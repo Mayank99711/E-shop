@@ -3,7 +3,7 @@ import { resolveMediaUrl } from '../../../services/shopOwner/index.js';
 import { shopOwnerApi } from '../../../services/shopOwner/index.js';
 import Modal from '../../../components/common/Modal.jsx';
 import { ListPagination } from '../../../components/shopOwner/ListPagination.jsx';
-import { maxProductImages, maxImagesPerUpload, maxProductImageBytes, productImageTypes } from '../../../pages/shopOwner/productConfig.js';
+import { maxProductImages, maxImagesPerUpload, maxProductImageBytes, productImageTypes } from '../config/productConfig.js';
 
 export function ProductsSection({ products, options, busy, submit, reload, error, loading = false }) {
   const [name, setName] = useState("");

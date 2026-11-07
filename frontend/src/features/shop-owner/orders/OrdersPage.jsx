@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import { shopOwnerApi } from '../../../services/shopOwner/index.js';
 import { ListPagination } from '../../../components/shopOwner/ListPagination.jsx';
-import { nextOrderStatus, orderStatuses } from '../../../pages/shopOwner/productConfig.js';
+import { nextOrderStatus, orderStatuses } from '../config/productConfig.js';
 
 export function OrdersSection({ orders, mode = "orders", busy, submit, reload, loading = false }) {
   const [query, setQuery] = useState("");

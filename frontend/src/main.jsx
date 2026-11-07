@@ -2,7 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./pages/customer/styles.css";
-import "./pages/shopOwner/styles.css";
+import "./styles/shopOwner.css";
 import "./pages/admin/styles.css";
 import "./styles/app.css";
 import "./pages/customer/eshop-hybrid.css";

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { authService } from "../../services/authService.js";
+import { authService } from "../../../services/authService.js";
 export default function EmployeeActivation() {
   const location = useLocation();
   const token = new URLSearchParams(location.search).get("token") || "";
