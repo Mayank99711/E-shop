@@ -5,7 +5,7 @@ import DeliveryAssociatePortal from "./DeliveryAssociatePortal.jsx";
 import EmployeeOrders from "./EmployeeOrders.jsx";
 import EmployeeCatalog from "./EmployeeCatalog.jsx";
 import EmployeeOperations from "./EmployeeOperations.jsx";
-import EmployeeFinance from "./EmployeeFinance.jsx";
+import EmployeeFinance from "../../features/employee/finance/EmployeeFinance.jsx";
 
 const MODULES = [
   { key: "dashboard", title: "Dashboard", icon: "▦", description: "Shop overview and summary", view: "dashboard.view" },

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { apiRequest } from "../../services/apiClient.js";
+import { apiRequest } from "../../../services/apiClient.js";
 
 export default function EmployeeFinance({ mode }) {
   const isReports = mode === "reports";
