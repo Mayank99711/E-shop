@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
-import { shopOwnerApi } from "../../services/shopOwner/index.js";
-import { PurchaseOrdersSection } from "./PurchaseOrdersPage.jsx";
-import { UploadBillsSection } from "../../components/shopOwner/UploadBillsSection.jsx";
-import { PaymentHistorySection } from "../../components/shopOwner/PaymentHistorySection.jsx";
+import { shopOwnerApi } from "../../../services/shopOwner/index.js";
+import { PurchaseOrdersSection } from "../purchase-orders/PurchaseOrdersPage.jsx";
+import { UploadBillsSection } from "../../../components/shopOwner/UploadBillsSection.jsx";
+import { PaymentHistorySection } from "../../../components/shopOwner/PaymentHistorySection.jsx";
 
 const initialForm = { code: "", name: "", contactName: "", email: "", phone: "" };
 const money = value => new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(Number(value || 0));

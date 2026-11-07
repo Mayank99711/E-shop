@@ -21,9 +21,9 @@ const EmployeesSection = lazy(() => import('../../features/shop-owner/employees/
 const AttendancePage = lazy(() =>
   import("./AttendancePage.jsx")
 );
-const OrdersSection = lazy(() => import('./OrdersPage.jsx').then((module) => ({ default: module.OrdersSection })));
-const PurchaseOrdersSection = lazy(() => import('./PurchaseOrdersPage.jsx').then((module) => ({ default: module.PurchaseOrdersSection })));
-const OwnerWholesalers = lazy(() => import('./WholesalersPage.jsx').then((module) => ({ default: module.OwnerWholesalers })));
+const OrdersSection = lazy(() => import('../../features/shop-owner/orders/OrdersPage.jsx').then((module) => ({ default: module.OrdersSection })));
+const PurchaseOrdersSection = lazy(() => import('../../features/shop-owner/purchase-orders/PurchaseOrdersPage.jsx').then((module) => ({ default: module.PurchaseOrdersSection })));
+const OwnerWholesalers = lazy(() => import('../../features/shop-owner/wholesalers/WholesalersPage.jsx').then((module) => ({ default: module.OwnerWholesalers })));
 const PaymentsPage = lazy(() => import('./PaymentsPage.jsx'));
 const ReportsPage = lazy(() => import('./ReportsPage.jsx'));
 const InventoryPage = lazy(() => import('../../features/shop-owner/inventory/InventoryPage.jsx'));

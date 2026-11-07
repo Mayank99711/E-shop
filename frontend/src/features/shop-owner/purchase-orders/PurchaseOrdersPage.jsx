@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { shopOwnerApi } from "../../services/shopOwner/index.js";
-import { PurchaseOrderList } from "../../components/shopOwner/PurchaseOrderList.jsx";
-import { PurchaseOrderDetails } from "../../components/shopOwner/PurchaseOrderDetails.jsx";
+import { shopOwnerApi } from "../../../services/shopOwner/index.js";
+import { PurchaseOrderList } from "../../../components/shopOwner/PurchaseOrderList.jsx";
+import { PurchaseOrderDetails } from "../../../components/shopOwner/PurchaseOrderDetails.jsx";
 
 const emptyForm = () => ({
   wholesalerId: "",
