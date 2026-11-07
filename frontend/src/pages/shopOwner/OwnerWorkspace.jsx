@@ -9,7 +9,7 @@ const Overview = lazy(() => import('./DashboardPage.jsx').then((module) => ({ de
 const OwnerProfile = lazy(() => import('./ProfilePage.jsx').then((module) => ({ default: module.OwnerProfile })));
 const OwnerShopProfile = lazy(() => import('./ShopProfilePage.jsx').then((module) => ({ default: module.OwnerShopProfile })));
 const OwnerSettings = lazy(() => import('./SettingsPage.jsx').then((module) => ({ default: module.OwnerSettings })));
-const ProductsSection = lazy(() => import('./ProductsPage.jsx').then((module) => ({ default: module.ProductsSection })));
+const ProductsSection = lazy(() => import('../../features/shop-owner/products/ProductsPage.jsx').then((module) => ({ default: module.ProductsSection })));
 const CategoryRequestsPage = lazy(() => import('./catalogRequests/CategoriesPage.jsx'));
 const SubcategoryRequestsPage = lazy(() => import('./catalogRequests/SubcategoriesPage.jsx'));
 const BrandRequestsPage = lazy(() => import('./catalogRequests/BrandsPage.jsx'));
@@ -26,7 +26,7 @@ const PurchaseOrdersSection = lazy(() => import('./PurchaseOrdersPage.jsx').then
 const OwnerWholesalers = lazy(() => import('./WholesalersPage.jsx').then((module) => ({ default: module.OwnerWholesalers })));
 const PaymentsPage = lazy(() => import('./PaymentsPage.jsx'));
 const ReportsPage = lazy(() => import('./ReportsPage.jsx'));
-const InventoryPage = lazy(() => import('./InventoryPage.jsx'));
+const InventoryPage = lazy(() => import('../../features/shop-owner/inventory/InventoryPage.jsx'));
 
 const emptyData = {
   dashboard: null,
