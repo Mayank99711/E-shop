@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { apiRequest } from "../../services/apiClient.js";
 import "./EmployeeWorkspace.css";
 import DeliveryAssociatePortal from "./DeliveryAssociatePortal.jsx";
-import EmployeeOrders from "./EmployeeOrders.jsx";
+import EmployeeOrders from "../../features/employee/orders/EmployeeOrders.jsx";
 import EmployeeCatalog from "./EmployeeCatalog.jsx";
 import EmployeeOperations from "./EmployeeOperations.jsx";
 import EmployeeFinance from "../../features/employee/finance/EmployeeFinance.jsx";
