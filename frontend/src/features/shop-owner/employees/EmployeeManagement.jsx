@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { shopOwnerApi } from "../../services/shopOwner/index.js";
-import Modal from "../../components/common/Modal.jsx";
-import { ListPagination } from "../../components/shopOwner/ListPagination.jsx";
+import { shopOwnerApi } from "../../../services/shopOwner/index.js";
+import Modal from "../../../components/common/Modal.jsx";
+import { ListPagination } from "../../../components/shopOwner/ListPagination.jsx";
 import "./EmployeeManagement.css";
 
 const ROLES = [

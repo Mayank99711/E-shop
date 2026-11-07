@@ -1,7 +1,7 @@
 import { Fragment, useState, useMemo,useEffect } from "react";
-import { shopOwnerApi } from '../../services/shopOwner/index.js';
-import Modal from '../../components/common/Modal.jsx';
-import { ListPagination } from '../../components/shopOwner/ListPagination.jsx';
+import { shopOwnerApi } from '../../../services/shopOwner/index.js';
+import Modal from '../../../components/common/Modal.jsx';
+import { ListPagination } from '../../../components/shopOwner/ListPagination.jsx';
 import { EmployeeAttendancePayroll } from "./EmployeeAttendancePayroll.jsx";
 import EmployeeManagement from "./EmployeeManagement.jsx";
 

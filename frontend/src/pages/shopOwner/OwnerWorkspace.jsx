@@ -14,10 +14,10 @@ const CategoryRequestsPage = lazy(() => import('./catalogRequests/CategoriesPage
 const SubcategoryRequestsPage = lazy(() => import('./catalogRequests/SubcategoriesPage.jsx'));
 const BrandRequestsPage = lazy(() => import('./catalogRequests/BrandsPage.jsx'));
 const VariantRequestsPage = lazy(() => import('./catalogRequests/VariantsPage.jsx'));
-const OwnerEmployeeAccess = lazy(() => import('./OwnerEmployeeAccess.jsx'));
+const OwnerEmployeeAccess = lazy(() => import('../../features/shop-owner/employees/OwnerEmployeeAccess.jsx'));
 const OwnerReturnManagement = lazy(() => import('./OwnerReturnManagement.jsx'));
 const OwnerDeliveryAssignments = lazy(() => import('./OwnerDeliveryAssignments.jsx'));
-const EmployeesSection = lazy(() => import('./EmployeesPage.jsx').then((module) => ({ default: module.EmployeesSection })));
+const EmployeesSection = lazy(() => import('../../features/shop-owner/employees/EmployeesPage.jsx').then((module) => ({ default: module.EmployeesSection })));
 const AttendancePage = lazy(() =>
   import("./AttendancePage.jsx")
 );
