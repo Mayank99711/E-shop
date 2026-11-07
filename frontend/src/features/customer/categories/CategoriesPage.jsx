@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { customerApi } from '../../services/customer/index.js';
-import { PageState } from '../../components/customer/StorefrontComponents.jsx';
+import { customerApi } from '../../../services/customer/index.js';
+import { PageState } from '../../../components/customer/StorefrontComponents.jsx';
 
 export function CategoriesPage() {
   const [categories, setCategories] = useState([]);

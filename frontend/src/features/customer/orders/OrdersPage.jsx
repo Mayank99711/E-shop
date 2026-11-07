@@ -1,14 +1,14 @@
 
-import CustomerReturnsPanel from "./CustomerReturnsPanel.jsx";
+import CustomerReturnsPanel from "../returns/CustomerReturnsPanel.jsx";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { customerApi } from "../../services/customer/index.js";
+import { customerApi } from "../../../services/customer/index.js";
 import {
   PageState,
   PageHeading,
   SignInPrompt,
-} from "../../components/customer/StorefrontComponents.jsx";
-import { money } from "../../utils/format.js";
+} from "../../../components/customer/StorefrontComponents.jsx";
+import { money } from "../../../utils/format.js";
 import "./orders-redesign.css";
 
 // Load every page so older reviews are also recognized.

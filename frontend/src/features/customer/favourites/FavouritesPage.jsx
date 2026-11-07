@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { customerApi } from '../../services/customer/index.js';
-import { PageState, ProductGrid, PageHeading, SignInPrompt } from '../../components/customer/StorefrontComponents.jsx';
+import { customerApi } from '../../../services/customer/index.js';
+import { PageState, ProductGrid, PageHeading, SignInPrompt } from '../../../components/customer/StorefrontComponents.jsx';
 
 export function FavouritesPage({ onFavourite, onAdd, favouriteIds, signedIn }) {
   const [items, setItems] = useState([]);

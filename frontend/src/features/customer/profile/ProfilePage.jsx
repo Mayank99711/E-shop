@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { customerApi } from "../../services/customer/index.js";
-import { authService } from "../../services/authService.js";
+import { customerApi } from "../../../services/customer/index.js";
+import { authService } from "../../../services/authService.js";
 import {
   PageHeading,
   SignInPrompt,
-} from "../../components/customer/StorefrontComponents.jsx";
+} from "../../../components/customer/StorefrontComponents.jsx";
 
 export function ProfilePage({ user, signedIn }) {
   const [form, setForm] = useState({

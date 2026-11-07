@@ -3,15 +3,15 @@ import { createPortal } from "react-dom";
 import { Link, NavLink, Route, Routes, useSearchParams } from "react-router-dom";
 import { customerApi } from "../../services/customer/index.js";
 
-const CatalogPage = lazy(() => import('./CatalogPage.jsx').then((module) => ({ default: module.CatalogPage })));
-const CategoriesPage = lazy(() => import('./CategoriesPage.jsx').then((module) => ({ default: module.CategoriesPage })));
-const ShopsPage = lazy(() => import('./ShopsPage.jsx').then((module) => ({ default: module.ShopsPage })));
-const ProductDetails = lazy(() => import('./ProductDetailsPage.jsx').then((module) => ({ default: module.ProductDetails })));
-const FavouritesPage = lazy(() => import('./FavouritesPage.jsx').then((module) => ({ default: module.FavouritesPage })));
-const CartPage = lazy(() => import('./checkout/CartPage.jsx').then((module) => ({ default: module.CartPage })));
-const AddressesPage = lazy(() => import('./AddressesPage.jsx').then((module) => ({ default: module.AddressesPage })));
-const OrdersPage = lazy(() => import('./OrdersPage.jsx').then((module) => ({ default: module.OrdersPage })));
-const ProfilePage = lazy(() => import('./ProfilePage.jsx').then((module) => ({ default: module.ProfilePage })));
+const CatalogPage = lazy(() => import('../../features/customer/catalog/CatalogPage.jsx').then((module) => ({ default: module.CatalogPage })));
+const CategoriesPage = lazy(() => import('../../features/customer/categories/CategoriesPage.jsx').then((module) => ({ default: module.CategoriesPage })));
+const ShopsPage = lazy(() => import('../../features/customer/shops/ShopsPage.jsx').then((module) => ({ default: module.ShopsPage })));
+const ProductDetails = lazy(() => import('../../features/customer/product-details/ProductDetailsPage.jsx').then((module) => ({ default: module.ProductDetails })));
+const FavouritesPage = lazy(() => import('../../features/customer/favourites/FavouritesPage.jsx').then((module) => ({ default: module.FavouritesPage })));
+const CartPage = lazy(() => import('../../features/customer/cart/CartPage.jsx').then((module) => ({ default: module.CartPage })));
+const AddressesPage = lazy(() => import('../../features/customer/addresses/AddressesPage.jsx').then((module) => ({ default: module.AddressesPage })));
+const OrdersPage = lazy(() => import('../../features/customer/orders/OrdersPage.jsx').then((module) => ({ default: module.OrdersPage })));
+const ProfilePage = lazy(() => import('../../features/customer/profile/ProfilePage.jsx').then((module) => ({ default: module.ProfilePage })));
 
 function NavIcon({ name }) {
   const paths = {

@@ -4,10 +4,10 @@ import { Link, useParams } from "react-router-dom";
 import {
   customerApi,
   resolveMediaUrl,
-} from "../../services/customer/index.js";
-import { PageState } from "../../components/customer/StorefrontComponents.jsx";
-import ProductRating from "../../components/customer/reviews/ProductRating.jsx";
-import { money } from "../../utils/format.js";
+} from "../../../services/customer/index.js";
+import { PageState } from "../../../components/customer/StorefrontComponents.jsx";
+import ProductRating from "../../../components/customer/reviews/ProductRating.jsx";
+import { money } from "../../../utils/format.js";
 
 function RatingBreakdown({ distribution = {}, total = 0 }) {
   return (

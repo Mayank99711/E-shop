@@ -1,11 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { customerApi, resolveMediaUrl } from "../../services/customer/index.js";
+import { customerApi, resolveMediaUrl } from "../../../services/customer/index.js";
 import {
   PageState,
   ProductGrid,
   ProductGridSkeleton,
-} from "../../components/customer/StorefrontComponents.jsx";
+} from "../../../components/customer/StorefrontComponents.jsx";
 
 const formatNumber = (value) => Number(value || 0).toLocaleString("en-IN");
 const getPrice = (product) => {
