@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 import { apiRequest } from "../../services/apiClient.js";
-import "./DeliveryProfessional.css";
+import "../../features/employee/delivery/DeliveryProfessional.css";
 
 const GROUPS = [
   ["Dashboard", [

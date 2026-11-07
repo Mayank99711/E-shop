@@ -1,6 +1,6 @@
 import {useCallback,useEffect,useState} from 'react';
 import {apiRequest} from '../../services/apiClient.js';
-import './DeliveryProfessional.css';
+import '../../features/employee/delivery/DeliveryProfessional.css';
 const labels={REQUESTED:'Requested',APPROVED:'Approved',ASSIGNED:'Pickup assigned',COLLECTED:'Collected',HANDED_OVER:'At shop',PICKUP_FAILED:'Pickup failed',RECEIVED:'Received',REJECTED:'Rejected',CLOSED:'Closed'};
 export default function OwnerReturnManagement(){
  const [data,setData]=useState({returns:[],employees:[]}),[cod,setCod]=useState([]),[loading,setLoading]=useState(true),[busy,setBusy]=useState(''),[error,setError]=useState(''),[notice,setNotice]=useState(''),[employee,setEmployee]=useState({}),[note,setNote]=useState({});
