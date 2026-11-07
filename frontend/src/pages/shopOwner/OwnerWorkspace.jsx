@@ -5,7 +5,7 @@ import { CustomerStorePreview } from './CustomerStorePage.jsx';
 import { useLocation, useNavigate } from "react-router-dom";
 
 const CouponsPage = lazy(() => import('../../features/shop-owner/coupons/CouponsPage.jsx'));
-const Overview = lazy(() => import('./DashboardPage.jsx').then((module) => ({ default: module.Overview })));
+const Overview = lazy(() => import('../../features/shop-owner/dashboard/DashboardPage.jsx').then((module) => ({ default: module.Overview })));
 const OwnerProfile = lazy(() => import('./ProfilePage.jsx').then((module) => ({ default: module.OwnerProfile })));
 const OwnerShopProfile = lazy(() => import('./ShopProfilePage.jsx').then((module) => ({ default: module.OwnerShopProfile })));
 const OwnerSettings = lazy(() => import('./SettingsPage.jsx').then((module) => ({ default: module.OwnerSettings })));
@@ -24,8 +24,8 @@ const AttendancePage = lazy(() =>
 const OrdersSection = lazy(() => import('../../features/shop-owner/orders/OrdersPage.jsx').then((module) => ({ default: module.OrdersSection })));
 const PurchaseOrdersSection = lazy(() => import('../../features/shop-owner/purchase-orders/PurchaseOrdersPage.jsx').then((module) => ({ default: module.PurchaseOrdersSection })));
 const OwnerWholesalers = lazy(() => import('../../features/shop-owner/wholesalers/WholesalersPage.jsx').then((module) => ({ default: module.OwnerWholesalers })));
-const PaymentsPage = lazy(() => import('./PaymentsPage.jsx'));
-const ReportsPage = lazy(() => import('./ReportsPage.jsx'));
+const PaymentsPage = lazy(() => import('../../features/shop-owner/payments/PaymentsPage.jsx'));
+const ReportsPage = lazy(() => import('../../features/shop-owner/reports/ReportsPage.jsx'));
 const InventoryPage = lazy(() => import('../../features/shop-owner/inventory/InventoryPage.jsx'));
 
 const emptyData = {
