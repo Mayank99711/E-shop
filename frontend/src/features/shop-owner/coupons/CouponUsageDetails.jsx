@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { shopOwnerApi } from "../../services/shopOwner/index.js";
+import { shopOwnerApi } from "../../../services/shopOwner/index.js";
 
 const money = value => new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR" }).format(Number(value ?? 0));
 const stamp = value => value ? new Date(value).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" }) : "—";

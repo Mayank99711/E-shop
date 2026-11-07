@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { shopOwnerApi } from "../../services/shopOwner/index.js";
+import { shopOwnerApi } from "../../../services/shopOwner/index.js";
 import CouponUsageDetails from "./CouponUsageDetails.jsx";
 
 const empty = () => ({ code: "", discountType: "PERCENTAGE", discountValue: "10", minimumOrder: "0", maxDiscount: "", usageLimit: "", perCustomerLimit: "1", startsAt: new Date().toISOString().slice(0, 16), expiresAt: "", isActive: true });

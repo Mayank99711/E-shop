@@ -4,7 +4,7 @@ import { resetInFlightRequests } from '../../services/apiClient.js';
 import { CustomerStorePreview } from './CustomerStorePage.jsx';
 import { useLocation, useNavigate } from "react-router-dom";
 
-const CouponsPage = lazy(() => import('./CouponsPage.jsx'));
+const CouponsPage = lazy(() => import('../../features/shop-owner/coupons/CouponsPage.jsx'));
 const Overview = lazy(() => import('./DashboardPage.jsx').then((module) => ({ default: module.Overview })));
 const OwnerProfile = lazy(() => import('./ProfilePage.jsx').then((module) => ({ default: module.OwnerProfile })));
 const OwnerShopProfile = lazy(() => import('./ShopProfilePage.jsx').then((module) => ({ default: module.OwnerShopProfile })));
