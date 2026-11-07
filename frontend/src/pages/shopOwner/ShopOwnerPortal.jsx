@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { OwnerActivation, PasswordReset, PortalAuth, usePortalAuth } from "../auth/OwnerAuth.jsx";
 import OwnerWorkspace from "./OwnerWorkspace.jsx";
-import EmployeeWorkspace from "./EmployeeWorkspace.jsx";
+import EmployeeWorkspace from "../../features/employee/workspace/EmployeeWorkspace.jsx";
 import EmployeeActivation from "./EmployeeActivation.jsx";
 import ShopOwnerLayout from "../../layouts/ShopOwnerLayout.jsx";
 import { useTheme } from "../../context/ThemeContext.jsx";

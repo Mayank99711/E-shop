@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { apiRequest } from "../../services/apiClient.js";
+import { apiRequest } from "../../../services/apiClient.js";
 import "./EmployeeWorkspace.css";
-import DeliveryAssociatePortal from "../../features/employee/delivery/DeliveryAssociatePortal.jsx";
-import EmployeeOrders from "../../features/employee/orders/EmployeeOrders.jsx";
-import EmployeeCatalog from "../../features/employee/catalog/EmployeeCatalog.jsx";
-import EmployeeOperations from "../../features/employee/operations/EmployeeOperations.jsx";
-import EmployeeFinance from "../../features/employee/finance/EmployeeFinance.jsx";
+import DeliveryAssociatePortal from "../delivery/DeliveryAssociatePortal.jsx";
+import EmployeeOrders from "../orders/EmployeeOrders.jsx";
+import EmployeeCatalog from "../catalog/EmployeeCatalog.jsx";
+import EmployeeOperations from "../operations/EmployeeOperations.jsx";
+import EmployeeFinance from "../finance/EmployeeFinance.jsx";
 
 const MODULES = [
   { key: "dashboard", title: "Dashboard", icon: "▦", description: "Shop overview and summary", view: "dashboard.view" },
