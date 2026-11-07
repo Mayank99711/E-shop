@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef, useMemo } from "react";
-import Modal from "../../components/common/Modal.jsx";
-import { resolveMediaUrl } from "../../services/apiClient.js";
+import Modal from "../../../components/common/Modal.jsx";
+import { resolveMediaUrl } from "../../../services/apiClient.js";
 import {
   submitBrandRequest,
   submitCategoryRequest,
   submitVariantRequest,
   uploadMasterDataImage,
-} from "../../services/shopOwner/catalogRequests.js";
+} from "../../../services/shopOwner/catalogRequests.js";
 
 function useImagePreview(file) {
   const [previewUrl, setPreviewUrl] = useState("");

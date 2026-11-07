@@ -10,10 +10,10 @@ const OwnerProfile = lazy(() => import('../../features/shop-owner/profile/Profil
 const OwnerShopProfile = lazy(() => import('../../features/shop-owner/shop-profile/ShopProfilePage.jsx').then((module) => ({ default: module.OwnerShopProfile })));
 const OwnerSettings = lazy(() => import('../../features/shop-owner/settings/SettingsPage.jsx').then((module) => ({ default: module.OwnerSettings })));
 const ProductsSection = lazy(() => import('../../features/shop-owner/products/ProductsPage.jsx').then((module) => ({ default: module.ProductsSection })));
-const CategoryRequestsPage = lazy(() => import('./catalogRequests/CategoriesPage.jsx'));
-const SubcategoryRequestsPage = lazy(() => import('./catalogRequests/SubcategoriesPage.jsx'));
-const BrandRequestsPage = lazy(() => import('./catalogRequests/BrandsPage.jsx'));
-const VariantRequestsPage = lazy(() => import('./catalogRequests/VariantsPage.jsx'));
+const CategoryRequestsPage = lazy(() => import('../../features/shop-owner/catalog-requests/CategoriesPage.jsx'));
+const SubcategoryRequestsPage = lazy(() => import('../../features/shop-owner/catalog-requests/SubcategoriesPage.jsx'));
+const BrandRequestsPage = lazy(() => import('../../features/shop-owner/catalog-requests/BrandsPage.jsx'));
+const VariantRequestsPage = lazy(() => import('../../features/shop-owner/catalog-requests/VariantsPage.jsx'));
 const OwnerEmployeeAccess = lazy(() => import('../../features/shop-owner/employees/OwnerEmployeeAccess.jsx'));
 const OwnerReturnManagement = lazy(() => import('../../features/shop-owner/returns/OwnerReturnManagement.jsx'));
 const OwnerDeliveryAssignments = lazy(() => import('../../features/shop-owner/delivery/OwnerDeliveryAssignments.jsx'));
