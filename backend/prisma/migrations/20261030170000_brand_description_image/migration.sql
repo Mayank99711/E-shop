@@ -1,0 +1,2 @@
+ALTER TABLE "Brand" ADD COLUMN "description" TEXT;
+ALTER TABLE "Brand" ADD COLUMN "imageUrl" VARCHAR(2048);

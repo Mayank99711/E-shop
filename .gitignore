@@ -1,0 +1,78 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+coverage/
+
+# Environment variables and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Logs
+*.log
+npm-debug.log*
+
+# Prisma generated files
+node_modules/.prisma/
+
+# Database dumps
+*.sql.gz
+*.dump
+*.backup
+
+# Editor and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Historical patches and backups
+
+*_backup_*/
+_backup*/
+_cart_coupon_ui_*/
+_coupon_resume_*/
+_shipping_syntax_*/
+
+# Temporary files
+*.tmp
+*.bak
+# Temporary patch backups
+*.wholesaler-edit-backup
+
+# Historical patch bundles
+cart_coupons_bundle/
+coupon_bundle/
+coupon_usage_complete_bundle/
+employee_granular_permissions/
+eshop_home_polish_bundle/
+simple_delivery_bundle/
+
+# Duplicate/reference projects
+test_project/
+reference-files/
+patch-files/
+files/
+
+# Patch scripts in project root
+/apply-*.cjs
+/fix-shipping-syntax.cjs
+/resume-coupons-frontend.cjs
+/myeshop_wholesaler_patch.cjs
+
+# Local archives
+archive/
+# Runtime uploaded product images
+/backend/uploads/
+# Local database inspection / migration previews
+/backend/employee_permissions_after.sql
+/backend/employee_permissions_review.sql
+/backend/employee_permissions_safe.sql
+/backend/product_fields_preview.sql

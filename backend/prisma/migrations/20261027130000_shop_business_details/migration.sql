@@ -1,0 +1,23 @@
+ALTER TABLE "Shop"
+ADD COLUMN "categoryId" UUID,
+ADD COLUMN "businessName" VARCHAR(160),
+ADD COLUMN "businessType" VARCHAR(100),
+ADD COLUMN "taxId" VARCHAR(100),
+ADD COLUMN "gstNumber" VARCHAR(15),
+ADD COLUMN "panNumber" VARCHAR(10),
+ADD COLUMN "pinCode" VARCHAR(20),
+ADD COLUMN "city" VARCHAR(100),
+ADD COLUMN "district" VARCHAR(100),
+ADD COLUMN "state" VARCHAR(100),
+ADD COLUMN "country" VARCHAR(100),
+ADD COLUMN "businessAddress" VARCHAR(500),
+ADD COLUMN "contactPhone" VARCHAR(20),
+ADD COLUMN "contactEmail" VARCHAR(254),
+ADD COLUMN "logoUrl" VARCHAR(2048);
+
+CREATE INDEX "Shop_categoryId_idx" ON "Shop"("categoryId");
+
+ALTER TABLE "Shop"
+ADD CONSTRAINT "Shop_categoryId_fkey"
+FOREIGN KEY ("categoryId") REFERENCES "Category"("id")
+ON DELETE RESTRICT ON UPDATE CASCADE;

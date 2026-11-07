@@ -1,0 +1,386 @@
+.eum-root {
+  min-width: 0;
+}
+.eum-page {
+  padding: 24px;
+}
+.eum-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.eum-header h2 {
+  margin: 0;
+  font-size: 1.45rem;
+  font-weight: 750;
+  color: #152a4d;
+}
+.eum-header p,
+.eum-muted {
+  color: #6a7891;
+  font-size: 0.9rem;
+  margin: 7px 0;
+}
+.eum-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.eum-stats > div {
+  background: #f6f9ff;
+  border: 1px solid #dfe9fa;
+  border-radius: 12px;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.eum-stats small {
+  color: #64748b;
+  font-weight: 600;
+}
+.eum-stats strong {
+  font-size: 1.75rem;
+  color: #152a4d;
+}
+.eum-toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.eum-toolbar label {
+  min-width: 180px;
+  flex: 1;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #51627e;
+  display: grid;
+  gap: 6px;
+}
+.eum-toolbar label:first-child {
+  flex: 2;
+}
+.eum-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.eum-table {
+  min-width: 790px;
+}
+.eum-table th {
+  white-space: nowrap;
+}
+.eum-table td {
+  vertical-align: middle;
+}
+.eum-table td small {
+  color: #77859c;
+}
+.eum-status {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 5px 11px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.eum-active {
+  background: #e4f7ee;
+  color: #137548;
+}
+.eum-inactive {
+  background: #fdeaea;
+  color: #a23030;
+}
+.eum-empty {
+  text-align: center;
+  padding: 28px !important;
+  color: #78859b;
+}
+.eum-modal {
+  width: min(900px, 94vw) !important;
+  max-width: 94vw !important;
+  max-height: 90vh;
+  overflow: auto;
+}
+.eum-section {
+  border: 1px solid #e1e8f3;
+  border-radius: 13px;
+  padding: 18px;
+  margin-bottom: 14px;
+  background: white;
+}
+.eum-section h3 {
+  font-size: 1.02rem;
+  color: #183358;
+  font-weight: 750;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin: 0 0 18px;
+}
+.eum-section h3 > span {
+  display: grid;
+  place-items: center;
+  background: #e9f1ff;
+  color: #2355c4;
+  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  font-size: 0.8rem;
+}
+.eum-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+.eum-grid label {
+  display: grid;
+  gap: 7px;
+  font-size: 0.85rem;
+  font-weight: 650;
+  color: #405371;
+}
+.eum-role-note {
+  padding: 10px 14px;
+  background: #f6f9ff;
+  border-radius: 10px;
+  display: grid;
+  gap: 6px;
+}
+.eum-role-note small {
+  color: #6c7b90;
+  line-height: 1.5;
+}
+.eum-permission-head,
+.eum-permission-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.eum-permission-head {
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.eum-permission-head span {
+  font-size: 0.85rem;
+  color: #536681;
+  font-weight: 700;
+}
+.eum-permission-actions {
+  margin: 12px 0 16px;
+}
+.eum-permission-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.eum-permission-group {
+  padding: 14px;
+  border: 1px solid #e2eaf5;
+  border-radius: 10px;
+}
+.eum-permission-group strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #253d61;
+}
+.eum-permission-group > div {
+  display: flex;
+  gap: 18px;
+}
+.eum-permission-group label {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  font-size: 0.87rem;
+  color: #42546d;
+}
+.eum-switch {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 700;
+  color: #334766;
+}
+.eum-account-box {
+  background: #f6faff;
+  border: 1px solid #dfebff;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 15px;
+}
+.eum-account-actions {
+  margin-top: 14px;
+}
+.eum-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 14px 0 0;
+  border-top: 1px solid #e3eaf5;
+}
+.eum-details-head {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+.eum-details-head h3 {
+  margin: 0;
+}
+.eum-details-head p {
+  margin: 5px 0;
+  color: #6d7c90;
+}
+.eum-avatar {
+  background: #e4ecff;
+  color: #2857d2;
+  border-radius: 16px;
+  font-size: 1.6rem;
+  font-weight: 800;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+}
+.eum-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-bottom: 1px solid #e3eaf5;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+}
+.eum-tabs button {
+  border: 0;
+  background: transparent;
+  padding: 9px;
+  color: #5d6b80;
+  font-weight: 650;
+}
+.eum-tabs button.active {
+  color: #255be0;
+  border-bottom: 2px solid #255be0;
+}
+.eum-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.eum-detail-grid > div {
+  padding: 12px;
+  border-radius: 10px;
+  background: #f7f9fd;
+}
+.eum-detail-grid dt {
+  color: #708098;
+  font-size: 0.8rem;
+}
+.eum-detail-grid dd {
+  margin: 5px 0 0;
+  font-weight: 700;
+  color: #1e3559;
+}
+.eum-detail-permissions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.eum-detail-permissions span {
+  background: #eaf1ff;
+  border-radius: 8px;
+  color: #2352bd;
+  padding: 6px 9px;
+  font-size: 0.82rem;
+}
+.eum-salary-line {
+  padding: 10px;
+  border-bottom: 1px solid #edf0f6;
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 650px) {
+  .eum-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .eum-grid,
+  .eum-permission-grid,
+  .eum-detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .eum-section {
+    padding: 13px;
+  }
+  .eum-page {
+    padding: 14px;
+  }
+}
+
+/* Responsive permission checklist: do not let checkboxes escape modal cards. */
+.eum-root .eum-modal,
+.eum-root .eum-form,
+.eum-root .eum-section {
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.eum-permission-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 100%;
+  min-width: 0;
+}
+.eum-permission-group {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  box-sizing: border-box;
+}
+.eum-permission-group > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px;
+  min-width: 0;
+}
+.eum-permission-group label.eum-permission-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  min-width: 0;
+  max-width: 100%;
+  white-space: normal;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.eum-permission-item input[type="checkbox"] {
+  flex: 0 0 auto;
+  margin-top: 3px;
+}
+.eum-permission-item span {
+  display: block;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 720px) {
+  .eum-permission-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Inline role creation: responsive, contained inside the existing employee form. */
+.eum-role-select-row{display:flex;align-items:end;gap:12px;flex-wrap:wrap;max-width:100%}
+.eum-role-picker{flex:1 1 250px;min-width:0}
+.eum-role-select-row>button{flex:0 0 auto}
+.eum-inline-role{display:flex;align-items:end;gap:10px;flex-wrap:wrap;margin-top:12px;max-width:100%}
+.eum-inline-role label{flex:1 1 260px;min-width:0}
+@media(max-width:520px){.eum-role-select-row>button,.eum-inline-role>button{width:100%}}

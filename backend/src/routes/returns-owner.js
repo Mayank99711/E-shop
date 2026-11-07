@@ -1,0 +1,10 @@
+import { Router } from 'express';
+import { z } from 'zod';
+import { requireAuth,requireRole } from '../middleware/require-auth.js';
+import { ownerReturns,ownerReturnAction,ownerCodCollections,confirmCodHandover } from '../services/return-cod.js';
+const router=Router();router.use(requireAuth,requireRole('SHOP_OWNER'));
+router.get('/',async(req,res,next)=>{try{res.json({success:true,data:await ownerReturns(req.authUser.id)});}catch(e){next(e)}});
+router.patch('/:id/action',async(req,res,next)=>{try{const id=z.string().uuid().parse(req.params.id);const b=z.object({action:z.enum(['approve','reject','assign','receive','close']),employeeId:z.string().uuid().optional(),note:z.string().trim().max(500).optional()}).strict().parse(req.body);res.json({success:true,data:await ownerReturnAction(req.authUser.id,req.authUser.id,id,b.action,b.employeeId,b.note)});}catch(e){next(e)}});
+router.get('/cod',async(req,res,next)=>{try{res.json({success:true,items:await ownerCodCollections(req.authUser.id)});}catch(e){next(e)}});
+router.patch('/cod/:id/verify',async(req,res,next)=>{try{res.json({success:true,data:await confirmCodHandover(req.authUser.id,req.authUser.id,z.string().uuid().parse(req.params.id))});}catch(e){next(e)}});
+export default router;

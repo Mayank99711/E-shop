@@ -1,0 +1,10 @@
+ALTER TABLE "Product"
+    ADD COLUMN IF NOT EXISTS "basePrice" DECIMAL(12,2),
+    ADD COLUMN IF NOT EXISTS "commissionPercent" DECIMAL(5,2),
+    ADD COLUMN IF NOT EXISTS "masterSku" VARCHAR(80),
+    ADD COLUMN IF NOT EXISTS "shortDescription" VARCHAR(1000);
+
+ALTER TABLE "ProductVariant"
+    ADD COLUMN IF NOT EXISTS "markedPrice" DECIMAL(12,2),
+    ADD COLUMN IF NOT EXISTS "variantName" VARCHAR(120),
+    ADD COLUMN IF NOT EXISTS "wholesalePrice" DECIMAL(12,2);
