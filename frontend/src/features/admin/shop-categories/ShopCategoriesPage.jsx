@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { adminApi } from '../../services/admin/index.js';
-import { resolveMediaUrl } from '../../services/apiClient.js';
-import Modal from '../../components/common/Modal.jsx';
+import { adminApi } from '../../../services/admin/index.js';
+import { resolveMediaUrl } from '../../../services/apiClient.js';
+import Modal from '../../../components/common/Modal.jsx';
 function useImagePreview(file) {
   const [previewUrl, setPreviewUrl] = useState('');
   useEffect(() => {
@@ -12,7 +12,7 @@ function useImagePreview(file) {
   }, [file]);
   return previewUrl;
 }
-import { Notice } from '../../components/admin/WorkspaceFeedback.jsx';
+import { Notice } from '../../../components/admin/WorkspaceFeedback.jsx';
 
 export function ShopCategoryManagement({ items, onReload, loading = false }) {
   const [name, setName] = useState('');

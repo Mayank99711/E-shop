@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { authService } from '../../services/authService.js';
-import { Notice } from '../../components/admin/WorkspaceFeedback.jsx';
+import { authService } from '../../../services/authService.js';
+import { Notice } from '../../../components/admin/WorkspaceFeedback.jsx';
 
 export function ProfileManagement({ user }) {
   const [profile, setProfile] = useState({ name: user.name, mobile: user.mobile || "" });

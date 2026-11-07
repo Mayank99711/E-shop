@@ -1,9 +1,9 @@
 import { useMemo, useState, useEffect, useRef } from 'react';
-import { adminApi } from '../../services/admin/index.js';
-import { resolveMediaUrl } from '../../services/apiClient.js';
-import Modal from '../../components/common/Modal.jsx';
-import { Notice, AdminPagination } from '../../components/admin/WorkspaceFeedback.jsx';
-import { PendingApprovalModal } from '../../components/admin/PendingApprovalModal.jsx';
+import { adminApi } from '../../../services/admin/index.js';
+import { resolveMediaUrl } from '../../../services/apiClient.js';
+import Modal from '../../../components/common/Modal.jsx';
+import { Notice, AdminPagination } from '../../../components/admin/WorkspaceFeedback.jsx';
+import { PendingApprovalModal } from '../../../components/admin/PendingApprovalModal.jsx';
 
 function useImagePreview(file) {
   const [previewUrl, setPreviewUrl] = useState('');

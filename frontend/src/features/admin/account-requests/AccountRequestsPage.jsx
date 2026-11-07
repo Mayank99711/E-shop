@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { adminApi } from '../../services/admin/index.js';
-import { Notice } from '../../components/admin/WorkspaceFeedback.jsx';
+import { adminApi } from '../../../services/admin/index.js';
+import { Notice } from '../../../components/admin/WorkspaceFeedback.jsx';
 
 export function AccountDeletionReview({ items, onReload, loading = false }) {
   const [reasons, setReasons] = useState({});

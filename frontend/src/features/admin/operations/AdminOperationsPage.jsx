@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { adminApi } from "../../services/admin/index.js";
-import { resolveMediaUrl } from "../../services/apiClient.js";
-import { money } from "../../utils/format.js";
+import { adminApi } from "../../../services/admin/index.js";
+import { resolveMediaUrl } from "../../../services/apiClient.js";
+import { money } from "../../../utils/format.js";
 
 const pageConfig = {
   employees: {

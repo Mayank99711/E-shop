@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { adminApi } from '../../services/admin/index.js';
-import { apiRequest } from '../../services/apiClient.js';
-import Modal from '../../components/common/Modal.jsx';
-import { Notice, FieldError } from '../../components/admin/WorkspaceFeedback.jsx';
+import { adminApi } from '../../../services/admin/index.js';
+import { apiRequest } from '../../../services/apiClient.js';
+import Modal from '../../../components/common/Modal.jsx';
+import { Notice, FieldError } from '../../../components/admin/WorkspaceFeedback.jsx';
 
 export function ShopManagement({ items, onReload, loading = false }) {
   const emptyShopForm = {

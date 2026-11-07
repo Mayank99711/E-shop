@@ -1,20 +1,20 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getAdminResource } from "../../services/admin/index.js";
-const AdminCouponsPage = lazy(() => import('./AdminCouponsPage.jsx'));
-const SummaryCards = lazy(() => import('./DashboardPage.jsx').then((module) => ({ default: module.SummaryCards })));
-const ReportsOverview = lazy(() => import('./DashboardPage.jsx').then((module) => ({ default: module.ReportsOverview })));
-const AdminSettings = lazy(() => import('./DashboardPage.jsx').then((module) => ({ default: module.AdminSettings })));
-const ShopManagement = lazy(() => import('./ShopsPage.jsx').then((module) => ({ default: module.ShopManagement })));
-const CategoryManagement = lazy(() => import('./CategoriesPage.jsx').then((module) => ({ default: module.CategoryManagement })));
-const ShopCategoryManagement = lazy(() => import('./ShopCategoriesPage.jsx').then((module) => ({ default: module.ShopCategoryManagement })));
-const BrandManagement = lazy(() => import('./BrandsPage.jsx').then((module) => ({ default: module.BrandManagement })));
-const VariantManagement = lazy(() => import('./VariantsPage.jsx').then((module) => ({ default: module.VariantManagement })));
-const RequestReview = lazy(() => import('./DataRequestsPage.jsx').then((module) => ({ default: module.RequestReview })));
-const ProfileManagement = lazy(() => import('./ProfilePage.jsx').then((module) => ({ default: module.ProfileManagement })));
-const AccountDeletionReview = lazy(() => import('./AccountRequestsPage.jsx').then((module) => ({ default: module.AccountDeletionReview })));
-const WholesalerManagement = lazy(() => import('./WholesalersPage.jsx').then((module) => ({ default: module.WholesalerManagement })));
-const AdminOperationsPage = lazy(() => import('./AdminOperationsPage.jsx'));
+const AdminCouponsPage = lazy(() => import('../../features/admin/coupons/AdminCouponsPage.jsx'));
+const SummaryCards = lazy(() => import('../../features/admin/dashboard/DashboardPage.jsx').then((module) => ({ default: module.SummaryCards })));
+const ReportsOverview = lazy(() => import('../../features/admin/dashboard/DashboardPage.jsx').then((module) => ({ default: module.ReportsOverview })));
+const AdminSettings = lazy(() => import('../../features/admin/dashboard/DashboardPage.jsx').then((module) => ({ default: module.AdminSettings })));
+const ShopManagement = lazy(() => import('../../features/admin/shops/ShopsPage.jsx').then((module) => ({ default: module.ShopManagement })));
+const CategoryManagement = lazy(() => import('../../features/admin/categories/CategoriesPage.jsx').then((module) => ({ default: module.CategoryManagement })));
+const ShopCategoryManagement = lazy(() => import('../../features/admin/shop-categories/ShopCategoriesPage.jsx').then((module) => ({ default: module.ShopCategoryManagement })));
+const BrandManagement = lazy(() => import('../../features/admin/brands/BrandsPage.jsx').then((module) => ({ default: module.BrandManagement })));
+const VariantManagement = lazy(() => import('../../features/admin/variants/VariantsPage.jsx').then((module) => ({ default: module.VariantManagement })));
+const RequestReview = lazy(() => import('../../features/admin/data-requests/DataRequestsPage.jsx').then((module) => ({ default: module.RequestReview })));
+const ProfileManagement = lazy(() => import('../../features/admin/profile/ProfilePage.jsx').then((module) => ({ default: module.ProfileManagement })));
+const AccountDeletionReview = lazy(() => import('../../features/admin/account-requests/AccountRequestsPage.jsx').then((module) => ({ default: module.AccountDeletionReview })));
+const WholesalerManagement = lazy(() => import('../../features/admin/wholesalers/WholesalersPage.jsx').then((module) => ({ default: module.WholesalerManagement })));
+const AdminOperationsPage = lazy(() => import('../../features/admin/operations/AdminOperationsPage.jsx'));
 
 const views = [
   ["dashboard", "Overview"],

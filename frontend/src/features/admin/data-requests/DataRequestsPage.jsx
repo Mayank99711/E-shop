@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { adminApi } from '../../services/admin/index.js';
-import { Notice } from '../../components/admin/WorkspaceFeedback.jsx';
-import { resolveMediaUrl } from '../../services/apiClient.js';
-import Modal from '../../components/common/Modal.jsx';
+import { adminApi } from '../../../services/admin/index.js';
+import { Notice } from '../../../components/admin/WorkspaceFeedback.jsx';
+import { resolveMediaUrl } from '../../../services/apiClient.js';
+import Modal from '../../../components/common/Modal.jsx';
 
 export function RequestReview({ items, onReload, loading = false }) {
   const [rejection, setRejection] = useState({});

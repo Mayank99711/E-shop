@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
-import { adminApi } from "../../services/admin/index.js";
-import { Notice } from "../../components/admin/WorkspaceFeedback.jsx";
-import { ShopWholesalerAuthorization } from "../../components/admin/ShopWholesalerAuthorization.jsx";
+import { adminApi } from "../../../services/admin/index.js";
+import { Notice } from "../../../components/admin/WorkspaceFeedback.jsx";
+import { ShopWholesalerAuthorization } from "../../../components/admin/ShopWholesalerAuthorization.jsx";
 
 export function WholesalerManagement({ accessOnly = false }) {
   const [items, setItems] = useState([]);

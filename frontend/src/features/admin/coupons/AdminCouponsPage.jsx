@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { adminApi } from "../../services/admin/index.js";
+import { adminApi } from "../../../services/admin/index.js";
 export default function AdminCouponsPage() {
   const [items, setItems] = useState([]);
   const [error, setError] = useState("");
