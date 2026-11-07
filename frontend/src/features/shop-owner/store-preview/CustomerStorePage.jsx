@@ -1,4 +1,4 @@
-import { resolveMediaUrl } from '../../services/shopOwner/index.js';
+import { resolveMediaUrl } from '../../../services/shopOwner/index.js';
 
 export function CustomerStorePreview({ dashboard, products = [] }) {
   const shop = dashboard?.shop || {};

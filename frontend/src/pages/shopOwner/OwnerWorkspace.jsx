@@ -1,13 +1,13 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { apiRequest, shopOwnerApi } from '../../services/shopOwner/index.js';
 import { resetInFlightRequests } from '../../services/apiClient.js';
-import { CustomerStorePreview } from './CustomerStorePage.jsx';
+import { CustomerStorePreview } from '../../features/shop-owner/store-preview/CustomerStorePage.jsx';
 import { useLocation, useNavigate } from "react-router-dom";
 
 const CouponsPage = lazy(() => import('../../features/shop-owner/coupons/CouponsPage.jsx'));
 const Overview = lazy(() => import('../../features/shop-owner/dashboard/DashboardPage.jsx').then((module) => ({ default: module.Overview })));
-const OwnerProfile = lazy(() => import('./ProfilePage.jsx').then((module) => ({ default: module.OwnerProfile })));
-const OwnerShopProfile = lazy(() => import('./ShopProfilePage.jsx').then((module) => ({ default: module.OwnerShopProfile })));
+const OwnerProfile = lazy(() => import('../../features/shop-owner/profile/ProfilePage.jsx').then((module) => ({ default: module.OwnerProfile })));
+const OwnerShopProfile = lazy(() => import('../../features/shop-owner/shop-profile/ShopProfilePage.jsx').then((module) => ({ default: module.OwnerShopProfile })));
 const OwnerSettings = lazy(() => import('../../features/shop-owner/settings/SettingsPage.jsx').then((module) => ({ default: module.OwnerSettings })));
 const ProductsSection = lazy(() => import('../../features/shop-owner/products/ProductsPage.jsx').then((module) => ({ default: module.ProductsSection })));
 const CategoryRequestsPage = lazy(() => import('./catalogRequests/CategoriesPage.jsx'));

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { shopOwnerApi, resolveMediaUrl } from '../../services/shopOwner/index.js';
+import { shopOwnerApi, resolveMediaUrl } from '../../../services/shopOwner/index.js';
 
 export function OwnerShopProfile({ shop, submit }) {
   const [profile, setProfile] = useState({

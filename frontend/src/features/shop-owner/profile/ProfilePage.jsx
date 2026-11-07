@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { authService } from '../../services/authService.js';
-import { resolveMediaUrl } from '../../services/shopOwner/index.js';
+import { authService } from '../../../services/authService.js';
+import { resolveMediaUrl } from '../../../services/shopOwner/index.js';
 
 export function OwnerProfile({ user, submit }) {
   const [profile, setProfile] = useState({ name: user.name, mobile: user.mobile || "" });
