@@ -15,6 +15,7 @@ test("Owner order status transition is shop-scoped and audits atomically", async
   };
   const service = createOwnerOrdersService({
     shopOrder: { findFirst: async ({ where }) => (assert.equal(where.shopId, "shop-a"), { id: "order-a", orderId: "parent-a", status: "PLACED", order: { payments: [{ provider: "RAZORPAY", status: "PAID" }] } }) },
+    deliveryAssignment: { findUnique: async () => null },
     $transaction: (callback) => callback(tx)
   }, async (ownerId) => (assert.equal(ownerId, "owner-a"), { id: "shop-a" }));
   assert.deepEqual(await service.updateStatus("owner-a", "order-a", "owner-a", "CONFIRMED"), { id: "order-a", status: "CONFIRMED" });
@@ -58,28 +59,35 @@ test("Owner order listing includes only delivery fields from the linked address"
 
 test("Owner order service rejects skipped status transitions", async () => {
   const service = createOwnerOrdersService({ shopOrder: { findFirst: async () => ({ id: "order-a", status: "PLACED" }) } }, async () => ({ id: "shop-a" }));
-  await assert.rejects(() => service.updateStatus("owner-a", "order-a", "owner-a", "SHIPPED"), { code: "INVALID_ORDER_TRANSITION" });
+  await assert.rejects(() => service.updateStatus("owner-a", "order-a", "owner-a", "SHIPPED"), { code: "DELIVERY_WORKFLOW_REQUIRED" });
 });
 
-test("Owner order service rejects Razorpay orders until payment is verified", async () => {
+test("Owner order rejects unverified Razorpay payment before inventory allocation", async () => {
   for (const paymentStatus of ["PENDING", "AUTHORIZED", "FAILED"]) {
     const service = createOwnerOrdersService({
       shopOrder: {
         findFirst: async () => ({
           id: "order-a",
           orderId: "parent-a",
-          status: "PLACED",
-          order: { payments: [{ provider: "RAZORPAY", status: paymentStatus }] }
-        })
-      }
+          status: "CONFIRMED",
+          order: {
+            payments: [{ provider: "RAZORPAY", status: paymentStatus }],
+          },
+        }),
+      },
     }, async () => ({ id: "shop-a" }));
+
     await assert.rejects(
-      () => service.updateStatus("owner-a", "order-a", "owner-a", "CONFIRMED"),
+      () => service.updateStatus(
+        "owner-a",
+        "order-a",
+        "owner-a",
+        "INVENTORY_ALLOCATED"
+      ),
       { code: "PAYMENT_NOT_VERIFIED" }
     );
   }
 });
-
 test("Owner order status transitions keep COD orders available without online verification", async () => {
   const tx = {
     shopOrder: {
@@ -99,6 +107,7 @@ test("Owner order status transitions keep COD orders available without online ve
         order: { payments: [{ provider: "COD", status: "PENDING" }] },
       }),
     },
+    deliveryAssignment: { findUnique: async () => null },
     $transaction: (callback) => callback(tx),
   }, async () => ({ id: "shop-a" }));
 

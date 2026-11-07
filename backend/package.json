@@ -1,47 +1,47 @@
-{
-  "name": "e-shop-server",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js",
-    "prisma:generate": "prisma generate",
-    "db:validate": "prisma validate",
-    "db:migrate": "prisma migrate dev",
-    "db:deploy": "prisma migrate deploy",
-    "db:seed": "node prisma/seed.js",
-    "db:seed:test": "set NODE_ENV=test&& node prisma/seed-test.js",
-    "db:seed:demo": "node prisma/seed-demo-catalog.js",
-    "test": "set NODE_ENV=test&& node --import ./tests/test-db-guard.mjs --test",
-    "test:unit": "set NODE_ENV=test&& node --import ./tests/test-db-guard.mjs --test tests/admin-account-requests-service.test.js tests/admin-approvals-service.test.js tests/admin-catalog-service.test.js tests/admin-dashboard-service.test.js tests/admin-shop-validation.test.js tests/auth-accounts-service.test.js tests/catalog-request-validation.test.js tests/catalog-service.test.js tests/customer-commerce-service.test.js tests/health-controller.test.js tests/owner-catalog-requests-service.test.js tests/owner-employees-service.test.js tests/owner-inventory-service.test.js tests/owner-orders-service.test.js tests/owner-product-images-service.test.js tests/owner-product-variants-service.test.js tests/owner-products-service.test.js tests/owner-shop-service.test.js tests/product-images.test.js tests/product-reviews-api.test.js tests/product-reviews-service.test.js tests/shop-profile-validation.test.js",
-    "test:mocked": "set NODE_ENV=test&& node --import ./tests/test-db-guard.mjs --test tests/admin-owner-workflow.integration.test.js tests/catalog-controller.integration.test.js tests/checkout-policy.test.js",
-    "test:app-session": "set NODE_ENV=test&& node --import ./tests/test-db-guard.mjs --test tests/api-authorization.test.js tests/api-rate-limiters.test.js tests/security-middleware.test.js",
-    "test:auth-http": "set NODE_ENV=test&& set USE_MEMORY_SESSION_STORE=true&& node --import ./tests/test-db-guard.mjs --test tests/authenticated-http.test.js",
-    "test:safe": "npm run test"
-  },
-  "dependencies": {
-    "@prisma/client": "^6.19.0",
-    "bcryptjs": "^3.0.3",
-    "connect-pg-simple": "^10.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^5.1.0",
-    "express-rate-limit": "^7.5.0",
-    "express-session": "^1.18.1",
-    "helmet": "^8.1.0",
-    "morgan": "^1.12.1",
-    "multer": "^2.5.0",
-    "nodemailer": "^10.2.1",
-    "pg": "^8.16.3",
-    "swagger-ui-express": "^5.0.1",
-    "zod": "^4.6.7"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.10",
-    "prisma": "^6.19.0"
-  },
-  "overrides": {
-    "deepmerge-ts": "^8.0.0"
-  }
+﻿{
+    "name":  "e-shop-server",
+    "version":  "1.0.0",
+    "private":  true,
+    "type":  "module",
+    "scripts":  {
+                    "dev":  "nodemon src/server.js",
+                    "start":  "node src/server.js",
+                    "prisma:generate":  "prisma generate",
+                    "db:validate":  "prisma validate",
+                    "db:migrate":  "prisma migrate dev",
+                    "db:deploy":  "prisma migrate deploy",
+                    "db:seed":  "node prisma/seed.js",
+                    "db:seed:test":  "set NODE_ENV=test\u0026\u0026 node prisma/seed-test.js",
+                    "db:seed:demo":  "node prisma/seed-demo-catalog.js",
+                    "test":  "set NODE_ENV=test\u0026\u0026 node --import ./tests/test-db-guard.mjs --test tests/*.test.js",
+                    "test:unit":  "set NODE_ENV=test\u0026\u0026 node --import ./tests/test-db-guard.mjs --test tests/admin-account-requests-service.test.js tests/admin-approvals-service.test.js tests/admin-catalog-service.test.js tests/admin-dashboard-service.test.js tests/admin-shop-validation.test.js tests/auth-accounts-service.test.js tests/catalog-request-validation.test.js tests/catalog-service.test.js tests/customer-commerce-service.test.js tests/health-controller.test.js tests/owner-catalog-requests-service.test.js tests/owner-employees-service.test.js tests/owner-inventory-service.test.js tests/owner-orders-service.test.js tests/owner-product-images-service.test.js tests/owner-product-variants-service.test.js tests/owner-products-service.test.js tests/owner-shop-service.test.js tests/product-images.test.js tests/product-reviews-api.test.js tests/product-reviews-service.test.js tests/shop-profile-validation.test.js",
+                    "test:mocked":  "set NODE_ENV=test\u0026\u0026 node --import ./tests/test-db-guard.mjs --test tests/admin-owner-workflow.integration.test.js tests/catalog-controller.integration.test.js tests/checkout-policy.test.js",
+                    "test:app-session":  "set NODE_ENV=test\u0026\u0026 node --import ./tests/test-db-guard.mjs --test tests/api-authorization.test.js tests/api-rate-limiters.test.js tests/security-middleware.test.js",
+                    "test:auth-http":  "set NODE_ENV=test\u0026\u0026 set USE_MEMORY_SESSION_STORE=true\u0026\u0026 node --import ./tests/test-db-guard.mjs --test tests/authenticated-http.test.js",
+                    "test:safe":  "npm run test"
+                },
+    "dependencies":  {
+                         "@prisma/client":  "^6.19.0",
+                         "bcryptjs":  "^3.0.3",
+                         "connect-pg-simple":  "^10.0.0",
+                         "cors":  "^2.8.5",
+                         "dotenv":  "^16.4.7",
+                         "express":  "^5.1.0",
+                         "express-rate-limit":  "^7.5.0",
+                         "express-session":  "^1.18.1",
+                         "helmet":  "^8.1.0",
+                         "morgan":  "^1.12.1",
+                         "multer":  "^2.5.0",
+                         "nodemailer":  "^10.2.1",
+                         "pg":  "^8.16.3",
+                         "swagger-ui-express":  "^5.0.1",
+                         "zod":  "^4.6.7"
+                     },
+    "devDependencies":  {
+                            "nodemon":  "^3.1.10",
+                            "prisma":  "^6.19.0"
+                        },
+    "overrides":  {
+                      "deepmerge-ts":  "^8.0.0"
+                  }
 }

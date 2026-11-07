@@ -15,7 +15,7 @@ test("public catalog controller serves filtered product results through the HTTP
   let query;
   prisma.product.findMany = async (options) => {
     query = options;
-    return [{ id: "catalog-product", name: "Desk lamp" }];
+    return [{ id: "a7d31b28-cb29-4dbf-9da4-6ca7f2fc7a01", name: "Desk lamp" }];
   };
   prisma.product.count = async () => 1;
 
@@ -32,9 +32,15 @@ test("public catalog controller serves filtered product results through the HTTP
 
   try {
     const response = await fetch(`http://127.0.0.1:${server.address().port}/api/catalog/products?q=desk&categoryId=9a6f9d2a-09a2-4e3a-a384-e920b1d2b185&subcategoryId=171c0d47-170f-4f4d-8976-cf65b524ff2f&sort=name_asc&page=2&limit=4`);
+    const responseBody = await response.json();
+
+    if (response.status !== 200) {
+      console.error("CATALOG API ERROR:", response.status, responseBody);
+    }
+
     assert.equal(response.status, 200);
-    assert.deepEqual(await response.json(), {
-      items: [{ id: "catalog-product", name: "Desk lamp" }],
+    assert.deepEqual(responseBody, {
+      items: [{ id: "a7d31b28-cb29-4dbf-9da4-6ca7f2fc7a01", name: "Desk lamp", averageRating: 0, reviewCount: 0 }],
       page: 2,
       limit: 4,
       total: 1,
