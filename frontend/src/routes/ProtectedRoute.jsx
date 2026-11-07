@@ -8,7 +8,15 @@ export default function ProtectedRoute({ role }) {
 
   if (loading) return <Loader>Restoring your secure E-Shop session...</Loader>;
   if (!user || !(Array.isArray(role) ? role : [role]).includes(user.role)) {
-    const loginPath = role === "SUPER_ADMIN" ? "/admin/login" : role === "SHOP_OWNER" ? "/shop/login" : "/";
+    const allowedRoles = Array.isArray(role) ? role : [role];
+
+const loginPath = allowedRoles.includes("SUPER_ADMIN")
+  ? "/admin/login"
+  : allowedRoles.some((allowedRole) =>
+      ["SHOP_OWNER", "SHOP_EMPLOYEE"].includes(allowedRole)
+    )
+    ? "/shop/login"
+    : "/";
     return <Navigate to={loginPath} replace state={{ from: location.pathname }} />;
   }
   return <Outlet />;

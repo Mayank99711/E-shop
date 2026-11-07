@@ -154,6 +154,7 @@ function Filters({
             <input
               type="radio"
               name="esh-category"
+               
               checked={!categoryId}
               onChange={() =>
                 updateFilters({ categoryId: "", subcategoryId: "" })
@@ -172,6 +173,7 @@ function Filters({
                 <input
                   type="radio"
                   name="esh-category"
+                  value={category.id}
                   checked={categoryId === category.id}
                   onChange={() =>
                     updateFilters({
