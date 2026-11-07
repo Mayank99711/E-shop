@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { apiRequest } from "../../services/apiClient.js";
+import { apiRequest } from "../../../services/apiClient.js";
 import "./EmployeeOperations.css";
 
 export default function EmployeeOperations({ mode }) {

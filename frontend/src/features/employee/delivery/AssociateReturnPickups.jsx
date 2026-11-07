@@ -1,5 +1,5 @@
 import {useCallback,useEffect,useState} from 'react';
-import {apiRequest} from '../../services/apiClient.js';
+import {apiRequest} from '../../../services/apiClient.js';
 const labels={ASSIGNED:'Assigned',COLLECTED:'Collected',HANDED_OVER:'Handed over to shop',PICKUP_FAILED:'Pickup failed'};
 export default function AssociateReturnPickups({canManage}){
  const [rows,setRows]=useState([]),[busy,setBusy]=useState(''),[error,setError]=useState(''),[reason,setReason]=useState({}),[loading,setLoading]=useState(true);
