@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { shopOwnerApi } from "../../services/shopOwner/index.js";
+import { shopOwnerApi } from "../../../services/shopOwner/index.js";
 
 const STATUSES = ["PRESENT", "ABSENT", "LEAVE"];
 const todayLocal = () => {

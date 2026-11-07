@@ -1,4 +1,4 @@
-import { useTheme } from '../../context/ThemeContext.jsx';
+import { useTheme } from '../../../context/ThemeContext.jsx';
 
 export function OwnerSettings() {
   const { theme, toggleTheme } = useTheme();

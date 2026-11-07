@@ -8,18 +8,18 @@ const CouponsPage = lazy(() => import('../../features/shop-owner/coupons/Coupons
 const Overview = lazy(() => import('../../features/shop-owner/dashboard/DashboardPage.jsx').then((module) => ({ default: module.Overview })));
 const OwnerProfile = lazy(() => import('./ProfilePage.jsx').then((module) => ({ default: module.OwnerProfile })));
 const OwnerShopProfile = lazy(() => import('./ShopProfilePage.jsx').then((module) => ({ default: module.OwnerShopProfile })));
-const OwnerSettings = lazy(() => import('./SettingsPage.jsx').then((module) => ({ default: module.OwnerSettings })));
+const OwnerSettings = lazy(() => import('../../features/shop-owner/settings/SettingsPage.jsx').then((module) => ({ default: module.OwnerSettings })));
 const ProductsSection = lazy(() => import('../../features/shop-owner/products/ProductsPage.jsx').then((module) => ({ default: module.ProductsSection })));
 const CategoryRequestsPage = lazy(() => import('./catalogRequests/CategoriesPage.jsx'));
 const SubcategoryRequestsPage = lazy(() => import('./catalogRequests/SubcategoriesPage.jsx'));
 const BrandRequestsPage = lazy(() => import('./catalogRequests/BrandsPage.jsx'));
 const VariantRequestsPage = lazy(() => import('./catalogRequests/VariantsPage.jsx'));
 const OwnerEmployeeAccess = lazy(() => import('../../features/shop-owner/employees/OwnerEmployeeAccess.jsx'));
-const OwnerReturnManagement = lazy(() => import('./OwnerReturnManagement.jsx'));
-const OwnerDeliveryAssignments = lazy(() => import('./OwnerDeliveryAssignments.jsx'));
+const OwnerReturnManagement = lazy(() => import('../../features/shop-owner/returns/OwnerReturnManagement.jsx'));
+const OwnerDeliveryAssignments = lazy(() => import('../../features/shop-owner/delivery/OwnerDeliveryAssignments.jsx'));
 const EmployeesSection = lazy(() => import('../../features/shop-owner/employees/EmployeesPage.jsx').then((module) => ({ default: module.EmployeesSection })));
 const AttendancePage = lazy(() =>
-  import("./AttendancePage.jsx")
+  import("../../features/shop-owner/attendance/AttendancePage.jsx")
 );
 const OrdersSection = lazy(() => import('../../features/shop-owner/orders/OrdersPage.jsx').then((module) => ({ default: module.OrdersSection })));
 const PurchaseOrdersSection = lazy(() => import('../../features/shop-owner/purchase-orders/PurchaseOrdersPage.jsx').then((module) => ({ default: module.PurchaseOrdersSection })));
