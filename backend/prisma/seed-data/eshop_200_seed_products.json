@@ -1,0 +1,7569 @@
+{
+  "metadata": {
+    "note": "Synthetic test catalog, mapping to Prisma schema is required before inserting",
+    "products": 200,
+    "variants": 440
+  },
+  "products": [
+    {
+      "sku": "ESH-P-0001",
+      "name": "H&M Oxford Shirt",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "H&M",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 720,
+      "mrpINR": 900,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0001-V01",
+          "color": "Red",
+          "size": "S",
+          "priceINR": 720,
+          "mrpINR": 900,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0001-V02",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 720,
+          "mrpINR": 900,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0001-V03",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 720,
+          "mrpINR": 900,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0002",
+      "name": "Zudio Casual Shirt",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "Zudio",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1337,
+      "mrpINR": 1910,
+      "status": "ACTIVE",
+      "stock": 4,
+      "variants": [
+        {
+          "sku": "ESH-0002-V01",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 1337,
+          "mrpINR": 1910,
+          "stock": 3,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0002-V02",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 1337,
+          "mrpINR": 1910,
+          "stock": 1,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0002-V03",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 1337,
+          "mrpINR": 1910,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0003",
+      "name": "Lee Formal Shirt",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "Lee",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1917,
+      "mrpINR": 2130,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0003-V01",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 1917,
+          "mrpINR": 2130,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0003-V02",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 1917,
+          "mrpINR": 2130,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0003-V03",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 1917,
+          "mrpINR": 2130,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0004",
+      "name": "Sparky Checked Shirt",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "Sparky",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1503,
+      "mrpINR": 1670,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0004-V01",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 1503,
+          "mrpINR": 1670,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0004-V02",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 1503,
+          "mrpINR": 1670,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0004-V03",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 1503,
+          "mrpINR": 1670,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0005",
+      "name": "H&M Linen Shirt",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "H&M",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 2100,
+      "mrpINR": 2470,
+      "status": "ACTIVE",
+      "stock": 144,
+      "variants": [
+        {
+          "sku": "ESH-0005-V01",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 2100,
+          "mrpINR": 2470,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0005-V02",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 2100,
+          "mrpINR": 2470,
+          "stock": 48,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0005-V03",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 2100,
+          "mrpINR": 2470,
+          "stock": 46,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0006",
+      "name": "Zudio Oxford Shirt 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "Zudio",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1785,
+      "mrpINR": 2100,
+      "status": "ACTIVE",
+      "stock": 4,
+      "variants": [
+        {
+          "sku": "ESH-0006-V01",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 1785,
+          "mrpINR": 2100,
+          "stock": 3,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0006-V02",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 1785,
+          "mrpINR": 2100,
+          "stock": 1,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0006-V03",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 1785,
+          "mrpINR": 2100,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0007",
+      "name": "Lee Casual Shirt 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "Lee",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 540,
+      "mrpINR": 600,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0007-V01",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 540,
+          "mrpINR": 600,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0007-V02",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 540,
+          "mrpINR": 600,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0007-V03",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 540,
+          "mrpINR": 600,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0008",
+      "name": "Sparky Formal Shirt 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "Sparky",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 704,
+      "mrpINR": 880,
+      "status": "ACTIVE",
+      "stock": 144,
+      "variants": [
+        {
+          "sku": "ESH-0008-V01",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 704,
+          "mrpINR": 880,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0008-V02",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 704,
+          "mrpINR": 880,
+          "stock": 48,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0008-V03",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 704,
+          "mrpINR": 880,
+          "stock": 46,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0009",
+      "name": "H&M Checked Shirt 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "H&M",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 722,
+      "mrpINR": 850,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0009-V01",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 722,
+          "mrpINR": 850,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0009-V02",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 722,
+          "mrpINR": 850,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0009-V03",
+          "color": "Black",
+          "size": "S",
+          "priceINR": 722,
+          "mrpINR": 850,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0010",
+      "name": "Zudio Linen Shirt 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "Zudio",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1998,
+      "mrpINR": 2350,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0010-V01",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 1998,
+          "mrpINR": 2350,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0010-V02",
+          "color": "Black",
+          "size": "S",
+          "priceINR": 1998,
+          "mrpINR": 2350,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0010-V03",
+          "color": "Blue",
+          "size": "M",
+          "priceINR": 1998,
+          "mrpINR": 2350,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0011",
+      "name": "Lee Oxford Shirt 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "Lee",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1050,
+      "mrpINR": 1400,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0011-V01",
+          "color": "Black",
+          "size": "S",
+          "priceINR": 1050,
+          "mrpINR": 1400,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0011-V02",
+          "color": "Blue",
+          "size": "M",
+          "priceINR": 1050,
+          "mrpINR": 1400,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0011-V03",
+          "color": "Red",
+          "size": "L",
+          "priceINR": 1050,
+          "mrpINR": 1400,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0012",
+      "name": "Sparky Casual Shirt 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "Sparky",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 992,
+      "mrpINR": 1240,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0012-V01",
+          "color": "Blue",
+          "size": "M",
+          "priceINR": 992,
+          "mrpINR": 1240,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0012-V02",
+          "color": "Red",
+          "size": "L",
+          "priceINR": 992,
+          "mrpINR": 1240,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0012-V03",
+          "color": "Black",
+          "size": "XL",
+          "priceINR": 992,
+          "mrpINR": 1240,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0013",
+      "name": "H&M Formal Shirt 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Shirt",
+      "brand": "H&M",
+      "description": "Synthetic sample shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1404,
+      "mrpINR": 1560,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0013-V01",
+          "color": "Red",
+          "size": "L",
+          "priceINR": 1404,
+          "mrpINR": 1560,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0013-V02",
+          "color": "Black",
+          "size": "XL",
+          "priceINR": 1404,
+          "mrpINR": 1560,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0013-V03",
+          "color": "Blue",
+          "size": "XXL",
+          "priceINR": 1404,
+          "mrpINR": 1560,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0014",
+      "name": "H&M Crew Neck T-Shirt",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "H&M",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 312,
+      "mrpINR": 390,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0014-V01",
+          "color": "Red",
+          "size": "S",
+          "priceINR": 312,
+          "mrpINR": 390,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0014-V02",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 312,
+          "mrpINR": 390,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0014-V03",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 312,
+          "mrpINR": 390,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0015",
+      "name": "Zudio Polo T-Shirt",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Zudio",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 909,
+      "mrpINR": 1010,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0015-V01",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 909,
+          "mrpINR": 1010,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0015-V02",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 909,
+          "mrpINR": 1010,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0015-V03",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 909,
+          "mrpINR": 1010,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0016",
+      "name": "Lee Graphic T-Shirt",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Lee",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 561,
+      "mrpINR": 660,
+      "status": "ACTIVE",
+      "stock": 4,
+      "variants": [
+        {
+          "sku": "ESH-0016-V01",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 561,
+          "mrpINR": 660,
+          "stock": 3,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0016-V02",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 561,
+          "mrpINR": 660,
+          "stock": 1,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0016-V03",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 561,
+          "mrpINR": 660,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0017",
+      "name": "Sparky Oversized T-Shirt",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Sparky",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1278,
+      "mrpINR": 1420,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0017-V01",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 1278,
+          "mrpINR": 1420,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0017-V02",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 1278,
+          "mrpINR": 1420,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0017-V03",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 1278,
+          "mrpINR": 1420,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0018",
+      "name": "H&M Henley T-Shirt",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "H&M",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 264,
+      "mrpINR": 330,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0018-V01",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 264,
+          "mrpINR": 330,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0018-V02",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 264,
+          "mrpINR": 330,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0018-V03",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 264,
+          "mrpINR": 330,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0019",
+      "name": "Zudio Crew Neck T-Shirt 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Zudio",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 756,
+      "mrpINR": 890,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0019-V01",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 756,
+          "mrpINR": 890,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0019-V02",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 756,
+          "mrpINR": 890,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0019-V03",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 756,
+          "mrpINR": 890,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0020",
+      "name": "Lee Polo T-Shirt 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Lee",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 729,
+      "mrpINR": 810,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0020-V01",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 729,
+          "mrpINR": 810,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0020-V02",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 729,
+          "mrpINR": 810,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0020-V03",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 729,
+          "mrpINR": 810,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0021",
+      "name": "Sparky Graphic T-Shirt 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Sparky",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 651,
+      "mrpINR": 930,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0021-V01",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 651,
+          "mrpINR": 930,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0021-V02",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 651,
+          "mrpINR": 930,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0021-V03",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 651,
+          "mrpINR": 930,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0022",
+      "name": "H&M Oversized T-Shirt 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "H&M",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 846,
+      "mrpINR": 940,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0022-V01",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 846,
+          "mrpINR": 940,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0022-V02",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 846,
+          "mrpINR": 940,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0022-V03",
+          "color": "Black",
+          "size": "S",
+          "priceINR": 846,
+          "mrpINR": 940,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0023",
+      "name": "Zudio Henley T-Shirt 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Zudio",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 720,
+      "mrpINR": 800,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0023-V01",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 720,
+          "mrpINR": 800,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0023-V02",
+          "color": "Black",
+          "size": "S",
+          "priceINR": 720,
+          "mrpINR": 800,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0023-V03",
+          "color": "Blue",
+          "size": "M",
+          "priceINR": 720,
+          "mrpINR": 800,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0024",
+      "name": "Lee Crew Neck T-Shirt 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Lee",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1173,
+      "mrpINR": 1380,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0024-V01",
+          "color": "Black",
+          "size": "S",
+          "priceINR": 1173,
+          "mrpINR": 1380,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0024-V02",
+          "color": "Blue",
+          "size": "M",
+          "priceINR": 1173,
+          "mrpINR": 1380,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0024-V03",
+          "color": "Red",
+          "size": "L",
+          "priceINR": 1173,
+          "mrpINR": 1380,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0025",
+      "name": "Sparky Polo T-Shirt 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Sparky",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1258,
+      "mrpINR": 1480,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0025-V01",
+          "color": "Blue",
+          "size": "M",
+          "priceINR": 1258,
+          "mrpINR": 1480,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0025-V02",
+          "color": "Red",
+          "size": "L",
+          "priceINR": 1258,
+          "mrpINR": 1480,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0025-V03",
+          "color": "Black",
+          "size": "XL",
+          "priceINR": 1258,
+          "mrpINR": 1480,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0026",
+      "name": "H&M Graphic T-Shirt 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "H&M",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 672,
+      "mrpINR": 960,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0026-V01",
+          "color": "Red",
+          "size": "L",
+          "priceINR": 672,
+          "mrpINR": 960,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0026-V02",
+          "color": "Black",
+          "size": "XL",
+          "priceINR": 672,
+          "mrpINR": 960,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0026-V03",
+          "color": "Blue",
+          "size": "XXL",
+          "priceINR": 672,
+          "mrpINR": 960,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0027",
+      "name": "Zudio Oversized T-Shirt 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Zudio",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 435,
+      "mrpINR": 580,
+      "status": "ACTIVE",
+      "stock": 144,
+      "variants": [
+        {
+          "sku": "ESH-0027-V01",
+          "color": "Black",
+          "size": "XL",
+          "priceINR": 435,
+          "mrpINR": 580,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0027-V02",
+          "color": "Blue",
+          "size": "XXL",
+          "priceINR": 435,
+          "mrpINR": 580,
+          "stock": 48,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0027-V03",
+          "color": "Red",
+          "size": "S",
+          "priceINR": 435,
+          "mrpINR": 580,
+          "stock": 46,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0028",
+      "name": "Lee Henley T-Shirt 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Lee",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 324,
+      "mrpINR": 360,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0028-V01",
+          "color": "Blue",
+          "size": "XXL",
+          "priceINR": 324,
+          "mrpINR": 360,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0028-V02",
+          "color": "Red",
+          "size": "S",
+          "priceINR": 324,
+          "mrpINR": 360,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0028-V03",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 324,
+          "mrpINR": 360,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0029",
+      "name": "Sparky Crew Neck T-Shirt 4",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Sparky",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 387,
+      "mrpINR": 430,
+      "status": "INACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0029-V01",
+          "color": "Red",
+          "size": "S",
+          "priceINR": 387,
+          "mrpINR": 430,
+          "stock": 12,
+          "isActive": false
+        },
+        {
+          "sku": "ESH-0029-V02",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 387,
+          "mrpINR": 430,
+          "stock": 10,
+          "isActive": false
+        },
+        {
+          "sku": "ESH-0029-V03",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 387,
+          "mrpINR": 430,
+          "stock": 8,
+          "isActive": false
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0030",
+      "name": "H&M Polo T-Shirt 4",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "H&M",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 675,
+      "mrpINR": 900,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0030-V01",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 675,
+          "mrpINR": 900,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0030-V02",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 675,
+          "mrpINR": 900,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0030-V03",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 675,
+          "mrpINR": 900,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0031",
+      "name": "Zudio Graphic T-Shirt 4",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "T-Shirt",
+      "brand": "Zudio",
+      "description": "Synthetic sample t-shirt item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1072,
+      "mrpINR": 1430,
+      "status": "ACTIVE",
+      "stock": 144,
+      "variants": [
+        {
+          "sku": "ESH-0031-V01",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 1072,
+          "mrpINR": 1430,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0031-V02",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 1072,
+          "mrpINR": 1430,
+          "stock": 48,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0031-V03",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 1072,
+          "mrpINR": 1430,
+          "stock": 46,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0032",
+      "name": "H&M Slim Jeans",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "H&M",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1028,
+      "mrpINR": 1210,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0032-V01",
+          "color": "Red",
+          "size": "28",
+          "priceINR": 1028,
+          "mrpINR": 1210,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0032-V02",
+          "color": "Black",
+          "size": "30",
+          "priceINR": 1028,
+          "mrpINR": 1210,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0032-V03",
+          "color": "Blue",
+          "size": "32",
+          "priceINR": 1028,
+          "mrpINR": 1210,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0033",
+      "name": "Zudio Straight Jeans",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "Zudio",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1890,
+      "mrpINR": 2100,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0033-V01",
+          "color": "Black",
+          "size": "30",
+          "priceINR": 1890,
+          "mrpINR": 2100,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0033-V02",
+          "color": "Blue",
+          "size": "32",
+          "priceINR": 1890,
+          "mrpINR": 2100,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0033-V03",
+          "color": "Red",
+          "size": "34",
+          "priceINR": 1890,
+          "mrpINR": 2100,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0034",
+      "name": "Lee Relaxed Jeans",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "Lee",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1980,
+      "mrpINR": 2330,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0034-V01",
+          "color": "Blue",
+          "size": "32",
+          "priceINR": 1980,
+          "mrpINR": 2330,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0034-V02",
+          "color": "Red",
+          "size": "34",
+          "priceINR": 1980,
+          "mrpINR": 2330,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0034-V03",
+          "color": "Black",
+          "size": "36",
+          "priceINR": 1980,
+          "mrpINR": 2330,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0035",
+      "name": "Sparky Tapered Jeans",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "Sparky",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1512,
+      "mrpINR": 1680,
+      "status": "ACTIVE",
+      "stock": 144,
+      "variants": [
+        {
+          "sku": "ESH-0035-V01",
+          "color": "Red",
+          "size": "34",
+          "priceINR": 1512,
+          "mrpINR": 1680,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0035-V02",
+          "color": "Black",
+          "size": "36",
+          "priceINR": 1512,
+          "mrpINR": 1680,
+          "stock": 48,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0035-V03",
+          "color": "Blue",
+          "size": "38",
+          "priceINR": 1512,
+          "mrpINR": 1680,
+          "stock": 46,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0036",
+      "name": "H&M Slim Jeans 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "H&M",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 2295,
+      "mrpINR": 2550,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0036-V01",
+          "color": "Black",
+          "size": "36",
+          "priceINR": 2295,
+          "mrpINR": 2550,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0036-V02",
+          "color": "Blue",
+          "size": "38",
+          "priceINR": 2295,
+          "mrpINR": 2550,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0036-V03",
+          "color": "Red",
+          "size": "40",
+          "priceINR": 2295,
+          "mrpINR": 2550,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0037",
+      "name": "Zudio Straight Jeans 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "Zudio",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1802,
+      "mrpINR": 2120,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0037-V01",
+          "color": "Blue",
+          "size": "38",
+          "priceINR": 1802,
+          "mrpINR": 2120,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0037-V02",
+          "color": "Red",
+          "size": "40",
+          "priceINR": 1802,
+          "mrpINR": 2120,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0037-V03",
+          "color": "Black",
+          "size": "28",
+          "priceINR": 1802,
+          "mrpINR": 2120,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0038",
+      "name": "Lee Relaxed Jeans 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "Lee",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1128,
+      "mrpINR": 1410,
+      "status": "ACTIVE",
+      "stock": 144,
+      "variants": [
+        {
+          "sku": "ESH-0038-V01",
+          "color": "Red",
+          "size": "40",
+          "priceINR": 1128,
+          "mrpINR": 1410,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0038-V02",
+          "color": "Black",
+          "size": "28",
+          "priceINR": 1128,
+          "mrpINR": 1410,
+          "stock": 48,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0038-V03",
+          "color": "Blue",
+          "size": "30",
+          "priceINR": 1128,
+          "mrpINR": 1410,
+          "stock": 46,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0039",
+      "name": "Sparky Tapered Jeans 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "Sparky",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1106,
+      "mrpINR": 1580,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0039-V01",
+          "color": "Black",
+          "size": "28",
+          "priceINR": 1106,
+          "mrpINR": 1580,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0039-V02",
+          "color": "Blue",
+          "size": "30",
+          "priceINR": 1106,
+          "mrpINR": 1580,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0039-V03",
+          "color": "Red",
+          "size": "32",
+          "priceINR": 1106,
+          "mrpINR": 1580,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0040",
+      "name": "H&M Slim Jeans 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "H&M",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1152,
+      "mrpINR": 1280,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0040-V01",
+          "color": "Blue",
+          "size": "30",
+          "priceINR": 1152,
+          "mrpINR": 1280,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0040-V02",
+          "color": "Red",
+          "size": "32",
+          "priceINR": 1152,
+          "mrpINR": 1280,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0040-V03",
+          "color": "Black",
+          "size": "34",
+          "priceINR": 1152,
+          "mrpINR": 1280,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0041",
+      "name": "Zudio Straight Jeans 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "Zudio",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 2655,
+      "mrpINR": 2950,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0041-V01",
+          "color": "Red",
+          "size": "32",
+          "priceINR": 2655,
+          "mrpINR": 2950,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0041-V02",
+          "color": "Black",
+          "size": "34",
+          "priceINR": 2655,
+          "mrpINR": 2950,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0041-V03",
+          "color": "Blue",
+          "size": "36",
+          "priceINR": 2655,
+          "mrpINR": 2950,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0042",
+      "name": "Lee Relaxed Jeans 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "Lee",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1365,
+      "mrpINR": 1820,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0042-V01",
+          "color": "Black",
+          "size": "34",
+          "priceINR": 1365,
+          "mrpINR": 1820,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0042-V02",
+          "color": "Blue",
+          "size": "36",
+          "priceINR": 1365,
+          "mrpINR": 1820,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0042-V03",
+          "color": "Red",
+          "size": "38",
+          "priceINR": 1365,
+          "mrpINR": 1820,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0043",
+      "name": "Sparky Tapered Jeans 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "Sparky",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 2270,
+      "mrpINR": 2670,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0043-V01",
+          "color": "Blue",
+          "size": "36",
+          "priceINR": 2270,
+          "mrpINR": 2670,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0043-V02",
+          "color": "Red",
+          "size": "38",
+          "priceINR": 2270,
+          "mrpINR": 2670,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0043-V03",
+          "color": "Black",
+          "size": "40",
+          "priceINR": 2270,
+          "mrpINR": 2670,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0044",
+      "name": "H&M Slim Jeans 4",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "H&M",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1870,
+      "mrpINR": 2200,
+      "status": "ACTIVE",
+      "stock": 144,
+      "variants": [
+        {
+          "sku": "ESH-0044-V01",
+          "color": "Red",
+          "size": "38",
+          "priceINR": 1870,
+          "mrpINR": 2200,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0044-V02",
+          "color": "Black",
+          "size": "40",
+          "priceINR": 1870,
+          "mrpINR": 2200,
+          "stock": 48,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0044-V03",
+          "color": "Blue",
+          "size": "28",
+          "priceINR": 1870,
+          "mrpINR": 2200,
+          "stock": 46,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0045",
+      "name": "Zudio Straight Jeans 4",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Jeans",
+      "brand": "Zudio",
+      "description": "Synthetic sample jeans item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1809,
+      "mrpINR": 2010,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0045-V01",
+          "color": "Black",
+          "size": "40",
+          "priceINR": 1809,
+          "mrpINR": 2010,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0045-V02",
+          "color": "Blue",
+          "size": "28",
+          "priceINR": 1809,
+          "mrpINR": 2010,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0045-V03",
+          "color": "Red",
+          "size": "30",
+          "priceINR": 1809,
+          "mrpINR": 2010,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0046",
+      "name": "H&M Chino Trouser",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "H&M",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 624,
+      "mrpINR": 780,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0046-V01",
+          "color": "Red",
+          "size": "28",
+          "priceINR": 624,
+          "mrpINR": 780,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0046-V02",
+          "color": "Black",
+          "size": "30",
+          "priceINR": 624,
+          "mrpINR": 780,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0046-V03",
+          "color": "Blue",
+          "size": "32",
+          "priceINR": 624,
+          "mrpINR": 780,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0047",
+      "name": "Zudio Formal Trouser",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "Zudio",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1309,
+      "mrpINR": 1870,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0047-V01",
+          "color": "Black",
+          "size": "30",
+          "priceINR": 1309,
+          "mrpINR": 1870,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0047-V02",
+          "color": "Blue",
+          "size": "32",
+          "priceINR": 1309,
+          "mrpINR": 1870,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0047-V03",
+          "color": "Red",
+          "size": "34",
+          "priceINR": 1309,
+          "mrpINR": 1870,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0048",
+      "name": "Lee Cargo Trouser",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "Lee",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 2214,
+      "mrpINR": 2460,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0048-V01",
+          "color": "Blue",
+          "size": "32",
+          "priceINR": 2214,
+          "mrpINR": 2460,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0048-V02",
+          "color": "Red",
+          "size": "34",
+          "priceINR": 2214,
+          "mrpINR": 2460,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0048-V03",
+          "color": "Black",
+          "size": "36",
+          "priceINR": 2214,
+          "mrpINR": 2460,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0049",
+      "name": "Sparky Jogger Trouser",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "Sparky",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1388,
+      "mrpINR": 1850,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0049-V01",
+          "color": "Red",
+          "size": "34",
+          "priceINR": 1388,
+          "mrpINR": 1850,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0049-V02",
+          "color": "Black",
+          "size": "36",
+          "priceINR": 1388,
+          "mrpINR": 1850,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0049-V03",
+          "color": "Blue",
+          "size": "38",
+          "priceINR": 1388,
+          "mrpINR": 1850,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0050",
+      "name": "H&M Chino Trouser 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "H&M",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1344,
+      "mrpINR": 1920,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0050-V01",
+          "color": "Black",
+          "size": "36",
+          "priceINR": 1344,
+          "mrpINR": 1920,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0050-V02",
+          "color": "Blue",
+          "size": "38",
+          "priceINR": 1344,
+          "mrpINR": 1920,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0050-V03",
+          "color": "Red",
+          "size": "40",
+          "priceINR": 1344,
+          "mrpINR": 1920,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0051",
+      "name": "Zudio Formal Trouser 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "Zudio",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1173,
+      "mrpINR": 1380,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0051-V01",
+          "color": "Blue",
+          "size": "38",
+          "priceINR": 1173,
+          "mrpINR": 1380,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0051-V02",
+          "color": "Red",
+          "size": "40",
+          "priceINR": 1173,
+          "mrpINR": 1380,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0051-V03",
+          "color": "Black",
+          "size": "28",
+          "priceINR": 1173,
+          "mrpINR": 1380,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0052",
+      "name": "Lee Cargo Trouser 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "Lee",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 705,
+      "mrpINR": 940,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0052-V01",
+          "color": "Red",
+          "size": "40",
+          "priceINR": 705,
+          "mrpINR": 940,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0052-V02",
+          "color": "Black",
+          "size": "28",
+          "priceINR": 705,
+          "mrpINR": 940,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0052-V03",
+          "color": "Blue",
+          "size": "30",
+          "priceINR": 705,
+          "mrpINR": 940,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0053",
+      "name": "Sparky Jogger Trouser 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "Sparky",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1312,
+      "mrpINR": 1750,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0053-V01",
+          "color": "Black",
+          "size": "28",
+          "priceINR": 1312,
+          "mrpINR": 1750,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0053-V02",
+          "color": "Blue",
+          "size": "30",
+          "priceINR": 1312,
+          "mrpINR": 1750,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0053-V03",
+          "color": "Red",
+          "size": "32",
+          "priceINR": 1312,
+          "mrpINR": 1750,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0054",
+      "name": "H&M Chino Trouser 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "H&M",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 511,
+      "mrpINR": 730,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0054-V01",
+          "color": "Blue",
+          "size": "30",
+          "priceINR": 511,
+          "mrpINR": 730,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0054-V02",
+          "color": "Red",
+          "size": "32",
+          "priceINR": 511,
+          "mrpINR": 730,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0054-V03",
+          "color": "Black",
+          "size": "34",
+          "priceINR": 511,
+          "mrpINR": 730,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0055",
+      "name": "Zudio Formal Trouser 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "Zudio",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1665,
+      "mrpINR": 1850,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0055-V01",
+          "color": "Red",
+          "size": "32",
+          "priceINR": 1665,
+          "mrpINR": 1850,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0055-V02",
+          "color": "Black",
+          "size": "34",
+          "priceINR": 1665,
+          "mrpINR": 1850,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0055-V03",
+          "color": "Blue",
+          "size": "36",
+          "priceINR": 1665,
+          "mrpINR": 1850,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0056",
+      "name": "Lee Cargo Trouser 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "Lee",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 819,
+      "mrpINR": 910,
+      "status": "ACTIVE",
+      "stock": 144,
+      "variants": [
+        {
+          "sku": "ESH-0056-V01",
+          "color": "Black",
+          "size": "34",
+          "priceINR": 819,
+          "mrpINR": 910,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0056-V02",
+          "color": "Blue",
+          "size": "36",
+          "priceINR": 819,
+          "mrpINR": 910,
+          "stock": 48,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0056-V03",
+          "color": "Red",
+          "size": "38",
+          "priceINR": 819,
+          "mrpINR": 910,
+          "stock": 46,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0057",
+      "name": "Sparky Jogger Trouser 3",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Trouser",
+      "brand": "Sparky",
+      "description": "Synthetic sample trouser item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 900,
+      "mrpINR": 1200,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0057-V01",
+          "color": "Blue",
+          "size": "36",
+          "priceINR": 900,
+          "mrpINR": 1200,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0057-V02",
+          "color": "Red",
+          "size": "38",
+          "priceINR": 900,
+          "mrpINR": 1200,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0057-V03",
+          "color": "Black",
+          "size": "40",
+          "priceINR": 900,
+          "mrpINR": 1200,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0058",
+      "name": "H&M Ankle Socks",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Socks",
+      "brand": "H&M",
+      "description": "Synthetic sample socks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 343,
+      "mrpINR": 490,
+      "status": "INACTIVE",
+      "stock": 144,
+      "variants": [
+        {
+          "sku": "ESH-0058-V01",
+          "color": "Red",
+          "size": "Free Size",
+          "priceINR": 343,
+          "mrpINR": 490,
+          "stock": 50,
+          "isActive": false
+        },
+        {
+          "sku": "ESH-0058-V02",
+          "color": "Black",
+          "size": "Free Size",
+          "priceINR": 343,
+          "mrpINR": 490,
+          "stock": 48,
+          "isActive": false
+        },
+        {
+          "sku": "ESH-0058-V03",
+          "color": "Blue",
+          "size": "Free Size",
+          "priceINR": 343,
+          "mrpINR": 490,
+          "stock": 46,
+          "isActive": false
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0059",
+      "name": "Zudio Crew Socks",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Socks",
+      "brand": "Zudio",
+      "description": "Synthetic sample socks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 352,
+      "mrpINR": 440,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0059-V01",
+          "color": "Black",
+          "size": "Free Size",
+          "priceINR": 352,
+          "mrpINR": 440,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0059-V02",
+          "color": "Blue",
+          "size": "Free Size",
+          "priceINR": 352,
+          "mrpINR": 440,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0059-V03",
+          "color": "Red",
+          "size": "Free Size",
+          "priceINR": 352,
+          "mrpINR": 440,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0060",
+      "name": "Lee Sports Socks",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Socks",
+      "brand": "Lee",
+      "description": "Synthetic sample socks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 240,
+      "mrpINR": 320,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0060-V01",
+          "color": "Blue",
+          "size": "Free Size",
+          "priceINR": 240,
+          "mrpINR": 320,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0060-V02",
+          "color": "Red",
+          "size": "Free Size",
+          "priceINR": 240,
+          "mrpINR": 320,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0060-V03",
+          "color": "Black",
+          "size": "Free Size",
+          "priceINR": 240,
+          "mrpINR": 320,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0061",
+      "name": "Sparky Cotton Socks",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Socks",
+      "brand": "Sparky",
+      "description": "Synthetic sample socks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 270,
+      "mrpINR": 300,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0061-V01",
+          "color": "Red",
+          "size": "Free Size",
+          "priceINR": 270,
+          "mrpINR": 300,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0061-V02",
+          "color": "Black",
+          "size": "Free Size",
+          "priceINR": 270,
+          "mrpINR": 300,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0061-V03",
+          "color": "Blue",
+          "size": "Free Size",
+          "priceINR": 270,
+          "mrpINR": 300,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0062",
+      "name": "H&M Ankle Socks 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Socks",
+      "brand": "H&M",
+      "description": "Synthetic sample socks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 308,
+      "mrpINR": 410,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0062-V01",
+          "color": "Black",
+          "size": "Free Size",
+          "priceINR": 308,
+          "mrpINR": 410,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0062-V02",
+          "color": "Blue",
+          "size": "Free Size",
+          "priceINR": 308,
+          "mrpINR": 410,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0062-V03",
+          "color": "Red",
+          "size": "Free Size",
+          "priceINR": 308,
+          "mrpINR": 410,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0063",
+      "name": "Zudio Crew Socks 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Socks",
+      "brand": "Zudio",
+      "description": "Synthetic sample socks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 204,
+      "mrpINR": 240,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0063-V01",
+          "color": "Blue",
+          "size": "Free Size",
+          "priceINR": 204,
+          "mrpINR": 240,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0063-V02",
+          "color": "Red",
+          "size": "Free Size",
+          "priceINR": 204,
+          "mrpINR": 240,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0063-V03",
+          "color": "Black",
+          "size": "Free Size",
+          "priceINR": 204,
+          "mrpINR": 240,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0064",
+      "name": "Lee Sports Socks 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Socks",
+      "brand": "Lee",
+      "description": "Synthetic sample socks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 162,
+      "mrpINR": 180,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0064-V01",
+          "color": "Red",
+          "size": "Free Size",
+          "priceINR": 162,
+          "mrpINR": 180,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0064-V02",
+          "color": "Black",
+          "size": "Free Size",
+          "priceINR": 162,
+          "mrpINR": 180,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0064-V03",
+          "color": "Blue",
+          "size": "Free Size",
+          "priceINR": 162,
+          "mrpINR": 180,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0065",
+      "name": "Sparky Cotton Socks 2",
+      "category": "Clothing",
+      "segment": "Mens",
+      "subcategory": "Socks",
+      "brand": "Sparky",
+      "description": "Synthetic sample socks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 336,
+      "mrpINR": 420,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0065-V01",
+          "color": "Black",
+          "size": "Free Size",
+          "priceINR": 336,
+          "mrpINR": 420,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0065-V02",
+          "color": "Blue",
+          "size": "Free Size",
+          "priceINR": 336,
+          "mrpINR": 420,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0065-V03",
+          "color": "Red",
+          "size": "Free Size",
+          "priceINR": 336,
+          "mrpINR": 420,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0066",
+      "name": "H&M Ribbed Top",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "H&M",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 622,
+      "mrpINR": 830,
+      "status": "ACTIVE",
+      "stock": 4,
+      "variants": [
+        {
+          "sku": "ESH-0066-V01",
+          "color": "Red",
+          "size": "S",
+          "priceINR": 622,
+          "mrpINR": 830,
+          "stock": 3,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0066-V02",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 622,
+          "mrpINR": 830,
+          "stock": 1,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0066-V03",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 622,
+          "mrpINR": 830,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0067",
+      "name": "Zudio Peplum Top",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "Zudio",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1170,
+      "mrpINR": 1300,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0067-V01",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 1170,
+          "mrpINR": 1300,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0067-V02",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 1170,
+          "mrpINR": 1300,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0067-V03",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 1170,
+          "mrpINR": 1300,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0068",
+      "name": "Lee Printed Top",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "Lee",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 799,
+      "mrpINR": 940,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0068-V01",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 799,
+          "mrpINR": 940,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0068-V02",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 799,
+          "mrpINR": 940,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0068-V03",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 799,
+          "mrpINR": 940,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0069",
+      "name": "Sparky Sleeveless Top",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "Sparky",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 998,
+      "mrpINR": 1330,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0069-V01",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 998,
+          "mrpINR": 1330,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0069-V02",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 998,
+          "mrpINR": 1330,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0069-V03",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 998,
+          "mrpINR": 1330,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0070",
+      "name": "H&M Ribbed Top 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "H&M",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 998,
+      "mrpINR": 1330,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0070-V01",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 998,
+          "mrpINR": 1330,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0070-V02",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 998,
+          "mrpINR": 1330,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0070-V03",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 998,
+          "mrpINR": 1330,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0071",
+      "name": "Zudio Peplum Top 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "Zudio",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 217,
+      "mrpINR": 310,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0071-V01",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 217,
+          "mrpINR": 310,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0071-V02",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 217,
+          "mrpINR": 310,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0071-V03",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 217,
+          "mrpINR": 310,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0072",
+      "name": "Lee Printed Top 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "Lee",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1001,
+      "mrpINR": 1430,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0072-V01",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 1001,
+          "mrpINR": 1430,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0072-V02",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 1001,
+          "mrpINR": 1430,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0072-V03",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 1001,
+          "mrpINR": 1430,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0073",
+      "name": "Sparky Sleeveless Top 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "Sparky",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1088,
+      "mrpINR": 1360,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0073-V01",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 1088,
+          "mrpINR": 1360,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0073-V02",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 1088,
+          "mrpINR": 1360,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0073-V03",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 1088,
+          "mrpINR": 1360,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0074",
+      "name": "H&M Ribbed Top 3",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "H&M",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 525,
+      "mrpINR": 750,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0074-V01",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 525,
+          "mrpINR": 750,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0074-V02",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 525,
+          "mrpINR": 750,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0074-V03",
+          "color": "Black",
+          "size": "S",
+          "priceINR": 525,
+          "mrpINR": 750,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0075",
+      "name": "Zudio Peplum Top 3",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "Zudio",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 808,
+      "mrpINR": 950,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0075-V01",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 808,
+          "mrpINR": 950,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0075-V02",
+          "color": "Black",
+          "size": "S",
+          "priceINR": 808,
+          "mrpINR": 950,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0075-V03",
+          "color": "Blue",
+          "size": "M",
+          "priceINR": 808,
+          "mrpINR": 950,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0076",
+      "name": "Lee Printed Top 3",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "Lee",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 936,
+      "mrpINR": 1170,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0076-V01",
+          "color": "Black",
+          "size": "S",
+          "priceINR": 936,
+          "mrpINR": 1170,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0076-V02",
+          "color": "Blue",
+          "size": "M",
+          "priceINR": 936,
+          "mrpINR": 1170,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0076-V03",
+          "color": "Red",
+          "size": "L",
+          "priceINR": 936,
+          "mrpINR": 1170,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0077",
+      "name": "Sparky Sleeveless Top 3",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Top",
+      "brand": "Sparky",
+      "description": "Synthetic sample top item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 497,
+      "mrpINR": 710,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0077-V01",
+          "color": "Blue",
+          "size": "M",
+          "priceINR": 497,
+          "mrpINR": 710,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0077-V02",
+          "color": "Red",
+          "size": "L",
+          "priceINR": 497,
+          "mrpINR": 710,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0077-V03",
+          "color": "Black",
+          "size": "XL",
+          "priceINR": 497,
+          "mrpINR": 710,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0078",
+      "name": "H&M A-Line Kurti",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Kurti",
+      "brand": "H&M",
+      "description": "Synthetic sample kurti item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1521,
+      "mrpINR": 1690,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0078-V01",
+          "color": "Red",
+          "size": "S",
+          "priceINR": 1521,
+          "mrpINR": 1690,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0078-V02",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 1521,
+          "mrpINR": 1690,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0078-V03",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 1521,
+          "mrpINR": 1690,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0079",
+      "name": "Zudio Straight Kurti",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Kurti",
+      "brand": "Zudio",
+      "description": "Synthetic sample kurti item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 698,
+      "mrpINR": 930,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0079-V01",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 698,
+          "mrpINR": 930,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0079-V02",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 698,
+          "mrpINR": 930,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0079-V03",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 698,
+          "mrpINR": 930,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0080",
+      "name": "Lee Embroidered Kurti",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Kurti",
+      "brand": "Lee",
+      "description": "Synthetic sample kurti item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1372,
+      "mrpINR": 1830,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0080-V01",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 1372,
+          "mrpINR": 1830,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0080-V02",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 1372,
+          "mrpINR": 1830,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0080-V03",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 1372,
+          "mrpINR": 1830,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0081",
+      "name": "Sparky Cotton Kurti",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Kurti",
+      "brand": "Sparky",
+      "description": "Synthetic sample kurti item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1672,
+      "mrpINR": 2090,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0081-V01",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 1672,
+          "mrpINR": 2090,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0081-V02",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 1672,
+          "mrpINR": 2090,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0081-V03",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 1672,
+          "mrpINR": 2090,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0082",
+      "name": "H&M A-Line Kurti 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Kurti",
+      "brand": "H&M",
+      "description": "Synthetic sample kurti item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1522,
+      "mrpINR": 2030,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0082-V01",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 1522,
+          "mrpINR": 2030,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0082-V02",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 1522,
+          "mrpINR": 2030,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0082-V03",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 1522,
+          "mrpINR": 2030,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0083",
+      "name": "Zudio Straight Kurti 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Kurti",
+      "brand": "Zudio",
+      "description": "Synthetic sample kurti item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 603,
+      "mrpINR": 670,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0083-V01",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 603,
+          "mrpINR": 670,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0083-V02",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 603,
+          "mrpINR": 670,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0083-V03",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 603,
+          "mrpINR": 670,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0084",
+      "name": "Lee Embroidered Kurti 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Kurti",
+      "brand": "Lee",
+      "description": "Synthetic sample kurti item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 435,
+      "mrpINR": 580,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0084-V01",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 435,
+          "mrpINR": 580,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0084-V02",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 435,
+          "mrpINR": 580,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0084-V03",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 435,
+          "mrpINR": 580,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0085",
+      "name": "Sparky Cotton Kurti 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Kurti",
+      "brand": "Sparky",
+      "description": "Synthetic sample kurti item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 658,
+      "mrpINR": 940,
+      "status": "ACTIVE",
+      "stock": 102,
+      "variants": [
+        {
+          "sku": "ESH-0085-V01",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 658,
+          "mrpINR": 940,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0085-V02",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 658,
+          "mrpINR": 940,
+          "stock": 34,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0085-V03",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 658,
+          "mrpINR": 940,
+          "stock": 32,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0086",
+      "name": "H&M A-Line Kurti 3",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Kurti",
+      "brand": "H&M",
+      "description": "Synthetic sample kurti item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1323,
+      "mrpINR": 1890,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0086-V01",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 1323,
+          "mrpINR": 1890,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0086-V02",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 1323,
+          "mrpINR": 1890,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0086-V03",
+          "color": "Black",
+          "size": "S",
+          "priceINR": 1323,
+          "mrpINR": 1890,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0087",
+      "name": "Zudio Straight Kurti 3",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Kurti",
+      "brand": "Zudio",
+      "description": "Synthetic sample kurti item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1605,
+      "mrpINR": 2140,
+      "status": "INACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0087-V01",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 1605,
+          "mrpINR": 2140,
+          "stock": 12,
+          "isActive": false
+        },
+        {
+          "sku": "ESH-0087-V02",
+          "color": "Black",
+          "size": "S",
+          "priceINR": 1605,
+          "mrpINR": 2140,
+          "stock": 10,
+          "isActive": false
+        },
+        {
+          "sku": "ESH-0087-V03",
+          "color": "Blue",
+          "size": "M",
+          "priceINR": 1605,
+          "mrpINR": 2140,
+          "stock": 8,
+          "isActive": false
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0088",
+      "name": "H&M Wide Leg Palazzo",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Palazzo",
+      "brand": "H&M",
+      "description": "Synthetic sample palazzo item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 917,
+      "mrpINR": 1310,
+      "status": "ACTIVE",
+      "stock": 4,
+      "variants": [
+        {
+          "sku": "ESH-0088-V01",
+          "color": "Red",
+          "size": "S",
+          "priceINR": 917,
+          "mrpINR": 1310,
+          "stock": 3,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0088-V02",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 917,
+          "mrpINR": 1310,
+          "stock": 1,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0088-V03",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 917,
+          "mrpINR": 1310,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0089",
+      "name": "Zudio Cotton Palazzo",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Palazzo",
+      "brand": "Zudio",
+      "description": "Synthetic sample palazzo item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1098,
+      "mrpINR": 1220,
+      "status": "ACTIVE",
+      "stock": 4,
+      "variants": [
+        {
+          "sku": "ESH-0089-V01",
+          "color": "Black",
+          "size": "M",
+          "priceINR": 1098,
+          "mrpINR": 1220,
+          "stock": 3,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0089-V02",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 1098,
+          "mrpINR": 1220,
+          "stock": 1,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0089-V03",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 1098,
+          "mrpINR": 1220,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0090",
+      "name": "Lee Pleated Palazzo",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Palazzo",
+      "brand": "Lee",
+      "description": "Synthetic sample palazzo item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1260,
+      "mrpINR": 1400,
+      "status": "ACTIVE",
+      "stock": 4,
+      "variants": [
+        {
+          "sku": "ESH-0090-V01",
+          "color": "Blue",
+          "size": "L",
+          "priceINR": 1260,
+          "mrpINR": 1400,
+          "stock": 3,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0090-V02",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 1260,
+          "mrpINR": 1400,
+          "stock": 1,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0090-V03",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 1260,
+          "mrpINR": 1400,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0091",
+      "name": "Sparky Printed Palazzo",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Palazzo",
+      "brand": "Sparky",
+      "description": "Synthetic sample palazzo item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 450,
+      "mrpINR": 600,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0091-V01",
+          "color": "Red",
+          "size": "XL",
+          "priceINR": 450,
+          "mrpINR": 600,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0091-V02",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 450,
+          "mrpINR": 600,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0091-V03",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 450,
+          "mrpINR": 600,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0092",
+      "name": "H&M Wide Leg Palazzo 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Palazzo",
+      "brand": "H&M",
+      "description": "Synthetic sample palazzo item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 629,
+      "mrpINR": 740,
+      "status": "ACTIVE",
+      "stock": 54,
+      "variants": [
+        {
+          "sku": "ESH-0092-V01",
+          "color": "Black",
+          "size": "XXL",
+          "priceINR": 629,
+          "mrpINR": 740,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0092-V02",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 629,
+          "mrpINR": 740,
+          "stock": 18,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0092-V03",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 629,
+          "mrpINR": 740,
+          "stock": 16,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0093",
+      "name": "Zudio Cotton Palazzo 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Palazzo",
+      "brand": "Zudio",
+      "description": "Synthetic sample palazzo item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 651,
+      "mrpINR": 930,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0093-V01",
+          "color": "Blue",
+          "size": "S",
+          "priceINR": 651,
+          "mrpINR": 930,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0093-V02",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 651,
+          "mrpINR": 930,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0093-V03",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 651,
+          "mrpINR": 930,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0094",
+      "name": "Lee Pleated Palazzo 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Palazzo",
+      "brand": "Lee",
+      "description": "Synthetic sample palazzo item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 592,
+      "mrpINR": 790,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0094-V01",
+          "color": "Red",
+          "size": "M",
+          "priceINR": 592,
+          "mrpINR": 790,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0094-V02",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 592,
+          "mrpINR": 790,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0094-V03",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 592,
+          "mrpINR": 790,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0095",
+      "name": "Sparky Printed Palazzo 2",
+      "category": "Clothing",
+      "segment": "Womens",
+      "subcategory": "Palazzo",
+      "brand": "Sparky",
+      "description": "Synthetic sample palazzo item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 496,
+      "mrpINR": 620,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0095-V01",
+          "color": "Black",
+          "size": "L",
+          "priceINR": 496,
+          "mrpINR": 620,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0095-V02",
+          "color": "Blue",
+          "size": "XL",
+          "priceINR": 496,
+          "mrpINR": 620,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0095-V03",
+          "color": "Red",
+          "size": "XXL",
+          "priceINR": 496,
+          "mrpINR": 620,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0096",
+      "name": "H&M Festive Suit",
+      "category": "Clothing",
+      "segment": "Kids",
+      "subcategory": "Suit",
+      "brand": "H&M",
+      "description": "Synthetic sample suit item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1504,
+      "mrpINR": 1770,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0096-V01",
+          "color": "Red",
+          "size": "0",
+          "priceINR": 1504,
+          "mrpINR": 1770,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0096-V02",
+          "color": "Black",
+          "size": "20",
+          "priceINR": 1504,
+          "mrpINR": 1770,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0096-V03",
+          "color": "Blue",
+          "size": "22",
+          "priceINR": 1504,
+          "mrpINR": 1770,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0097",
+      "name": "Zudio Party Suit",
+      "category": "Clothing",
+      "segment": "Kids",
+      "subcategory": "Suit",
+      "brand": "Zudio",
+      "description": "Synthetic sample suit item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1268,
+      "mrpINR": 1690,
+      "status": "ACTIVE",
+      "stock": 18,
+      "variants": [
+        {
+          "sku": "ESH-0097-V01",
+          "color": "Black",
+          "size": "20",
+          "priceINR": 1268,
+          "mrpINR": 1690,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0097-V02",
+          "color": "Blue",
+          "size": "22",
+          "priceINR": 1268,
+          "mrpINR": 1690,
+          "stock": 6,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0097-V03",
+          "color": "Red",
+          "size": "24",
+          "priceINR": 1268,
+          "mrpINR": 1690,
+          "stock": 4,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0098",
+      "name": "Lee Ethnic Suit",
+      "category": "Clothing",
+      "segment": "Kids",
+      "subcategory": "Suit",
+      "brand": "Lee",
+      "description": "Synthetic sample suit item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1547,
+      "mrpINR": 1820,
+      "status": "ACTIVE",
+      "stock": 30,
+      "variants": [
+        {
+          "sku": "ESH-0098-V01",
+          "color": "Blue",
+          "size": "22",
+          "priceINR": 1547,
+          "mrpINR": 1820,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0098-V02",
+          "color": "Red",
+          "size": "24",
+          "priceINR": 1547,
+          "mrpINR": 1820,
+          "stock": 10,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0098-V03",
+          "color": "Black",
+          "size": "26",
+          "priceINR": 1547,
+          "mrpINR": 1820,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0099",
+      "name": "Sparky Casual Suit",
+      "category": "Clothing",
+      "segment": "Kids",
+      "subcategory": "Suit",
+      "brand": "Sparky",
+      "description": "Synthetic sample suit item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 720,
+      "mrpINR": 800,
+      "status": "ACTIVE",
+      "stock": 144,
+      "variants": [
+        {
+          "sku": "ESH-0099-V01",
+          "color": "Red",
+          "size": "24",
+          "priceINR": 720,
+          "mrpINR": 800,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0099-V02",
+          "color": "Black",
+          "size": "26",
+          "priceINR": 720,
+          "mrpINR": 800,
+          "stock": 48,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0099-V03",
+          "color": "Blue",
+          "size": "28",
+          "priceINR": 720,
+          "mrpINR": 800,
+          "stock": 46,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0100",
+      "name": "H&M Festive Suit 2",
+      "category": "Clothing",
+      "segment": "Kids",
+      "subcategory": "Suit",
+      "brand": "H&M",
+      "description": "Synthetic sample suit item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1472,
+      "mrpINR": 1840,
+      "status": "ACTIVE",
+      "stock": 144,
+      "variants": [
+        {
+          "sku": "ESH-0100-V01",
+          "color": "Black",
+          "size": "26",
+          "priceINR": 1472,
+          "mrpINR": 1840,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0100-V02",
+          "color": "Blue",
+          "size": "28",
+          "priceINR": 1472,
+          "mrpINR": 1840,
+          "stock": 48,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0100-V03",
+          "color": "Red",
+          "size": "30",
+          "priceINR": 1472,
+          "mrpINR": 1840,
+          "stock": 46,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0101",
+      "name": "Daily Basket Basmati Rice",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Rice",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample rice item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 158,
+      "mrpINR": 210,
+      "status": "ACTIVE",
+      "stock": 3,
+      "variants": [
+        {
+          "sku": "ESH-0101-V01",
+          "color": "Standard",
+          "size": "1 kg",
+          "priceINR": 158,
+          "mrpINR": 210,
+          "stock": 3,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0102",
+      "name": "Fresh Choice Brown Rice",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Rice",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample rice item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 63,
+      "mrpINR": 90,
+      "status": "ACTIVE",
+      "stock": 12,
+      "variants": [
+        {
+          "sku": "ESH-0102-V01",
+          "color": "Standard",
+          "size": "5 kg",
+          "priceINR": 63,
+          "mrpINR": 90,
+          "stock": 12,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0103",
+      "name": "Daily Basket Sona Masoori Rice",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Rice",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample rice item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 434,
+      "mrpINR": 510,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0103-V01",
+          "color": "Standard",
+          "size": "1 kg",
+          "priceINR": 434,
+          "mrpINR": 510,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0104",
+      "name": "Fresh Choice Basmati Rice 2",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Rice",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample rice item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 224,
+      "mrpINR": 320,
+      "status": "ACTIVE",
+      "stock": 8,
+      "variants": [
+        {
+          "sku": "ESH-0104-V01",
+          "color": "Standard",
+          "size": "5 kg",
+          "priceINR": 224,
+          "mrpINR": 320,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0105",
+      "name": "Daily Basket Brown Rice 2",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Rice",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample rice item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 232,
+      "mrpINR": 290,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0105-V01",
+          "color": "Standard",
+          "size": "1 kg",
+          "priceINR": 232,
+          "mrpINR": 290,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0106",
+      "name": "Fresh Choice Sona Masoori Rice 2",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Rice",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample rice item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 578,
+      "mrpINR": 770,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0106-V01",
+          "color": "Standard",
+          "size": "5 kg",
+          "priceINR": 578,
+          "mrpINR": 770,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0107",
+      "name": "Daily Basket Basmati Rice 3",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Rice",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample rice item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 396,
+      "mrpINR": 440,
+      "status": "ACTIVE",
+      "stock": 50,
+      "variants": [
+        {
+          "sku": "ESH-0107-V01",
+          "color": "Standard",
+          "size": "1 kg",
+          "priceINR": 396,
+          "mrpINR": 440,
+          "stock": 50,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0108",
+      "name": "Daily Basket Wheat Flour",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Flour",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample flour item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 308,
+      "mrpINR": 410,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0108-V01",
+          "color": "Standard",
+          "size": "1 kg",
+          "priceINR": 308,
+          "mrpINR": 410,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0109",
+      "name": "Fresh Choice Multigrain Flour",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Flour",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample flour item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 207,
+      "mrpINR": 230,
+      "status": "ACTIVE",
+      "stock": 8,
+      "variants": [
+        {
+          "sku": "ESH-0109-V01",
+          "color": "Standard",
+          "size": "5 kg",
+          "priceINR": 207,
+          "mrpINR": 230,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0110",
+      "name": "Daily Basket Besan Flour",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Flour",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample flour item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 423,
+      "mrpINR": 470,
+      "status": "ACTIVE",
+      "stock": 3,
+      "variants": [
+        {
+          "sku": "ESH-0110-V01",
+          "color": "Standard",
+          "size": "1 kg",
+          "priceINR": 423,
+          "mrpINR": 470,
+          "stock": 3,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0111",
+      "name": "Fresh Choice Wheat Flour 2",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Flour",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample flour item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 88,
+      "mrpINR": 110,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0111-V01",
+          "color": "Standard",
+          "size": "5 kg",
+          "priceINR": 88,
+          "mrpINR": 110,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0112",
+      "name": "Daily Basket Multigrain Flour 2",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Flour",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample flour item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 240,
+      "mrpINR": 320,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0112-V01",
+          "color": "Standard",
+          "size": "1 kg",
+          "priceINR": 240,
+          "mrpINR": 320,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0113",
+      "name": "Daily Basket Toor Pulses",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Pulses",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample pulses item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 80,
+      "mrpINR": 100,
+      "status": "ACTIVE",
+      "stock": 36,
+      "variants": [
+        {
+          "sku": "ESH-0113-V01",
+          "color": "Standard",
+          "size": "500 g",
+          "priceINR": 80,
+          "mrpINR": 100,
+          "stock": 36,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0114",
+      "name": "Fresh Choice Moong Pulses",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Pulses",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample pulses item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 126,
+      "mrpINR": 180,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0114-V01",
+          "color": "Standard",
+          "size": "1 kg",
+          "priceINR": 126,
+          "mrpINR": 180,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0115",
+      "name": "Daily Basket Chana Pulses",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Pulses",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample pulses item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 216,
+      "mrpINR": 270,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0115-V01",
+          "color": "Standard",
+          "size": "500 g",
+          "priceINR": 216,
+          "mrpINR": 270,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0116",
+      "name": "Fresh Choice Masoor Pulses",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Pulses",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample pulses item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 88,
+      "mrpINR": 110,
+      "status": "INACTIVE",
+      "stock": 8,
+      "variants": [
+        {
+          "sku": "ESH-0116-V01",
+          "color": "Standard",
+          "size": "1 kg",
+          "priceINR": 88,
+          "mrpINR": 110,
+          "stock": 8,
+          "isActive": false
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0117",
+      "name": "Daily Basket Toor Pulses 2",
+      "category": "Grocery",
+      "segment": "Staples",
+      "subcategory": "Pulses",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample pulses item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 136,
+      "mrpINR": 170,
+      "status": "ACTIVE",
+      "stock": 8,
+      "variants": [
+        {
+          "sku": "ESH-0117-V01",
+          "color": "Standard",
+          "size": "500 g",
+          "priceINR": 136,
+          "mrpINR": 170,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0118",
+      "name": "Daily Basket Butter Biscuits",
+      "category": "Grocery",
+      "segment": "Snacks",
+      "subcategory": "Biscuits",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample biscuits item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 28,
+      "mrpINR": 40,
+      "status": "ACTIVE",
+      "stock": 12,
+      "variants": [
+        {
+          "sku": "ESH-0118-V01",
+          "color": "Standard",
+          "size": "100 g",
+          "priceINR": 28,
+          "mrpINR": 40,
+          "stock": 12,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0119",
+      "name": "Fresh Choice Digestive Biscuits",
+      "category": "Grocery",
+      "segment": "Snacks",
+      "subcategory": "Biscuits",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample biscuits item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 85,
+      "mrpINR": 100,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0119-V01",
+          "color": "Standard",
+          "size": "200 g",
+          "priceINR": 85,
+          "mrpINR": 100,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0120",
+      "name": "Daily Basket Chocolate Biscuits",
+      "category": "Grocery",
+      "segment": "Snacks",
+      "subcategory": "Biscuits",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample biscuits item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 21,
+      "mrpINR": 30,
+      "status": "ACTIVE",
+      "stock": 3,
+      "variants": [
+        {
+          "sku": "ESH-0120-V01",
+          "color": "Standard",
+          "size": "100 g",
+          "priceINR": 21,
+          "mrpINR": 30,
+          "stock": 3,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0121",
+      "name": "Fresh Choice Oat Biscuits",
+      "category": "Grocery",
+      "segment": "Snacks",
+      "subcategory": "Biscuits",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample biscuits item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 16,
+      "mrpINR": 20,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0121-V01",
+          "color": "Standard",
+          "size": "200 g",
+          "priceINR": 16,
+          "mrpINR": 20,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0122",
+      "name": "Daily Basket Butter Biscuits 2",
+      "category": "Grocery",
+      "segment": "Snacks",
+      "subcategory": "Biscuits",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample biscuits item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 45,
+      "mrpINR": 50,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0122-V01",
+          "color": "Standard",
+          "size": "100 g",
+          "priceINR": 45,
+          "mrpINR": 50,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0123",
+      "name": "Daily Basket Assam Tea",
+      "category": "Grocery",
+      "segment": "Beverages",
+      "subcategory": "Tea",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample tea item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 240,
+      "mrpINR": 300,
+      "status": "ACTIVE",
+      "stock": 50,
+      "variants": [
+        {
+          "sku": "ESH-0123-V01",
+          "color": "Standard",
+          "size": "100 g",
+          "priceINR": 240,
+          "mrpINR": 300,
+          "stock": 50,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0124",
+      "name": "Fresh Choice Green Tea",
+      "category": "Grocery",
+      "segment": "Beverages",
+      "subcategory": "Tea",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample tea item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 333,
+      "mrpINR": 370,
+      "status": "ACTIVE",
+      "stock": 36,
+      "variants": [
+        {
+          "sku": "ESH-0124-V01",
+          "color": "Standard",
+          "size": "250 g",
+          "priceINR": 333,
+          "mrpINR": 370,
+          "stock": 36,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0125",
+      "name": "Daily Basket Masala Tea",
+      "category": "Grocery",
+      "segment": "Beverages",
+      "subcategory": "Tea",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample tea item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 441,
+      "mrpINR": 490,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0125-V01",
+          "color": "Standard",
+          "size": "100 g",
+          "priceINR": 441,
+          "mrpINR": 490,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0126",
+      "name": "Fresh Choice Ginger Tea",
+      "category": "Grocery",
+      "segment": "Beverages",
+      "subcategory": "Tea",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample tea item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 264,
+      "mrpINR": 330,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0126-V01",
+          "color": "Standard",
+          "size": "250 g",
+          "priceINR": 264,
+          "mrpINR": 330,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0127",
+      "name": "Daily Basket Powder Detergent",
+      "category": "Grocery",
+      "segment": "Household",
+      "subcategory": "Detergent",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample detergent item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 207,
+      "mrpINR": 230,
+      "status": "ACTIVE",
+      "stock": 12,
+      "variants": [
+        {
+          "sku": "ESH-0127-V01",
+          "color": "Standard",
+          "size": "500 ml",
+          "priceINR": 207,
+          "mrpINR": 230,
+          "stock": 12,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0128",
+      "name": "Fresh Choice Liquid Detergent",
+      "category": "Grocery",
+      "segment": "Household",
+      "subcategory": "Detergent",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample detergent item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 259,
+      "mrpINR": 370,
+      "status": "ACTIVE",
+      "stock": 36,
+      "variants": [
+        {
+          "sku": "ESH-0128-V01",
+          "color": "Standard",
+          "size": "1 L",
+          "priceINR": 259,
+          "mrpINR": 370,
+          "stock": 36,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0129",
+      "name": "Daily Basket Fabric Care Detergent",
+      "category": "Grocery",
+      "segment": "Household",
+      "subcategory": "Detergent",
+      "brand": "Daily Basket",
+      "description": "Synthetic sample detergent item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 297,
+      "mrpINR": 330,
+      "status": "ACTIVE",
+      "stock": 36,
+      "variants": [
+        {
+          "sku": "ESH-0129-V01",
+          "color": "Standard",
+          "size": "500 ml",
+          "priceINR": 297,
+          "mrpINR": 330,
+          "stock": 36,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0130",
+      "name": "Fresh Choice Powder Detergent 2",
+      "category": "Grocery",
+      "segment": "Household",
+      "subcategory": "Detergent",
+      "brand": "Fresh Choice",
+      "description": "Synthetic sample detergent item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 221,
+      "mrpINR": 260,
+      "status": "ACTIVE",
+      "stock": 8,
+      "variants": [
+        {
+          "sku": "ESH-0130-V01",
+          "color": "Standard",
+          "size": "1 L",
+          "priceINR": 221,
+          "mrpINR": 260,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0131",
+      "name": "Urban Step Canvas Casual Shoes",
+      "category": "Footwear",
+      "segment": "Mens",
+      "subcategory": "Casual Shoes",
+      "brand": "Urban Step",
+      "description": "Synthetic sample casual shoes item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 2232,
+      "mrpINR": 2790,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0131-V01",
+          "color": "Red",
+          "size": "6",
+          "priceINR": 2232,
+          "mrpINR": 2790,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0131-V02",
+          "color": "Black",
+          "size": "7",
+          "priceINR": 2232,
+          "mrpINR": 2790,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0132",
+      "name": "Daily Walk Slip-On Casual Shoes",
+      "category": "Footwear",
+      "segment": "Mens",
+      "subcategory": "Casual Shoes",
+      "brand": "Daily Walk",
+      "description": "Synthetic sample casual shoes item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 2193,
+      "mrpINR": 2580,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0132-V01",
+          "color": "Black",
+          "size": "7",
+          "priceINR": 2193,
+          "mrpINR": 2580,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0132-V02",
+          "color": "Blue",
+          "size": "8",
+          "priceINR": 2193,
+          "mrpINR": 2580,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0133",
+      "name": "Urban Step Walking Casual Shoes",
+      "category": "Footwear",
+      "segment": "Mens",
+      "subcategory": "Casual Shoes",
+      "brand": "Urban Step",
+      "description": "Synthetic sample casual shoes item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1136,
+      "mrpINR": 1420,
+      "status": "ACTIVE",
+      "stock": 14,
+      "variants": [
+        {
+          "sku": "ESH-0133-V01",
+          "color": "Blue",
+          "size": "8",
+          "priceINR": 1136,
+          "mrpINR": 1420,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0133-V02",
+          "color": "Red",
+          "size": "9",
+          "priceINR": 1136,
+          "mrpINR": 1420,
+          "stock": 6,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0134",
+      "name": "Daily Walk Canvas Casual Shoes 2",
+      "category": "Footwear",
+      "segment": "Mens",
+      "subcategory": "Casual Shoes",
+      "brand": "Daily Walk",
+      "description": "Synthetic sample casual shoes item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1792,
+      "mrpINR": 2560,
+      "status": "ACTIVE",
+      "stock": 14,
+      "variants": [
+        {
+          "sku": "ESH-0134-V01",
+          "color": "Red",
+          "size": "9",
+          "priceINR": 1792,
+          "mrpINR": 2560,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0134-V02",
+          "color": "Black",
+          "size": "10",
+          "priceINR": 1792,
+          "mrpINR": 2560,
+          "stock": 6,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0135",
+      "name": "Urban Step Slip-On Casual Shoes 2",
+      "category": "Footwear",
+      "segment": "Mens",
+      "subcategory": "Casual Shoes",
+      "brand": "Urban Step",
+      "description": "Synthetic sample casual shoes item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 2261,
+      "mrpINR": 2660,
+      "status": "ACTIVE",
+      "stock": 14,
+      "variants": [
+        {
+          "sku": "ESH-0135-V01",
+          "color": "Black",
+          "size": "10",
+          "priceINR": 2261,
+          "mrpINR": 2660,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0135-V02",
+          "color": "Blue",
+          "size": "6",
+          "priceINR": 2261,
+          "mrpINR": 2660,
+          "stock": 6,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0136",
+      "name": "Daily Walk Walking Casual Shoes 2",
+      "category": "Footwear",
+      "segment": "Mens",
+      "subcategory": "Casual Shoes",
+      "brand": "Daily Walk",
+      "description": "Synthetic sample casual shoes item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1533,
+      "mrpINR": 2190,
+      "status": "ACTIVE",
+      "stock": 38,
+      "variants": [
+        {
+          "sku": "ESH-0136-V01",
+          "color": "Blue",
+          "size": "6",
+          "priceINR": 1533,
+          "mrpINR": 2190,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0136-V02",
+          "color": "Red",
+          "size": "7",
+          "priceINR": 1533,
+          "mrpINR": 2190,
+          "stock": 18,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0137",
+      "name": "Urban Step Comfort Sandals",
+      "category": "Footwear",
+      "segment": "Mens",
+      "subcategory": "Sandals",
+      "brand": "Urban Step",
+      "description": "Synthetic sample sandals item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 622,
+      "mrpINR": 830,
+      "status": "ACTIVE",
+      "stock": 38,
+      "variants": [
+        {
+          "sku": "ESH-0137-V01",
+          "color": "Red",
+          "size": "6",
+          "priceINR": 622,
+          "mrpINR": 830,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0137-V02",
+          "color": "Black",
+          "size": "7",
+          "priceINR": 622,
+          "mrpINR": 830,
+          "stock": 18,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0138",
+      "name": "Daily Walk Outdoor Sandals",
+      "category": "Footwear",
+      "segment": "Mens",
+      "subcategory": "Sandals",
+      "brand": "Daily Walk",
+      "description": "Synthetic sample sandals item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 329,
+      "mrpINR": 470,
+      "status": "ACTIVE",
+      "stock": 4,
+      "variants": [
+        {
+          "sku": "ESH-0138-V01",
+          "color": "Black",
+          "size": "7",
+          "priceINR": 329,
+          "mrpINR": 470,
+          "stock": 3,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0138-V02",
+          "color": "Blue",
+          "size": "8",
+          "priceINR": 329,
+          "mrpINR": 470,
+          "stock": 1,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0139",
+      "name": "Urban Step Everyday Sandals",
+      "category": "Footwear",
+      "segment": "Mens",
+      "subcategory": "Sandals",
+      "brand": "Urban Step",
+      "description": "Synthetic sample sandals item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 833,
+      "mrpINR": 1190,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0139-V01",
+          "color": "Blue",
+          "size": "8",
+          "priceINR": 833,
+          "mrpINR": 1190,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0139-V02",
+          "color": "Red",
+          "size": "9",
+          "priceINR": 833,
+          "mrpINR": 1190,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0140",
+      "name": "Daily Walk Comfort Sandals 2",
+      "category": "Footwear",
+      "segment": "Mens",
+      "subcategory": "Sandals",
+      "brand": "Daily Walk",
+      "description": "Synthetic sample sandals item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 330,
+      "mrpINR": 440,
+      "status": "ACTIVE",
+      "stock": 38,
+      "variants": [
+        {
+          "sku": "ESH-0140-V01",
+          "color": "Red",
+          "size": "9",
+          "priceINR": 330,
+          "mrpINR": 440,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0140-V02",
+          "color": "Black",
+          "size": "10",
+          "priceINR": 330,
+          "mrpINR": 440,
+          "stock": 18,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0141",
+      "name": "Urban Step Ballet Flats",
+      "category": "Footwear",
+      "segment": "Womens",
+      "subcategory": "Flats",
+      "brand": "Urban Step",
+      "description": "Synthetic sample flats item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1170,
+      "mrpINR": 1300,
+      "status": "ACTIVE",
+      "stock": 70,
+      "variants": [
+        {
+          "sku": "ESH-0141-V01",
+          "color": "Red",
+          "size": "4",
+          "priceINR": 1170,
+          "mrpINR": 1300,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0141-V02",
+          "color": "Black",
+          "size": "5",
+          "priceINR": 1170,
+          "mrpINR": 1300,
+          "stock": 34,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0142",
+      "name": "Daily Walk Strappy Flats",
+      "category": "Footwear",
+      "segment": "Womens",
+      "subcategory": "Flats",
+      "brand": "Daily Walk",
+      "description": "Synthetic sample flats item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 819,
+      "mrpINR": 1170,
+      "status": "ACTIVE",
+      "stock": 22,
+      "variants": [
+        {
+          "sku": "ESH-0142-V01",
+          "color": "Black",
+          "size": "5",
+          "priceINR": 819,
+          "mrpINR": 1170,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0142-V02",
+          "color": "Blue",
+          "size": "6",
+          "priceINR": 819,
+          "mrpINR": 1170,
+          "stock": 10,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0143",
+      "name": "Urban Step Everyday Flats",
+      "category": "Footwear",
+      "segment": "Womens",
+      "subcategory": "Flats",
+      "brand": "Urban Step",
+      "description": "Synthetic sample flats item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 576,
+      "mrpINR": 720,
+      "status": "ACTIVE",
+      "stock": 22,
+      "variants": [
+        {
+          "sku": "ESH-0143-V01",
+          "color": "Blue",
+          "size": "6",
+          "priceINR": 576,
+          "mrpINR": 720,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0143-V02",
+          "color": "Red",
+          "size": "7",
+          "priceINR": 576,
+          "mrpINR": 720,
+          "stock": 10,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0144",
+      "name": "Daily Walk Ballet Flats 2",
+      "category": "Footwear",
+      "segment": "Womens",
+      "subcategory": "Flats",
+      "brand": "Daily Walk",
+      "description": "Synthetic sample flats item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1173,
+      "mrpINR": 1380,
+      "status": "ACTIVE",
+      "stock": 4,
+      "variants": [
+        {
+          "sku": "ESH-0144-V01",
+          "color": "Red",
+          "size": "7",
+          "priceINR": 1173,
+          "mrpINR": 1380,
+          "stock": 3,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0144-V02",
+          "color": "Black",
+          "size": "8",
+          "priceINR": 1173,
+          "mrpINR": 1380,
+          "stock": 1,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0145",
+      "name": "Urban Step Strappy Flats 2",
+      "category": "Footwear",
+      "segment": "Womens",
+      "subcategory": "Flats",
+      "brand": "Urban Step",
+      "description": "Synthetic sample flats item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1102,
+      "mrpINR": 1470,
+      "status": "INACTIVE",
+      "stock": 98,
+      "variants": [
+        {
+          "sku": "ESH-0145-V01",
+          "color": "Black",
+          "size": "8",
+          "priceINR": 1102,
+          "mrpINR": 1470,
+          "stock": 50,
+          "isActive": false
+        },
+        {
+          "sku": "ESH-0145-V02",
+          "color": "Blue",
+          "size": "4",
+          "priceINR": 1102,
+          "mrpINR": 1470,
+          "stock": 48,
+          "isActive": false
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0146",
+      "name": "Urban Step Court Sneakers",
+      "category": "Footwear",
+      "segment": "Womens",
+      "subcategory": "Sneakers",
+      "brand": "Urban Step",
+      "description": "Synthetic sample sneakers item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 915,
+      "mrpINR": 1220,
+      "status": "ACTIVE",
+      "stock": 38,
+      "variants": [
+        {
+          "sku": "ESH-0146-V01",
+          "color": "Red",
+          "size": "4",
+          "priceINR": 915,
+          "mrpINR": 1220,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0146-V02",
+          "color": "Black",
+          "size": "5",
+          "priceINR": 915,
+          "mrpINR": 1220,
+          "stock": 18,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0147",
+      "name": "Daily Walk Walking Sneakers",
+      "category": "Footwear",
+      "segment": "Womens",
+      "subcategory": "Sneakers",
+      "brand": "Daily Walk",
+      "description": "Synthetic sample sneakers item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 873,
+      "mrpINR": 970,
+      "status": "ACTIVE",
+      "stock": 70,
+      "variants": [
+        {
+          "sku": "ESH-0147-V01",
+          "color": "Black",
+          "size": "5",
+          "priceINR": 873,
+          "mrpINR": 970,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0147-V02",
+          "color": "Blue",
+          "size": "6",
+          "priceINR": 873,
+          "mrpINR": 970,
+          "stock": 34,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0148",
+      "name": "Urban Step Chunky Sneakers",
+      "category": "Footwear",
+      "segment": "Womens",
+      "subcategory": "Sneakers",
+      "brand": "Urban Step",
+      "description": "Synthetic sample sneakers item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1972,
+      "mrpINR": 2320,
+      "status": "ACTIVE",
+      "stock": 14,
+      "variants": [
+        {
+          "sku": "ESH-0148-V01",
+          "color": "Blue",
+          "size": "6",
+          "priceINR": 1972,
+          "mrpINR": 2320,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0148-V02",
+          "color": "Red",
+          "size": "7",
+          "priceINR": 1972,
+          "mrpINR": 2320,
+          "stock": 6,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0149",
+      "name": "Daily Walk Court Sneakers 2",
+      "category": "Footwear",
+      "segment": "Womens",
+      "subcategory": "Sneakers",
+      "brand": "Daily Walk",
+      "description": "Synthetic sample sneakers item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 2182,
+      "mrpINR": 2910,
+      "status": "ACTIVE",
+      "stock": 4,
+      "variants": [
+        {
+          "sku": "ESH-0149-V01",
+          "color": "Red",
+          "size": "7",
+          "priceINR": 2182,
+          "mrpINR": 2910,
+          "stock": 3,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0149-V02",
+          "color": "Black",
+          "size": "8",
+          "priceINR": 2182,
+          "mrpINR": 2910,
+          "stock": 1,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0150",
+      "name": "Urban Step Walking Sneakers 2",
+      "category": "Footwear",
+      "segment": "Womens",
+      "subcategory": "Sneakers",
+      "brand": "Urban Step",
+      "description": "Synthetic sample sneakers item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 665,
+      "mrpINR": 950,
+      "status": "ACTIVE",
+      "stock": 14,
+      "variants": [
+        {
+          "sku": "ESH-0150-V01",
+          "color": "Black",
+          "size": "8",
+          "priceINR": 665,
+          "mrpINR": 950,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0150-V02",
+          "color": "Blue",
+          "size": "4",
+          "priceINR": 665,
+          "mrpINR": 950,
+          "stock": 6,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0151",
+      "name": "TechNest Wired Earphones",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Earphones",
+      "brand": "TechNest",
+      "description": "Synthetic sample earphones item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1207,
+      "mrpINR": 1420,
+      "status": "ACTIVE",
+      "stock": 14,
+      "variants": [
+        {
+          "sku": "ESH-0151-V01",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 1207,
+          "mrpINR": 1420,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0151-V02",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 1207,
+          "mrpINR": 1420,
+          "stock": 6,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0152",
+      "name": "Voltix In-Ear Earphones",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Earphones",
+      "brand": "Voltix",
+      "description": "Synthetic sample earphones item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 750,
+      "mrpINR": 1000,
+      "status": "ACTIVE",
+      "stock": 70,
+      "variants": [
+        {
+          "sku": "ESH-0152-V01",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 750,
+          "mrpINR": 1000,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0152-V02",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 750,
+          "mrpINR": 1000,
+          "stock": 34,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0153",
+      "name": "TechNest Type-C Earphones",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Earphones",
+      "brand": "TechNest",
+      "description": "Synthetic sample earphones item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 315,
+      "mrpINR": 420,
+      "status": "ACTIVE",
+      "stock": 38,
+      "variants": [
+        {
+          "sku": "ESH-0153-V01",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 315,
+          "mrpINR": 420,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0153-V02",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 315,
+          "mrpINR": 420,
+          "stock": 18,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0154",
+      "name": "Voltix Bass Earphones",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Earphones",
+      "brand": "Voltix",
+      "description": "Synthetic sample earphones item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 261,
+      "mrpINR": 290,
+      "status": "ACTIVE",
+      "stock": 98,
+      "variants": [
+        {
+          "sku": "ESH-0154-V01",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 261,
+          "mrpINR": 290,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0154-V02",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 261,
+          "mrpINR": 290,
+          "stock": 48,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0155",
+      "name": "TechNest Wired Earphones 2",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Earphones",
+      "brand": "TechNest",
+      "description": "Synthetic sample earphones item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 696,
+      "mrpINR": 870,
+      "status": "ACTIVE",
+      "stock": 70,
+      "variants": [
+        {
+          "sku": "ESH-0155-V01",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 696,
+          "mrpINR": 870,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0155-V02",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 696,
+          "mrpINR": 870,
+          "stock": 34,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0156",
+      "name": "TechNest Fast Chargers",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Chargers",
+      "brand": "TechNest",
+      "description": "Synthetic sample chargers item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1304,
+      "mrpINR": 1630,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0156-V01",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 1304,
+          "mrpINR": 1630,
+          "stock": 0,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0156-V02",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 1304,
+          "mrpINR": 1630,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0157",
+      "name": "Voltix Dual Port Chargers",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Chargers",
+      "brand": "Voltix",
+      "description": "Synthetic sample chargers item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 240,
+      "mrpINR": 320,
+      "status": "ACTIVE",
+      "stock": 22,
+      "variants": [
+        {
+          "sku": "ESH-0157-V01",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 240,
+          "mrpINR": 320,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0157-V02",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 240,
+          "mrpINR": 320,
+          "stock": 10,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0158",
+      "name": "TechNest Compact Chargers",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Chargers",
+      "brand": "TechNest",
+      "description": "Synthetic sample chargers item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 330,
+      "mrpINR": 440,
+      "status": "ACTIVE",
+      "stock": 70,
+      "variants": [
+        {
+          "sku": "ESH-0158-V01",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 330,
+          "mrpINR": 440,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0158-V02",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 330,
+          "mrpINR": 440,
+          "stock": 34,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0159",
+      "name": "Voltix Fast Chargers 2",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Chargers",
+      "brand": "Voltix",
+      "description": "Synthetic sample chargers item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1200,
+      "mrpINR": 1600,
+      "status": "ACTIVE",
+      "stock": 70,
+      "variants": [
+        {
+          "sku": "ESH-0159-V01",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 1200,
+          "mrpINR": 1600,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0159-V02",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 1200,
+          "mrpINR": 1600,
+          "stock": 34,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0160",
+      "name": "TechNest 10000mAh Power Banks",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Power Banks",
+      "brand": "TechNest",
+      "description": "Synthetic sample power banks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1456,
+      "mrpINR": 1820,
+      "status": "ACTIVE",
+      "stock": 98,
+      "variants": [
+        {
+          "sku": "ESH-0160-V01",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 1456,
+          "mrpINR": 1820,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0160-V02",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 1456,
+          "mrpINR": 1820,
+          "stock": 48,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0161",
+      "name": "Voltix 20000mAh Power Banks",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Power Banks",
+      "brand": "Voltix",
+      "description": "Synthetic sample power banks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1251,
+      "mrpINR": 1390,
+      "status": "ACTIVE",
+      "stock": 98,
+      "variants": [
+        {
+          "sku": "ESH-0161-V01",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 1251,
+          "mrpINR": 1390,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0161-V02",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 1251,
+          "mrpINR": 1390,
+          "stock": 48,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0162",
+      "name": "TechNest Slim Power Banks",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Power Banks",
+      "brand": "TechNest",
+      "description": "Synthetic sample power banks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1200,
+      "mrpINR": 1500,
+      "status": "ACTIVE",
+      "stock": 98,
+      "variants": [
+        {
+          "sku": "ESH-0162-V01",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 1200,
+          "mrpINR": 1500,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0162-V02",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 1200,
+          "mrpINR": 1500,
+          "stock": 48,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0163",
+      "name": "Voltix 10000mAh Power Banks 2",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "Power Banks",
+      "brand": "Voltix",
+      "description": "Synthetic sample power banks item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 1048,
+      "mrpINR": 1310,
+      "status": "ACTIVE",
+      "stock": 14,
+      "variants": [
+        {
+          "sku": "ESH-0163-V01",
+          "color": "Blue",
+          "size": "Standard",
+          "priceINR": 1048,
+          "mrpINR": 1310,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0163-V02",
+          "color": "Black",
+          "size": "Standard",
+          "priceINR": 1048,
+          "mrpINR": 1310,
+          "stock": 6,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0164",
+      "name": "TechNest Warm LED Bulbs",
+      "category": "Electronics",
+      "segment": "Home",
+      "subcategory": "LED Bulbs",
+      "brand": "TechNest",
+      "description": "Synthetic sample led bulbs item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 332,
+      "mrpINR": 390,
+      "status": "ACTIVE",
+      "stock": 38,
+      "variants": [
+        {
+          "sku": "ESH-0164-V01",
+          "color": "Black",
+          "size": "9 W",
+          "priceINR": 332,
+          "mrpINR": 390,
+          "stock": 20,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0164-V02",
+          "color": "Blue",
+          "size": "12 W",
+          "priceINR": 332,
+          "mrpINR": 390,
+          "stock": 18,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0165",
+      "name": "Voltix Cool LED Bulbs",
+      "category": "Electronics",
+      "segment": "Home",
+      "subcategory": "LED Bulbs",
+      "brand": "Voltix",
+      "description": "Synthetic sample led bulbs item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 518,
+      "mrpINR": 610,
+      "status": "ACTIVE",
+      "stock": 98,
+      "variants": [
+        {
+          "sku": "ESH-0165-V01",
+          "color": "Blue",
+          "size": "12 W",
+          "priceINR": 518,
+          "mrpINR": 610,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0165-V02",
+          "color": "Black",
+          "size": "9 W",
+          "priceINR": 518,
+          "mrpINR": 610,
+          "stock": 48,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0166",
+      "name": "TechNest Smart LED Bulbs",
+      "category": "Electronics",
+      "segment": "Home",
+      "subcategory": "LED Bulbs",
+      "brand": "TechNest",
+      "description": "Synthetic sample led bulbs item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 477,
+      "mrpINR": 530,
+      "status": "ACTIVE",
+      "stock": 14,
+      "variants": [
+        {
+          "sku": "ESH-0166-V01",
+          "color": "Black",
+          "size": "9 W",
+          "priceINR": 477,
+          "mrpINR": 530,
+          "stock": 8,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0166-V02",
+          "color": "Blue",
+          "size": "12 W",
+          "priceINR": 477,
+          "mrpINR": 530,
+          "stock": 6,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0167",
+      "name": "Voltix Warm LED Bulbs 2",
+      "category": "Electronics",
+      "segment": "Home",
+      "subcategory": "LED Bulbs",
+      "brand": "Voltix",
+      "description": "Synthetic sample led bulbs item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 165,
+      "mrpINR": 220,
+      "status": "ACTIVE",
+      "stock": 70,
+      "variants": [
+        {
+          "sku": "ESH-0167-V01",
+          "color": "Blue",
+          "size": "12 W",
+          "priceINR": 165,
+          "mrpINR": 220,
+          "stock": 36,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0167-V02",
+          "color": "Black",
+          "size": "9 W",
+          "priceINR": 165,
+          "mrpINR": 220,
+          "stock": 34,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0168",
+      "name": "TechNest Braided USB Cables",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "USB Cables",
+      "brand": "TechNest",
+      "description": "Synthetic sample usb cables item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 270,
+      "mrpINR": 360,
+      "status": "ACTIVE",
+      "stock": 22,
+      "variants": [
+        {
+          "sku": "ESH-0168-V01",
+          "color": "Black",
+          "size": "1 m",
+          "priceINR": 270,
+          "mrpINR": 360,
+          "stock": 12,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0168-V02",
+          "color": "Blue",
+          "size": "2 m",
+          "priceINR": 270,
+          "mrpINR": 360,
+          "stock": 10,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0169",
+      "name": "Voltix Fast USB Cables",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "USB Cables",
+      "brand": "Voltix",
+      "description": "Synthetic sample usb cables item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 80,
+      "mrpINR": 100,
+      "status": "ACTIVE",
+      "stock": 98,
+      "variants": [
+        {
+          "sku": "ESH-0169-V01",
+          "color": "Blue",
+          "size": "2 m",
+          "priceINR": 80,
+          "mrpINR": 100,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0169-V02",
+          "color": "Black",
+          "size": "1 m",
+          "priceINR": 80,
+          "mrpINR": 100,
+          "stock": 48,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0170",
+      "name": "TechNest Standard USB Cables",
+      "category": "Electronics",
+      "segment": "Accessories",
+      "subcategory": "USB Cables",
+      "brand": "TechNest",
+      "description": "Synthetic sample usb cables item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 366,
+      "mrpINR": 430,
+      "status": "ACTIVE",
+      "stock": 98,
+      "variants": [
+        {
+          "sku": "ESH-0170-V01",
+          "color": "Black",
+          "size": "1 m",
+          "priceINR": 366,
+          "mrpINR": 430,
+          "stock": 50,
+          "isActive": true
+        },
+        {
+          "sku": "ESH-0170-V02",
+          "color": "Blue",
+          "size": "2 m",
+          "priceINR": 366,
+          "mrpINR": 430,
+          "stock": 48,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0171",
+      "name": "CarePlus Cotton Bandages",
+      "category": "Pharmacy",
+      "segment": "First Aid",
+      "subcategory": "Bandages",
+      "brand": "CarePlus",
+      "description": "Synthetic sample bandages item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 38,
+      "mrpINR": 50,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0171-V01",
+          "color": "Standard",
+          "size": "Small",
+          "priceINR": 38,
+          "mrpINR": 50,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0172",
+      "name": "WellNest Adhesive Bandages",
+      "category": "Pharmacy",
+      "segment": "First Aid",
+      "subcategory": "Bandages",
+      "brand": "WellNest",
+      "description": "Synthetic sample bandages item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 104,
+      "mrpINR": 130,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0172-V01",
+          "color": "Standard",
+          "size": "Medium",
+          "priceINR": 104,
+          "mrpINR": 130,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0173",
+      "name": "CarePlus Elastic Bandages",
+      "category": "Pharmacy",
+      "segment": "First Aid",
+      "subcategory": "Bandages",
+      "brand": "CarePlus",
+      "description": "Synthetic sample bandages item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 90,
+      "mrpINR": 120,
+      "status": "ACTIVE",
+      "stock": 36,
+      "variants": [
+        {
+          "sku": "ESH-0173-V01",
+          "color": "Standard",
+          "size": "Small",
+          "priceINR": 90,
+          "mrpINR": 120,
+          "stock": 36,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0174",
+      "name": "WellNest Cotton Bandages 2",
+      "category": "Pharmacy",
+      "segment": "First Aid",
+      "subcategory": "Bandages",
+      "brand": "WellNest",
+      "description": "Synthetic sample bandages item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 49,
+      "mrpINR": 70,
+      "status": "INACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0174-V01",
+          "color": "Standard",
+          "size": "Medium",
+          "priceINR": 49,
+          "mrpINR": 70,
+          "stock": 20,
+          "isActive": false
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0175",
+      "name": "CarePlus Gel Sanitizer",
+      "category": "Pharmacy",
+      "segment": "Personal Care",
+      "subcategory": "Sanitizer",
+      "brand": "CarePlus",
+      "description": "Synthetic sample sanitizer item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 99,
+      "mrpINR": 110,
+      "status": "ACTIVE",
+      "stock": 8,
+      "variants": [
+        {
+          "sku": "ESH-0175-V01",
+          "color": "Standard",
+          "size": "100 ml",
+          "priceINR": 99,
+          "mrpINR": 110,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0176",
+      "name": "WellNest Spray Sanitizer",
+      "category": "Pharmacy",
+      "segment": "Personal Care",
+      "subcategory": "Sanitizer",
+      "brand": "WellNest",
+      "description": "Synthetic sample sanitizer item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 161,
+      "mrpINR": 230,
+      "status": "ACTIVE",
+      "stock": 12,
+      "variants": [
+        {
+          "sku": "ESH-0176-V01",
+          "color": "Standard",
+          "size": "250 ml",
+          "priceINR": 161,
+          "mrpINR": 230,
+          "stock": 12,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0177",
+      "name": "CarePlus Aloe Sanitizer",
+      "category": "Pharmacy",
+      "segment": "Personal Care",
+      "subcategory": "Sanitizer",
+      "brand": "CarePlus",
+      "description": "Synthetic sample sanitizer item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 153,
+      "mrpINR": 170,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0177-V01",
+          "color": "Standard",
+          "size": "100 ml",
+          "priceINR": 153,
+          "mrpINR": 170,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0178",
+      "name": "WellNest Gel Sanitizer 2",
+      "category": "Pharmacy",
+      "segment": "Personal Care",
+      "subcategory": "Sanitizer",
+      "brand": "WellNest",
+      "description": "Synthetic sample sanitizer item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 188,
+      "mrpINR": 250,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0178-V01",
+          "color": "Standard",
+          "size": "250 ml",
+          "priceINR": 188,
+          "mrpINR": 250,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0179",
+      "name": "CarePlus Digital Thermometer",
+      "category": "Pharmacy",
+      "segment": "Personal Care",
+      "subcategory": "Thermometer",
+      "brand": "CarePlus",
+      "description": "Synthetic sample thermometer item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 147,
+      "mrpINR": 210,
+      "status": "ACTIVE",
+      "stock": 3,
+      "variants": [
+        {
+          "sku": "ESH-0179-V01",
+          "color": "Standard",
+          "size": "Standard",
+          "priceINR": 147,
+          "mrpINR": 210,
+          "stock": 3,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0180",
+      "name": "WellNest Flexible Thermometer",
+      "category": "Pharmacy",
+      "segment": "Personal Care",
+      "subcategory": "Thermometer",
+      "brand": "WellNest",
+      "description": "Synthetic sample thermometer item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 312,
+      "mrpINR": 390,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0180-V01",
+          "color": "Standard",
+          "size": "Standard",
+          "priceINR": 312,
+          "mrpINR": 390,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0181",
+      "name": "CarePlus Digital Thermometer 2",
+      "category": "Pharmacy",
+      "segment": "Personal Care",
+      "subcategory": "Thermometer",
+      "brand": "CarePlus",
+      "description": "Synthetic sample thermometer item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 248,
+      "mrpINR": 310,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0181-V01",
+          "color": "Standard",
+          "size": "Standard",
+          "priceINR": 248,
+          "mrpINR": 310,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0182",
+      "name": "CarePlus 3-Ply Face Mask",
+      "category": "Pharmacy",
+      "segment": "Personal Care",
+      "subcategory": "Face Mask",
+      "brand": "CarePlus",
+      "description": "Synthetic sample face mask item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 252,
+      "mrpINR": 280,
+      "status": "ACTIVE",
+      "stock": 36,
+      "variants": [
+        {
+          "sku": "ESH-0182-V01",
+          "color": "Standard",
+          "size": "Pack of 5",
+          "priceINR": 252,
+          "mrpINR": 280,
+          "stock": 36,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0183",
+      "name": "WellNest Cotton Face Mask",
+      "category": "Pharmacy",
+      "segment": "Personal Care",
+      "subcategory": "Face Mask",
+      "brand": "WellNest",
+      "description": "Synthetic sample face mask item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 82,
+      "mrpINR": 110,
+      "status": "ACTIVE",
+      "stock": 8,
+      "variants": [
+        {
+          "sku": "ESH-0183-V01",
+          "color": "Standard",
+          "size": "Pack of 10",
+          "priceINR": 82,
+          "mrpINR": 110,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0184",
+      "name": "CarePlus Disposable Face Mask",
+      "category": "Pharmacy",
+      "segment": "Personal Care",
+      "subcategory": "Face Mask",
+      "brand": "CarePlus",
+      "description": "Synthetic sample face mask item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 126,
+      "mrpINR": 140,
+      "status": "ACTIVE",
+      "stock": 8,
+      "variants": [
+        {
+          "sku": "ESH-0184-V01",
+          "color": "Standard",
+          "size": "Pack of 5",
+          "priceINR": 126,
+          "mrpINR": 140,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0185",
+      "name": "WellNest 3-Ply Face Mask 2",
+      "category": "Pharmacy",
+      "segment": "Personal Care",
+      "subcategory": "Face Mask",
+      "brand": "WellNest",
+      "description": "Synthetic sample face mask item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 120,
+      "mrpINR": 160,
+      "status": "ACTIVE",
+      "stock": 12,
+      "variants": [
+        {
+          "sku": "ESH-0185-V01",
+          "color": "Standard",
+          "size": "Pack of 10",
+          "priceINR": 120,
+          "mrpINR": 160,
+          "stock": 12,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0186",
+      "name": "PaperTrail Ruled Notebook",
+      "category": "Stationery",
+      "segment": "Writing",
+      "subcategory": "Notebook",
+      "brand": "PaperTrail",
+      "description": "Synthetic sample notebook item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 70,
+      "mrpINR": 100,
+      "status": "ACTIVE",
+      "stock": 50,
+      "variants": [
+        {
+          "sku": "ESH-0186-V01",
+          "color": "Standard",
+          "size": "A4",
+          "priceINR": 70,
+          "mrpINR": 100,
+          "stock": 50,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0187",
+      "name": "WriteWell Unruled Notebook",
+      "category": "Stationery",
+      "segment": "Writing",
+      "subcategory": "Notebook",
+      "brand": "WriteWell",
+      "description": "Synthetic sample notebook item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 196,
+      "mrpINR": 230,
+      "status": "ACTIVE",
+      "stock": 12,
+      "variants": [
+        {
+          "sku": "ESH-0187-V01",
+          "color": "Standard",
+          "size": "A5",
+          "priceINR": 196,
+          "mrpINR": 230,
+          "stock": 12,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0188",
+      "name": "PaperTrail Spiral Notebook",
+      "category": "Stationery",
+      "segment": "Writing",
+      "subcategory": "Notebook",
+      "brand": "PaperTrail",
+      "description": "Synthetic sample notebook item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 135,
+      "mrpINR": 150,
+      "status": "ACTIVE",
+      "stock": 3,
+      "variants": [
+        {
+          "sku": "ESH-0188-V01",
+          "color": "Standard",
+          "size": "A4",
+          "priceINR": 135,
+          "mrpINR": 150,
+          "stock": 3,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0189",
+      "name": "WriteWell Hardbound Notebook",
+      "category": "Stationery",
+      "segment": "Writing",
+      "subcategory": "Notebook",
+      "brand": "WriteWell",
+      "description": "Synthetic sample notebook item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 140,
+      "mrpINR": 200,
+      "status": "ACTIVE",
+      "stock": 3,
+      "variants": [
+        {
+          "sku": "ESH-0189-V01",
+          "color": "Standard",
+          "size": "A5",
+          "priceINR": 140,
+          "mrpINR": 200,
+          "stock": 3,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0190",
+      "name": "PaperTrail Ruled Notebook 2",
+      "category": "Stationery",
+      "segment": "Writing",
+      "subcategory": "Notebook",
+      "brand": "PaperTrail",
+      "description": "Synthetic sample notebook item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 126,
+      "mrpINR": 140,
+      "status": "ACTIVE",
+      "stock": 3,
+      "variants": [
+        {
+          "sku": "ESH-0190-V01",
+          "color": "Standard",
+          "size": "A4",
+          "priceINR": 126,
+          "mrpINR": 140,
+          "stock": 3,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0191",
+      "name": "PaperTrail Ballpoint Pens",
+      "category": "Stationery",
+      "segment": "Writing",
+      "subcategory": "Pens",
+      "brand": "PaperTrail",
+      "description": "Synthetic sample pens item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 49,
+      "mrpINR": 70,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0191-V01",
+          "color": "Standard",
+          "size": "Pack of 5",
+          "priceINR": 49,
+          "mrpINR": 70,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0192",
+      "name": "WriteWell Gel Pens",
+      "category": "Stationery",
+      "segment": "Writing",
+      "subcategory": "Pens",
+      "brand": "WriteWell",
+      "description": "Synthetic sample pens item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 126,
+      "mrpINR": 180,
+      "status": "ACTIVE",
+      "stock": 50,
+      "variants": [
+        {
+          "sku": "ESH-0192-V01",
+          "color": "Standard",
+          "size": "Pack of 10",
+          "priceINR": 126,
+          "mrpINR": 180,
+          "stock": 50,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0193",
+      "name": "PaperTrail Fine Tip Pens",
+      "category": "Stationery",
+      "segment": "Writing",
+      "subcategory": "Pens",
+      "brand": "PaperTrail",
+      "description": "Synthetic sample pens item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 91,
+      "mrpINR": 130,
+      "status": "ACTIVE",
+      "stock": 8,
+      "variants": [
+        {
+          "sku": "ESH-0193-V01",
+          "color": "Standard",
+          "size": "Pack of 5",
+          "priceINR": 91,
+          "mrpINR": 130,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0194",
+      "name": "WriteWell Ballpoint Pens 2",
+      "category": "Stationery",
+      "segment": "Writing",
+      "subcategory": "Pens",
+      "brand": "WriteWell",
+      "description": "Synthetic sample pens item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 82,
+      "mrpINR": 110,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0194-V01",
+          "color": "Standard",
+          "size": "Pack of 10",
+          "priceINR": 82,
+          "mrpINR": 110,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0195",
+      "name": "PaperTrail Document Folders",
+      "category": "Stationery",
+      "segment": "Office",
+      "subcategory": "Folders",
+      "brand": "PaperTrail",
+      "description": "Synthetic sample folders item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 81,
+      "mrpINR": 90,
+      "status": "ACTIVE",
+      "stock": 20,
+      "variants": [
+        {
+          "sku": "ESH-0195-V01",
+          "color": "Standard",
+          "size": "A4",
+          "priceINR": 81,
+          "mrpINR": 90,
+          "stock": 20,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0196",
+      "name": "WriteWell Button Folders",
+      "category": "Stationery",
+      "segment": "Office",
+      "subcategory": "Folders",
+      "brand": "WriteWell",
+      "description": "Synthetic sample folders item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 90,
+      "mrpINR": 120,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0196-V01",
+          "color": "Standard",
+          "size": "A4",
+          "priceINR": 90,
+          "mrpINR": 120,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0197",
+      "name": "PaperTrail Expandable Folders",
+      "category": "Stationery",
+      "segment": "Office",
+      "subcategory": "Folders",
+      "brand": "PaperTrail",
+      "description": "Synthetic sample folders item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 128,
+      "mrpINR": 150,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0197-V01",
+          "color": "Standard",
+          "size": "A4",
+          "priceINR": 128,
+          "mrpINR": 150,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0198",
+      "name": "PaperTrail Drawing Sketchbook",
+      "category": "Stationery",
+      "segment": "Art",
+      "subcategory": "Sketchbook",
+      "brand": "PaperTrail",
+      "description": "Synthetic sample sketchbook item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 102,
+      "mrpINR": 120,
+      "status": "ACTIVE",
+      "stock": 8,
+      "variants": [
+        {
+          "sku": "ESH-0198-V01",
+          "color": "Standard",
+          "size": "A4",
+          "priceINR": 102,
+          "mrpINR": 120,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0199",
+      "name": "WriteWell Mixed Media Sketchbook",
+      "category": "Stationery",
+      "segment": "Art",
+      "subcategory": "Sketchbook",
+      "brand": "WriteWell",
+      "description": "Synthetic sample sketchbook item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 189,
+      "mrpINR": 270,
+      "status": "ACTIVE",
+      "stock": 8,
+      "variants": [
+        {
+          "sku": "ESH-0199-V01",
+          "color": "Standard",
+          "size": "A5",
+          "priceINR": 189,
+          "mrpINR": 270,
+          "stock": 8,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    },
+    {
+      "sku": "ESH-P-0200",
+      "name": "PaperTrail Hardbound Sketchbook",
+      "category": "Stationery",
+      "segment": "Art",
+      "subcategory": "Sketchbook",
+      "brand": "PaperTrail",
+      "description": "Synthetic sample sketchbook item for local E-Shop testing; not an official brand listing.",
+      "currency": "INR",
+      "priceINR": 323,
+      "mrpINR": 380,
+      "status": "ACTIVE",
+      "stock": 0,
+      "variants": [
+        {
+          "sku": "ESH-0200-V01",
+          "color": "Standard",
+          "size": "A4",
+          "priceINR": 323,
+          "mrpINR": 380,
+          "stock": 0,
+          "isActive": true
+        }
+      ],
+      "imageUrl": null,
+      "isDemo": true
+    }
+  ]
+}
