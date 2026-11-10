@@ -277,6 +277,13 @@ const variantSchema = z
     }
   });
 
+// Structured informational specifications (never used as stock/price variants).
+const productSpecificationsSchema = z.record(
+  z.string().trim().min(1).max(60),
+  z.string().trim().min(1).max(240)
+).refine((value) => Object.keys(value).length <= 30,
+  'Provide no more than 30 technical specifications.');
+
 const productCreateSchema = z.object({
   masterSku: z.string().trim().max(80).nullable().optional(),
 
@@ -295,6 +302,7 @@ const productCreateSchema = z.object({
     .optional(),
   name: z.string().trim().min(2).max(160),
   description: z.string().trim().min(1).max(5000),
+  specifications: productSpecificationsSchema.optional(),
   categoryId: uuidSchema,
   brandId: uuidSchema.nullable().optional(),
   hsnCode: z
@@ -390,6 +398,7 @@ router.patch(
           .optional(),
         name: z.string().trim().min(2).max(160).optional(),
         description: z.string().trim().min(1).max(5000).optional(),
+        specifications: productSpecificationsSchema.optional(),
         categoryId: uuidSchema.optional(),
         brandId: uuidSchema.nullable().optional(),
         hsnCode: z

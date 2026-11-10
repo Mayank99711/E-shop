@@ -2,7 +2,29 @@
 import { Link } from "react-router-dom";
 import { resolveMediaUrl } from "../../services/apiClient.js";
 import { money } from "../../utils/format.js";
+import { DemoPhoto, demoProductPhoto } from "./DemoMedia.jsx";
 import ProductRating from "./reviews/ProductRating.jsx";
+
+function getCartVariantImage(item) {
+  const images = item.product?.images || [];
+
+  const colorEntry = (item.variant?.values || []).find(
+    ({ attribute }) =>
+      attribute?.name?.trim().toLowerCase() === "color"
+  );
+
+  const colorValueId = colorEntry?.value?.id;
+
+  if (colorValueId) {
+    const matchingImage = images.find(
+      (image) => image.colorValueId === colorValueId
+    );
+
+    if (matchingImage) return matchingImage;
+  }
+
+  return images.find((image) => !image.colorValueId) || images[0] || null;
+}
 
 export function CartItems({ items, busy, update }) {
   return (
@@ -18,14 +40,11 @@ export function CartItems({ items, busy, update }) {
               to={`/products/${item.product.id}`}
               className="cart-thumb"
             >
-              {item.product.images?.[0] ? (
-                <img
-                  src={resolveMediaUrl(item.product.images[0].url)}
-                  alt=""
-                />
-              ) : (
-                "E"
-              )}
+              <DemoPhoto
+                src={getCartVariantImage(item)?.url}
+                fallback={demoProductPhoto(item.product)}
+                alt={`${item.product.name} product image`}
+              />
             </Link>
 
             <div className="cart-item-copy">

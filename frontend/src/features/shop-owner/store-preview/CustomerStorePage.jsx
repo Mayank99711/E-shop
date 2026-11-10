@@ -1,3 +1,4 @@
+import { DemoPhoto, demoProductPhoto, demoCategoryPhoto } from "../../../components/customer/DemoMedia.jsx";
 import { resolveMediaUrl } from '../../../services/shopOwner/index.js';
 
 export function CustomerStorePreview({ dashboard, products = [] }) {
@@ -22,7 +23,7 @@ export function CustomerStorePreview({ dashboard, products = [] }) {
 
       <div className="store-overview-grid">
         <div className="store-overview-card store-overview-brand">
-          {logo ? <img className="store-logo" src={resolveMediaUrl(logo)} alt={shopName} /> : <div className="store-logo store-logo-fallback">E</div>}
+          <DemoPhoto className="store-logo" src={logo} fallback={demoCategoryPhoto({ name: shopCategory })} alt={shopName} />
           <div>
             <h3>{shopName}</h3>
             <p>{shopCategory}</p>
@@ -49,7 +50,7 @@ export function CustomerStorePreview({ dashboard, products = [] }) {
             return (
               <article className="store-product-card" key={product.id}>
                 <div className="store-product-image">
-                  {product.images?.[0]?.url ? <img src={resolveMediaUrl(product.images[0].url)} alt={product.name} /> : <span>E</span>}
+                  <DemoPhoto src={product.images?.[0]?.url} fallback={demoProductPhoto(product)} alt={product.name} />
                 </div>
                 <div className="store-product-body">
                   <h4>{product.name}</h4>

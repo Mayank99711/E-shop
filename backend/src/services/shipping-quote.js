@@ -10,20 +10,31 @@ const numberSetting = (key, defaultValue) => {
 };
 const cachedRoutes = new Map();
 const fullAddress = (fields) => fields.filter(Boolean).map(v => String(v).trim()).filter(Boolean).join(', ');
+function localDemoDistanceKm() {
+  if ((process.env.NODE_ENV || 'development') !== 'development' || process.env.SHIPPING_LOCAL_DEMO_MODE !== 'true') return null;
+  const raw = process.env.SHIPPING_LOCAL_DEMO_DISTANCE_KM ?? '8';
+  const km = Number(raw);
+  if (!Number.isFinite(km) || km < 0) throw shippingError(500, 'SHIPPING_DEMO_DISTANCE_INVALID', 'Local demo shipping distance must be a non-negative number.');
+  return km;
+}
 async function getDrivingDistanceKm(shop, delivery) {
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
-  if (!apiKey) throw shippingError(503, 'SHIPPING_ROUTING_NOT_CONFIGURED', 'Delivery pricing is temporarily unavailable.');
+  const demoDistance = localDemoDistanceKm();
   if (!shop.businessAddress || !shop.city || !shop.state || !shop.pinCode) {
     throw shippingError(409, 'SHOP_PICKUP_ADDRESS_REQUIRED', 'Shop pickup address must be completed before checkout.');
   }
   if (!delivery?.line1 || !delivery.city || !delivery.region || !delivery.postalCode) {
     throw shippingError(400, 'DELIVERY_ADDRESS_INCOMPLETE', 'Please complete your delivery address.');
   }
+  // Explicit, development-only route simulation. Never used in production or test environments.
+  // All existing address, stock, weight, delivery-radius and fee rules still apply.
+  if (demoDistance !== null) return { km: demoDistance, demo: true };
+  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  if (!apiKey) throw shippingError(503, 'SHIPPING_ROUTING_NOT_CONFIGURED', 'Delivery pricing is temporarily unavailable.');
   const from = fullAddress([shop.businessAddress, shop.city, shop.state, shop.pinCode, shop.country || 'India']);
   const to = fullAddress([delivery.line1, delivery.line2, delivery.city, delivery.region, delivery.postalCode, delivery.country || 'India']);
   const cacheKey = `${from}|${to}`;
   const hit = cachedRoutes.get(cacheKey);
-  if (hit && hit.expiry > Date.now()) return hit.km;
+  if (hit && hit.expiry > Date.now()) return { km: hit.km, demo: false };
   const abort = new AbortController();
   const timeout = setTimeout(() => abort.abort(), 7000);
   try {
@@ -47,7 +58,7 @@ async function getDrivingDistanceKm(shop, delivery) {
     const km = Math.ceil(meters / 100) / 10;
     if (cachedRoutes.size >= 2000) cachedRoutes.clear();
     cachedRoutes.set(cacheKey, { km, expiry: Date.now() + 10 * 60 * 1000 });
-    return km;
+    return { km, demo: false };
   } catch (error) {
     if (error.code) throw error;
     throw shippingError(503, 'SHIPPING_ROUTE_UNAVAILABLE', 'Unable to calculate delivery right now. Please retry.');
@@ -86,6 +97,9 @@ export async function calculateShipping({ shop, address, cartItems, merchandiseS
     if (!Number.isInteger(qty) || qty <= 0) throw shippingError(400, 'INVALID_QUANTITY', 'Invalid cart quantity.');
     return total + grams * qty;
   }, 0);
-  const distanceKm = await getDrivingDistanceKm(shop, address);
-  return slabDeliveryPrice({ distanceKm, weightKg: weightGrams / 1000, merchandiseSubtotal });
+  const route = await getDrivingDistanceKm(shop, address);
+  const quote = slabDeliveryPrice({ distanceKm: route.km, weightKg: weightGrams / 1000, merchandiseSubtotal });
+  return route.demo
+    ? { ...quote, calculationMethod: 'LOCAL_DEMO_DISTANCE_WEIGHT_SLAB', isSimulated: true }
+    : quote;
 }

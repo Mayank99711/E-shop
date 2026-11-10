@@ -1,13 +1,39 @@
+import { DemoPhoto, demoProductPhoto } from "../../../components/customer/DemoMedia.jsx";
 import { Fragment, useMemo, useState, useEffect } from 'react';
 import { resolveMediaUrl } from '../../../services/shopOwner/index.js';
 import { shopOwnerApi } from '../../../services/shopOwner/index.js';
 import Modal from '../../../components/common/Modal.jsx';
+import { allowedVariantAttributes, variantPolicyForCategory } from './variantAttributePolicy.js';
 import { ListPagination } from '../../../components/shopOwner/ListPagination.jsx';
 import { maxProductImages, maxImagesPerUpload, maxProductImageBytes, productImageTypes } from '../config/productConfig.js';
+
+// One technical fact per line: e.g. "Output wattage: 22.5W".
+// Specifications describe the product; purchasable options remain variants.
+function parseSpecifications(text) {
+  const result = {};
+  const lines = String(text || '').split(/\r?\n/).filter((line) => line.trim());
+  if (lines.length > 30) throw new Error('Maximum 30 specifications allowed.');
+  for (const line of lines) {
+    const separator = line.indexOf(':');
+    if (separator < 1) throw new Error(`Use "Name: Value" for each specification: ${line}`);
+    const key = line.slice(0, separator).trim();
+    const value = line.slice(separator + 1).trim();
+    if (!key || !value || key.length > 60 || value.length > 240 || Object.hasOwn(result, key)) {
+      throw new Error(`Invalid or duplicate specification: ${key}`);
+    }
+    result[key] = value;
+  }
+  return result;
+}
+
+function formatSpecifications(specifications) {
+  return Object.entries(specifications || {}).map(([key, value]) => `${key}: ${value}`).join('\n');
+}
 
 export function ProductsSection({ products, options, busy, submit, reload, error, loading = false }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [specificationText, setSpecificationText] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [brandId, setBrandId] = useState("");
   const [imageUrls, setImageUrls] = useState("");
@@ -16,6 +42,7 @@ export function ProductsSection({ products, options, busy, submit, reload, error
   const [imageSelectionError, setImageSelectionError] = useState("");
   const [uploadingImages, setUploadingImages] = useState(false);
   const [uploadingProductId, setUploadingProductId] = useState("");
+  const [imageColorByProduct, setImageColorByProduct] = useState({});
   const [createdProductPendingImageUploadId, setCreatedProductPendingImageUploadId] = useState("");
   const [editImageFiles, setEditImageFiles] = useState([]);
   const [editImagePreviews, setEditImagePreviews] = useState([]);
@@ -99,6 +126,8 @@ function updateProductVariant(id, field, value) {
   const [createProductOpen, setCreateProductOpen] = useState(false);
   const pageSize = 10;
 
+  const categoryVariantAttributes = allowedVariantAttributes(categoryId, options.categories, options.attributes);
+  const categoryVariantPolicy = variantPolicyForCategory(categoryId, options.categories);
   const selectedAttribute = options.attributes.find(({ id }) => id === attributeId);
   const selectedValues = selectedAttribute?.values || [];
   const selectedVariantAttribute = options.attributes.find(({ id }) => id === variantAttributeId);
@@ -130,7 +159,25 @@ function updateProductVariant(id, field, value) {
   const pageCount = Math.max(1, Math.ceil(filteredProducts.length / pageSize));
   const pageProducts = filteredProducts.slice((page - 1) * pageSize, page * pageSize);
   useEffect(() => { if (page > pageCount) setPage(pageCount); }, [page, pageCount]);
+  function getProductColors(product) {
+  const colors = new Map();
 
+  for (const variant of product?.variants || []) {
+    for (const entry of variant.values || []) {
+      if (
+        entry.attribute?.name?.trim().toLowerCase() === "color" &&
+        entry.value?.id
+      ) {
+        colors.set(entry.value.id, {
+          id: entry.value.id,
+          name: entry.value.value,
+        });
+      }
+    }
+  }
+
+  return Array.from(colors.values());
+}
   function imageUploadError(files, existingCount = 0) {
     if (files.length > maxImagesPerUpload) return `Choose no more than ${maxImagesPerUpload} images per upload.`;
     if (existingCount + files.length > maxProductImages) return `A product can have at most ${maxProductImages} images.`;
@@ -140,7 +187,7 @@ function updateProductVariant(id, field, value) {
   }
 
 
-async function sendProductImages(productId, files) {
+async function sendProductImages(productId, files, colorValueId = null) {
   if (!productId) {
     throw new Error("Product ID is missing.");
   }
@@ -151,9 +198,13 @@ async function sendProductImages(productId, files) {
 
   const body = new FormData();
 
-  files.forEach((file) => {
-    body.append("images", file);
-  });
+files.forEach((file) => {
+  body.append("images", file);
+});
+
+if (colorValueId) {
+  body.append("colorValueId", colorValueId);
+}
 
   try {
     const result = await shopOwnerApi.uploadProductImages(
@@ -281,6 +332,10 @@ async function sendProductImages(productId, files) {
         throw new Error(`Variant ${index + 1}: Invalid stock.`);
       }
 
+      if (variant.attributeId && categoryVariantPolicy.options && !categoryVariantAttributes.some(({ id }) => id === variant.attributeId)) {
+        throw new Error(`Variant ${index + 1}: This attribute is not applicable to the selected category.`);
+      }
+
       if (variant.attributeId && !variant.valueId) {
         throw new Error(`Variant ${index + 1}: Select an attribute value.`);
       }
@@ -344,6 +399,7 @@ async function sendProductImages(productId, files) {
         masterSku: masterSku.trim() || null,
         shortDescription: shortDescription.trim() || null,
         description: description.trim(),
+        specifications: parseSpecifications(specificationText),
         categoryId,
         brandId: brandId || null,
         basePrice: basePrice || null,
@@ -382,6 +438,7 @@ async function sendProductImages(productId, files) {
 
     setName("");
     setDescription("");
+    setSpecificationText("");
     setCategoryId("");
     setBrandId("");
     setMasterSku("");
@@ -443,7 +500,12 @@ async function sendProductImages(productId, files) {
     setUploadingProductId(productId);
     try {
       await submit(
-        () => sendProductImages(productId, files),
+        () =>
+  sendProductImages(
+    productId,
+    files,
+    imageColorByProduct[productId] || null
+  ),
         `${files.length} product image${files.length === 1 ? "" : "s"} uploaded.`
       );
     } finally {
@@ -521,6 +583,12 @@ async function sendProductImages(productId, files) {
     body.gstRate = gstPercent === "" ? null : (Number(gstPercent) / 100).toFixed(4);
     body.taxInclusive = form.get("taxInclusive") === "on";
     body.images = String(body.images || "").split(/\r?\n/).map((url) => url.trim()).filter(Boolean);
+    try {
+      body.specifications = parseSpecifications(body.specifications || "");
+    } catch (issue) {
+      await submit(() => { throw issue; }, "");
+      return;
+    }
     const result = await submit(async () => {
       const updated = await shopOwnerApi.updateProduct(productId, body);
       if (editImageFiles.length) {
@@ -666,7 +734,12 @@ async function sendProductImages(productId, files) {
         className="form-select"
         required
         value={categoryId}
-        onChange={(e) => setCategoryId(e.target.value)}
+        onChange={(e) => {
+          setCategoryId(e.target.value);
+          setAttributeId("");
+          setValueId("");
+          setProductVariants((items) => items.map((variant) => ({ ...variant, attributeId: "", valueId: "" })));
+        }}
       >
         <option value="">Select category</option>
         {options.categories.map((item) => (
@@ -743,10 +816,19 @@ async function sendProductImages(productId, files) {
       onChange={(e) => setDescription(e.target.value)}
     />
   </label>
+  <label>
+    Technical specifications (one per line: Name: Value)
+    <textarea className="form-control" rows={4} value={specificationText}
+      placeholder={"Output wattage: 22.5W\nPorts: 2 USB-C\nWarranty: 12 months"}
+      onChange={(event) => setSpecificationText(event.target.value)} />
+    <small className="muted-copy">Informational only. Price and stock depend on selectable variants.</small>
+  </label>
 </fieldset>
 
               <fieldset className="product-form-section">
   <legend>Product Variants</legend>
+  <p className="muted-copy">Variants are selectable buying options (each has SKU, price and stock). {categoryVariantPolicy.options ? `Suggested options: ${categoryVariantPolicy.options.join(", ")}.` : "Select a category to see relevant options."} Technical specifications, such as {categoryVariantPolicy.specs}, belong in product details and are not automatically variants.</p>
+  {categoryId && categoryVariantPolicy.options && categoryVariantAttributes.length === 0 && <p className="muted-copy" role="status">No matching variant attributes have been configured in Admin master data. You can create a standard variant, or ask Admin to configure the category's options.</p>}
 
   {productVariants.map((variant, index) => {
     const selectedAttribute = options.attributes.find(
@@ -819,7 +901,7 @@ async function sendProductImages(productId, files) {
             >
               <option value="">No attribute</option>
 
-              {options.attributes.map((item) => (
+              {categoryVariantAttributes.map((item) => (
                 <option key={item.id} value={item.id}>
                   {item.name}
                 </option>
@@ -1072,7 +1154,7 @@ async function sendProductImages(productId, files) {
                     return <Fragment key={product.id}>
                       <tr>
                         <td className="product-name-cell"><div className="product-summary">
-                          {thumbnail ? <img className="product-thumbnail" src={resolveMediaUrl(thumbnail.url)} alt="" loading="lazy" /> : <span className="product-thumbnail product-thumbnail-empty" aria-hidden="true">?</span>}
+                          <DemoPhoto className="product-thumbnail" src={thumbnail?.url} fallback={demoProductPhoto(product)} alt={product.name} />
                           <span><strong>{product.name}</strong><small>{product.category.name}{product.brand ? " ? " + product.brand.name : ""}</small></span>
                         </div></td>
                         <td>{singleVariant ? singleVariant.sku : <><strong>{variants.length} variants</strong>{variants[0] && <small>{variants[0].sku}{variants.length > 1 ? " + " + (variants.length - 1) + " more" : ""}</small>}</>}</td>
@@ -1141,8 +1223,82 @@ async function sendProductImages(productId, files) {
                               {product.status !== "ARCHIVED" && <button className="btn btn-sm btn-outline-danger" type="button" onClick={() => setProductStatus(product.id, "ARCHIVED")}>Archive</button>}
                             </div>
                           </div>
-                          <section className="product-detail-section"><h4>Product images</h4><div className="product-image-manager">
-                            {product.images.map((image) => <div className="product-image-item" key={image.id}><img src={resolveMediaUrl(image.url)} alt={product.name + " product"} loading="lazy" /><button className="btn btn-sm btn-outline-danger" type="button" disabled={busy} onClick={() => deleteProductImage(product.id, image.id)}>Remove</button></div>)}
+                          <section className="product-detail-section"><h4>Product images</h4>
+                          {getProductColors(product).length > 0 && (
+  <div className="product-image-color-selector">
+    <label htmlFor={`image-color-${product.id}`}>
+      Image belongs to
+    </label>
+
+    <select
+      id={`image-color-${product.id}`}
+      className="form-select"
+      value={imageColorByProduct[product.id] || ""}
+      disabled={busy || uploadingProductId === product.id}
+      onChange={(event) =>
+        setImageColorByProduct((previous) => ({
+          ...previous,
+          [product.id]: event.target.value,
+        }))
+      }
+    >
+      <option value="">General product image</option>
+
+      {getProductColors(product).map((color) => (
+        <option key={color.id} value={color.id}>
+          {color.name} variant
+        </option>
+      ))}
+    </select>
+
+    <small className="muted-copy">
+      Select a color before uploading its photo.
+      General images are not linked to a specific color.
+    </small>
+  </div>
+)}
+                          <div className="product-image-manager">
+                            {product.images.map((image) => (
+                              <div className="product-image-item" key={image.id}>
+                                <div style={{ position: "relative", display: "inline-block" }}>
+                                  <img
+                                    src={resolveMediaUrl(image.url)}
+                                    alt={product.name + " product"}
+                                    loading="lazy"
+                                    style={{ display: "block" }}
+                                  />
+                                  <button
+                                    type="button"
+                                    aria-label={`Remove image from ${product.name}`}
+                                    title="Remove image"
+                                    disabled={busy || uploadingProductId === product.id}
+                                    onClick={() => deleteProductImage(product.id, image.id)}
+                                    style={{
+                                      position: "absolute",
+                                      top: 4,
+                                      right: 4,
+                                      width: 24,
+                                      height: 24,
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      padding: 0,
+                                      border: "2px solid white",
+                                      borderRadius: "50%",
+                                      background: "#dc2626",
+                                      color: "#fff",
+                                      fontSize: 17,
+                                      fontWeight: 700,
+                                      lineHeight: 1,
+                                      cursor: busy || uploadingProductId === product.id ? "not-allowed" : "pointer",
+                                      boxShadow: "0 1px 5px rgba(0, 0, 0, 0.22)",
+                                    }}
+                                  >
+                                    <span aria-hidden="true">×</span>
+                                  </button>
+                                </div>
+                              </div>
+                            ))}
                             <label className="product-image-upload">Add images (JPEG, PNG, WebP; up to 5 MB each)<input className="form-control" type="file" accept="image/jpeg,image/png,image/webp" multiple disabled={busy || uploadingImages || product.images.length >= maxProductImages} onChange={(event) => uploadProductImages(event, product.id)} /></label>
                             {uploadingProductId === product.id && <small className="image-upload-progress" role="status">Uploading product images?</small>}
                             <small className="muted-copy">{product.images.length} / {maxProductImages} images</small>
@@ -1156,7 +1312,7 @@ async function sendProductImages(productId, files) {
                             <strong>Add variant to {product.name}</strong><div className="form-row">
                               <label>SKU<input className="form-control" name="sku" required maxLength="80" /></label><label>Price<input className="form-control" name="price" required inputMode="decimal" pattern="[0-9]+([.][0-9]{1,2})?" /></label><label>Discount price<input className="form-control" name="discountPrice" inputMode="decimal" pattern="[0-9]+([.][0-9]{1,2})?" /></label><label>Stock<input className="form-control" name="stock" type="number" min="0" max="1000000" required defaultValue="0" /></label>
                             </div><div className="form-row">
-                              <label>Attribute<select className="form-select" value={variantAttributeId} onChange={(event) => setVariantAttributeId(event.target.value)}><option value="">No options</option>{options.attributes.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}</select></label><label>Value<select className="form-select" name="valueId" defaultValue=""><option value="">Select value if applicable</option>{(selectedVariantAttribute?.values || []).map((item) => <option value={item.id} key={item.id}>{item.value}</option>)}</select></label>
+                              <label>Attribute<select className="form-select" value={variantAttributeId} onChange={(event) => setVariantAttributeId(event.target.value)}><option value="">No options</option>{allowedVariantAttributes(product.categoryId, options.categories, options.attributes).map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}</select></label><label>Value<select className="form-select" name="valueId" defaultValue=""><option value="">Select value if applicable</option>{(selectedVariantAttribute?.values || []).map((item) => <option value={item.id} key={item.id}>{item.value}</option>)}</select></label>
                             </div><button className="btn btn-sm btn-primary" disabled={busy}>Save variant</button>
                           </form>}
                         </div>
@@ -1176,6 +1332,7 @@ async function sendProductImages(productId, files) {
             {detailsLocked && <p className="alert alert-warning" role="status">Product details were saved, but the image upload did not finish. Retry the upload; the product will not be saved a second time.</p>}
             <label>Name<input className="form-control" name="name" required minLength="2" maxLength="160" defaultValue={product.name} disabled={detailsLocked} /></label>
             <label>Description<textarea className="form-control" name="description" rows="3" required maxLength="5000" defaultValue={product.description} disabled={detailsLocked} /></label>
+            <label>Technical specifications (Name: Value per line)<textarea className="form-control" name="specifications" rows="4" defaultValue={formatSpecifications(product.specifications)} disabled={detailsLocked} /></label>
             <label>External image URLs (HTTPS, one per line)<textarea className="form-control" name="images" rows="2" defaultValue={product.images.map(({ url }) => url).filter((url) => url.startsWith("https://") || url.startsWith("http://")).join("\n")} disabled={detailsLocked} /></label>
             <div className="form-row">
               <label>Category<select className="form-select" name="categoryId" defaultValue={product.category.id} required disabled={detailsLocked}>{options.categories.map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}</select></label>

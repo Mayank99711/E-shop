@@ -323,7 +323,9 @@ export const ownerController = {
         req.authUser.id,
         req.params.productId,
         req.files,
+        req.body?.colorValueId || null,
       );
+
       res.status(201).json({ images });
     } catch (error) {
       next(error);

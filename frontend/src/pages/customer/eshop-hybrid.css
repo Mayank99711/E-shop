@@ -1534,7 +1534,6 @@ html[data-bs-theme="dark"]
   }
 }
 
-
 /* ESHOP_HOME_GUTTERS_AND_CIRCLE_BRANDS_V1 */
 /* Scoped to the E-Shop customer storefront; no backend or shop-owner changes. */
 .customer-marketplace {
@@ -1547,10 +1546,21 @@ html[data-bs-theme="dark"]
   margin-left: var(--esh-page-gutter);
   margin-right: var(--esh-page-gutter);
 }
-.customer-marketplace .esh-home-hero { margin-top: 22px; margin-bottom: 40px; }
-.customer-marketplace .esh-home-section { margin-top: 38px; margin-bottom: 42px; }
-.customer-marketplace .esh-editorial-banner { margin-top: 38px; margin-bottom: 42px; }
-.customer-marketplace .esh-home-section .esh-section-heading { margin-bottom: 22px; }
+.customer-marketplace .esh-home-hero {
+  margin-top: 22px;
+  margin-bottom: 40px;
+}
+.customer-marketplace .esh-home-section {
+  margin-top: 38px;
+  margin-bottom: 42px;
+}
+.customer-marketplace .esh-editorial-banner {
+  margin-top: 38px;
+  margin-bottom: 42px;
+}
+.customer-marketplace .esh-home-section .esh-section-heading {
+  margin-bottom: 22px;
+}
 /* Brand strip: circular uploaded logo above readable label. */
 .customer-marketplace .esh-brand-strip {
   display: flex;
@@ -1581,8 +1591,13 @@ html[data-bs-theme="dark"]
   overflow-wrap: anywhere;
   transition: transform 180ms ease;
 }
-.customer-marketplace .esh-brand-strip a:hover { transform: translateY(-3px); }
-.customer-marketplace .esh-brand-strip a:focus-visible { outline: 3px solid #a7199b; outline-offset: 2px; }
+.customer-marketplace .esh-brand-strip a:hover {
+  transform: translateY(-3px);
+}
+.customer-marketplace .esh-brand-strip a:focus-visible {
+  outline: 3px solid #a7199b;
+  outline-offset: 2px;
+}
 .customer-marketplace .esh-brand-strip a .esh-brand-logo-circle {
   display: grid;
   place-items: center;
@@ -1614,15 +1629,34 @@ html[data-bs-theme="dark"]
 }
 /* Keep the customer page consistent on smaller viewports. */
 @media (max-width: 1023px) {
-  .customer-marketplace { --esh-page-gutter: 24px; }
+  .customer-marketplace {
+    --esh-page-gutter: 24px;
+  }
 }
 @media (max-width: 767px) {
-  .customer-marketplace { --esh-page-gutter: 16px; }
-  .customer-marketplace .esh-home-hero { margin-top: 16px; margin-bottom: 30px; }
-  .customer-marketplace .esh-home-section { margin-top: 28px; margin-bottom: 30px; }
-  .customer-marketplace .esh-editorial-banner { margin-top: 28px; margin-bottom: 30px; }
-  .customer-marketplace .esh-brand-strip { gap: 12px; }
-  .customer-marketplace .esh-brand-strip a { flex-basis: 94px; font-size: 12px; min-height: 130px; }
+  .customer-marketplace {
+    --esh-page-gutter: 16px;
+  }
+  .customer-marketplace .esh-home-hero {
+    margin-top: 16px;
+    margin-bottom: 30px;
+  }
+  .customer-marketplace .esh-home-section {
+    margin-top: 28px;
+    margin-bottom: 30px;
+  }
+  .customer-marketplace .esh-editorial-banner {
+    margin-top: 28px;
+    margin-bottom: 30px;
+  }
+  .customer-marketplace .esh-brand-strip {
+    gap: 12px;
+  }
+  .customer-marketplace .esh-brand-strip a {
+    flex-basis: 94px;
+    font-size: 12px;
+    min-height: 130px;
+  }
   .customer-marketplace .esh-brand-strip a .esh-brand-logo-circle {
     width: 82px;
     height: 82px;
@@ -1630,10 +1664,179 @@ html[data-bs-theme="dark"]
     padding: 12px;
   }
 }
-html[data-bs-theme="dark"] .customer-marketplace .esh-brand-strip a .esh-brand-logo-circle {
+html[data-bs-theme="dark"]
+  .customer-marketplace
+  .esh-brand-strip
+  a
+  .esh-brand-logo-circle {
   background: #25162b;
   border-color: #5a375b;
 }
-html[data-bs-theme="dark"] .customer-marketplace .esh-brand-strip a .esh-brand-name {
+html[data-bs-theme="dark"]
+  .customer-marketplace
+  .esh-brand-strip
+  a
+  .esh-brand-name {
   color: #f3e7f2;
+}
+/* ==========================================
+   E-Shop Smart Sticky Navbar
+   Scroll Down: Hide
+   Scroll Up: Show
+   ========================================== */
+
+.portal-nav.esh-smart-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  transform: translateY(0);
+  transition:
+    transform 280ms ease,
+    visibility 280ms ease;
+
+  will-change: transform;
+}
+
+.portal-nav.esh-smart-header.esh-header-hidden {
+  transform: translateY(-105%);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-nav.esh-smart-header {
+    transition: none;
+  }
+}
+
+/* ==========================================
+   E-SHOP AUTOMATIC BRAND CAROUSEL
+   ========================================== */
+
+/* Carousel viewport: hide both scrollbars */
+.customer-marketplace .esh-brand-strip {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 8px 0 16px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.customer-marketplace .esh-brand-strip::-webkit-scrollbar {
+  display: none;
+}
+
+/* Moving track containing two identical groups */
+.customer-marketplace .esh-brand-track {
+  display: flex;
+  width: max-content;
+  max-width: none;
+  align-items: flex-start;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Each repeated group must have identical width */
+.customer-marketplace .esh-brand-group {
+  display: flex;
+  align-items: flex-start;
+  flex: 0 0 auto;
+  gap: clamp(14px, 2vw, 28px);
+  padding-right: clamp(14px, 2vw, 28px);
+}
+
+/* Keep brand cards from shrinking */
+.customer-marketplace .esh-brand-group > a {
+  flex-shrink: 0;
+}
+
+/* Infinite movement from right to left */
+.customer-marketplace .esh-brand-track-animated {
+  animation: eshBrandMarquee 32s linear infinite;
+}
+
+@keyframes eshBrandMarquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* Pause automatically when user interacts */
+.customer-marketplace .esh-brand-strip:hover .esh-brand-track-animated,
+.customer-marketplace .esh-brand-strip:focus-within .esh-brand-track-animated {
+  animation-play-state: paused;
+}
+
+/* Responsive sizing */
+@media (max-width: 767px) {
+  .customer-marketplace .esh-brand-group {
+    gap: 12px;
+    padding-right: 12px;
+  }
+}
+
+/* Accessibility: respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+  .customer-marketplace .esh-brand-track-animated {
+    animation: none;
+  }
+
+  .customer-marketplace .esh-brand-strip {
+    overflow-x: auto;
+  }
+}
+
+/* Auto + manual scrolling brand carousel */
+.customer-marketplace .esh-brand-manual-carousel {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+  cursor: grab;
+  touch-action: pan-x pan-y;
+  user-select: none;
+  padding: 8px 0 16px;
+}
+
+.customer-marketplace .esh-brand-manual-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.customer-marketplace .esh-brand-manual-carousel:active {
+  cursor: grabbing;
+}
+
+.customer-marketplace .esh-brand-manual-carousel .esh-brand-group {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-start;
+  gap: clamp(14px, 2vw, 28px);
+  padding-right: clamp(14px, 2vw, 28px);
+}
+
+.customer-marketplace .esh-brand-manual-carousel .esh-brand-group > a {
+  flex-shrink: 0;
+}
+
+@media (max-width: 767px) {
+  .customer-marketplace .esh-brand-manual-carousel .esh-brand-group {
+    gap: 12px;
+    padding-right: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .customer-marketplace .esh-brand-manual-carousel {
+    scroll-behavior: auto;
+  }
 }

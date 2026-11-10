@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CustomerAuth, useCustomerAuth } from "../auth/CustomerAuth.jsx";
 import { useTheme } from "../../context/ThemeContext.jsx";
@@ -13,6 +13,36 @@ export default function CustomerPortal() {
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
+  const [headerHidden, setHeaderHidden] = useState(false);
+const lastScrollY = useRef(0);
+
+useEffect(() => {
+  lastScrollY.current = window.scrollY;
+
+  const handleScroll = () => {
+    const currentScrollY = Math.max(0, window.scrollY);
+    const previousScrollY = lastScrollY.current;
+    const scrollDifference = currentScrollY - previousScrollY;
+
+    // Always display navbar near the top of the page.
+    if (currentScrollY <= 80) {
+      setHeaderHidden(false);
+    } else if (Math.abs(scrollDifference) >= 5) {
+      // Down = hide, Up = show.
+      setHeaderHidden(scrollDifference > 0);
+    }
+
+    lastScrollY.current = currentScrollY;
+  };
+
+  window.addEventListener("scroll", handleScroll, {
+    passive: true,
+  });
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,7 +60,11 @@ export default function CustomerPortal() {
   return (
     <CustomerLayout apiState={apiState}>
       <div className="esh-announcement"><span>✧ Discover independent shops</span><span>♡ Save your favourites</span><span>◈ Explore E-Shop</span></div>
-      <header className="portal-nav">
+      <header
+  className={`portal-nav esh-smart-header ${
+    headerHidden && !mobileMenuOpen ? "esh-header-hidden" : ""
+  }`}
+>
         <div className="market-header-brand">
           <Link className="brand" to="/" aria-label="E-Shop home"><span className="brand-mark">E</span><span>E-Shop</span></Link>
         </div>

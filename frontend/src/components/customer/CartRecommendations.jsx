@@ -1,3 +1,4 @@
+import { DemoPhoto, demoProductPhoto } from "./DemoMedia.jsx";
 
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -192,17 +193,11 @@ export function CartRecommendations({ cartItems = [] }) {
                   to={`/products/${product.id}`}
                   className="cart-recommendation-image"
                 >
-                  {image ? (
-                    <img
-                      src={resolveMediaUrl(image.url)}
-                      alt={product.name}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <span aria-hidden="true">
-                      {product.name?.charAt(0) || "E"}
-                    </span>
-                  )}
+                  <DemoPhoto
+                    src={image?.url}
+                    fallback={demoProductPhoto(product)}
+                    alt={product.name}
+                  />
                 </Link>
 
                 <div className="cart-recommendation-info">

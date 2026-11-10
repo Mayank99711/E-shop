@@ -1,3 +1,4 @@
+import { DemoPhoto, demoBrandPhoto } from "../../../components/customer/DemoMedia.jsx";
 import { useState, useEffect, useRef } from 'react';
 import { adminApi } from '../../../services/admin/index.js';
 import { resolveMediaUrl } from '../../../services/apiClient.js';
@@ -51,7 +52,7 @@ export function BrandManagement({ items, onReload, loading = false }) {
   const pendingRequests = (requests ?? []).filter((request) => request.status === 'PENDING' && request.type === 'BRAND');
 
   const filteredItems = (items ?? []).filter((item) => item.name.toLowerCase().includes(query.trim().toLowerCase()));
-  const hasImage = (items ?? []).some((item) => item.logoUrl || item.imageUrl);
+  const hasImage = true; // Show the sample-photo column during local catalog testing.
 
   function resetForm() { setName(''); setDescription(''); setImageFile(null); if (fileInputRef.current) fileInputRef.current.value = ''; }
 
@@ -118,7 +119,7 @@ export function BrandManagement({ items, onReload, loading = false }) {
               <tbody>
                 {filteredItems.map((item) => (
                   <tr key={item.id}>
-                    {hasImage && <td>{(item.logoUrl || item.imageUrl) && <img className="record-thumb" src={resolveMediaUrl(item.logoUrl || item.imageUrl)} alt="" />}</td>}
+                    {hasImage && <td><DemoPhoto className="record-thumb" src={item.logoUrl || item.imageUrl} fallback={demoBrandPhoto(item)} alt={`${item.name} sample`} /></td>}
                     <td><strong>{item.name}</strong></td>
                     <td>{item.description || '—'}</td>
                     <td>{(item._count?.products ?? 0)} products</td>

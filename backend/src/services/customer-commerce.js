@@ -59,7 +59,29 @@ export function createCustomerCommerceService(database = prisma) {
             discountPrice: true,
             stock: true,
             isActive: true,
-            shop: { select: { status: true } },
+
+            // Selected variant's color and size information
+            values: {
+              select: {
+                attribute: {
+                  select: {
+                    name: true,
+                  },
+                },
+                value: {
+                  select: {
+                    id: true,
+                    value: true,
+                  },
+                },
+              },
+            },
+
+            shop: {
+              select: {
+                status: true,
+              },
+            },
           },
         },
       },

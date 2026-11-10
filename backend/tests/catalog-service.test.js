@@ -31,31 +31,15 @@ test("public category and brand facets require active public products", async ()
 
   assert.deepEqual(queries[0].where, {
     isActive: true,
-    OR: [
-      {
-        products: {
-          some: {
-            status: "ACTIVE",
-            shop: { status: "ACTIVE" },
-            variants: { some: { isActive: true } },
-          },
+    products: {
+      some: {
+        status: "ACTIVE",
+        shop: { status: "ACTIVE" },
+        variants: {
+          some: { isActive: true },
         },
       },
-      {
-        children: {
-          some: {
-            isActive: true,
-            products: {
-              some: {
-                status: "ACTIVE",
-                shop: { status: "ACTIVE" },
-                variants: { some: { isActive: true } },
-              },
-            },
-          },
-        },
-      },
-    ],
+    },
   });
 
   assert.deepEqual(queries[1].where, {
@@ -111,6 +95,9 @@ test("public product list retains active shop, product and variant scope with pa
   let countWhere;
 
   const database = {
+    category: {
+      findMany: async () => [],
+    },
     product: {
       findMany: async (query) => {
         findQuery = query;
@@ -165,11 +152,11 @@ test("public product list retains active shop, product and variant scope with pa
     some: { isActive: true },
   });
 
-  assert.deepEqual(findQuery.where.category, {
-    OR: [{ id: "category-1" }, { parentId: "category-1" }],
+  assert.deepEqual(findQuery.where.categoryId, {
+    in: ["subcategory-1"],
   });
 
-  assert.equal(findQuery.where.categoryId, "subcategory-1");
+  assert.equal(findQuery.where.category, undefined);
   assert.equal(findQuery.where.OR.length, 5);
   assert.equal(countWhere, findQuery.where);
 });
@@ -216,6 +203,9 @@ test("price-sorted public products follow the database's effective-price order",
       sqlQuery = query;
       return [{ id: "cheap" }, { id: "expensive" }];
     },
+    category: {
+      findMany: async () => [],
+    },
     product: {
       findMany: async (query) => {
         productQuery = query;
@@ -261,11 +251,14 @@ test("price-sorted public products follow the database's effective-price order",
     in: ["cheap", "expensive"],
   });
 
+  // Search query must preserve escaped wildcard characters.
   assert.equal(sqlQuery.values.includes("%100\\% cotton%"), true);
 
-  assert.equal(sqlQuery.values.includes("category-1"), true);
-
+  // Subcategory takes priority over its parent category.
   assert.equal(sqlQuery.values.includes("subcategory-1"), true);
+
+  // Parent category should not be added as a separate SQL filter.
+  assert.equal(sqlQuery.values.includes("category-1"), false);
 });
 
 test("public products return correct average rating and review count", async () => {

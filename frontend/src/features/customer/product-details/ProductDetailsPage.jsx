@@ -1,13 +1,37 @@
-
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   customerApi,
   resolveMediaUrl,
 } from "../../../services/customer/index.js";
+import { DemoPhoto, demoProductPhoto } from "../../../components/customer/DemoMedia.jsx";
+import ProductImageAttribution from "../../../components/customer/ProductImageAttribution.jsx";
 import { PageState } from "../../../components/customer/StorefrontComponents.jsx";
 import ProductRating from "../../../components/customer/reviews/ProductRating.jsx";
 import { money } from "../../../utils/format.js";
+
+// Read the Color / Size values attached to a concrete SKU variant.
+function attributeValue(variant, name) {
+  return (variant?.values || []).find(
+    (entry) => entry.attribute?.name?.trim().toLowerCase() === name
+  )?.value || null;
+}
+
+function getOptions(variants, name) {
+  const options = new Map();
+  for (const variant of variants) {
+    const value = attributeValue(variant, name);
+    if (value?.id) options.set(value.id, value);
+  }
+  return [...options.values()];
+}
+
+const SWATCH_COLORS = {
+  black: "#242424", blue: "#3467a8", red: "#ba3545",
+  white: "#ffffff", green: "#39815b", grey: "#888888",
+  gray: "#888888", navy: "#183450", yellow: "#e8c84e",
+  pink: "#e69ab0", brown: "#79543f", beige: "#dec8a4",
+};
 
 function RatingBreakdown({ distribution = {}, total = 0 }) {
   return (
@@ -29,7 +53,7 @@ function RatingBreakdown({ distribution = {}, total = 0 }) {
             >
               <div
                 className="review-distribution-fill"
-                style={{ width: `${percentage}%` }}
+                style={{ width: `${percentage}%`}}
               />
             </div>
             <span>{count}</span>
@@ -50,6 +74,8 @@ export function ProductDetails({
 
   const [product, setProduct] = useState(null);
   const [variantId, setVariantId] = useState("");
+  const [selectedColorId, setSelectedColorId] = useState("");
+  const [selectedSizeId, setSelectedSizeId] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
@@ -77,7 +103,11 @@ export function ProductDetails({
           (variant) => variant.stock > 0
         );
 
-        setVariantId(inStock?.id || result.variants[0]?.id || "");
+        const initialVariant = inStock || result.variants[0];
+        setVariantId(initialVariant?.id || "");
+        setSelectedColorId(attributeValue(initialVariant, "color")?.id || "");
+        setSelectedSizeId(attributeValue(initialVariant, "size")?.id || "");
+        setQuantity(1);
       })
       .catch((requestError) => {
         if (active) setError(requestError.message);
@@ -119,9 +149,35 @@ export function ProductDetails({
     };
   }, [productId, reviewsPage]);
 
-  const variant = product?.variants.find(
-    (item) => item.id === variantId
+  const activeVariants = (product?.variants || []).filter(
+    (item) => item.isActive !== false
   );
+  const colors = getOptions(activeVariants, "color");
+  const sizes = getOptions(activeVariants, "size");
+  const hasSwatchSelector = colors.length > 0 || sizes.length > 0;
+
+  // The exact color + size must exist. Never silently switch sizes.
+  const variant = hasSwatchSelector
+    ? activeVariants.find((item) =>
+        (colors.length === 0 || attributeValue(item, "color")?.id === selectedColorId) &&
+        (sizes.length === 0 || attributeValue(item, "size")?.id === selectedSizeId)
+      )
+    : activeVariants.find((item) => item.id === variantId);
+
+  // Show one photo for the selected color, not all color variants together.
+  const allImages = product?.images || [];
+  const colorImages = selectedColorId
+    ? allImages.filter((image) => image.colorValueId === selectedColorId)
+    : [];
+  const genericImages = allImages.filter((image) => !image.colorValueId);
+  // Keep the gallery populated when only color-specific images exist or the
+  // selected variant lacks a matching upload. This does not change the variant.
+  const visibleImage = colorImages[0] || genericImages[0] || allImages[0] || null;
+  const canBuy = Boolean(
+    variant && Number(variant.stock) > 0 &&
+    product?.status === "ACTIVE" && product?.shop?.status === "ACTIVE"
+  );
+  const displayVariant = variant || activeVariants[0];
 
   const averageRating =
     Number(reviews?.averageRating ?? product?.averageRating ?? 0);
@@ -135,26 +191,18 @@ export function ProductDetails({
         <>
           <section className="product-detail">
             <div className="detail-gallery">
-              {product.images?.length ? (
-                product.images.map((image) => (
-                  <img
-                    src={resolveMediaUrl(image.url)}
-                    alt={product.name}
-                    key={image.id}
-                    onError={(event) =>
-                      event.currentTarget.classList.add(
-                        "image-unavailable"
-                      )
-                    }
+              {visibleImage ? (
+                <div className="detail-image-with-credit" key={visibleImage.id || visibleImage.url}>
+                  <DemoPhoto
+                    src={visibleImage.url}
+                    fallback={demoProductPhoto(product)}
+                    alt={`${product.name}${colors.length ? ` - ${colors.find((c) => c.id === selectedColorId)?.value || ""}` : ""}`}
+
                   />
-                ))
-              ) : (
-                <div
-                  className="detail-image-placeholder"
-                  aria-hidden="true"
-                >
-                  E
+                  <ProductImageAttribution imageUrl={visibleImage.url} />
                 </div>
+              ) : (
+                <DemoPhoto fallback={demoProductPhoto(product)} alt={product.name} />
               )}
             </div>
 
@@ -186,90 +234,142 @@ export function ProductDetails({
               <p className="detail-description">
                 {product.description}
               </p>
+              {product.specifications && Object.keys(product.specifications).length > 0 && (
+                <section aria-label="Technical specifications" style={{ margin: '18px 0' }}>
+                  <h2 style={{ fontSize: '1.15rem' }}>Technical specifications</h2>
+                  <dl style={{ display: 'grid', gridTemplateColumns: 'minmax(110px, 1fr) 2fr', gap: '8px 16px' }}>
+                    {Object.entries(product.specifications).map(([key, value]) => (
+                      <Fragment key={key}>
+                        <dt style={{ fontWeight: 600 }}>{key}</dt>
+                        <dd style={{ margin: 0 }}>{String(value)}</dd>
+                      </Fragment>
+                    ))}
+                  </dl>
+                </section>
+              )}
 
-              {product.variants.length > 1 && (
+              {colors.length > 0 && (
+                <fieldset className="detail-option" style={{ border: 0, margin: "16px 0", padding: 0 }}>
+                  <legend style={{ fontWeight: 600, marginBottom: 10 }}>
+                    Color: {colors.find((color) => color.id === selectedColorId)?.value || "Choose color"}
+                  </legend>
+                  <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+                    {colors.map((color) => {
+                      const selected = selectedColorId === color.id;
+                      const swatch = SWATCH_COLORS[color.value.toLowerCase()] || color.value.toLowerCase();
+                      return (
+                        <button
+                          key={color.id}
+                          type="button"
+                          aria-label={`Choose ${color.value} color`}
+                          aria-pressed={selected}
+                          title={color.value}
+                          onClick={() => {
+                            setSelectedColorId(color.id);
+                            setQuantity(1);
+                          }}
+                          style={{
+                            display: "flex", flexDirection: "column", alignItems: "center", gap: 5,
+                            background: "transparent", border: 0, cursor: "pointer", padding: 3,
+                          }}
+                        >
+                          <span style={{
+                            width: 35, height: 35, display: "block", borderRadius: "50%",
+                            background: swatch, border: selected ? "3px solid #2563eb" : "1px solid #888",
+                            outline: selected ? "2px solid #fff" : "none",
+                            boxShadow: selected ? "0 0 0 2px #2563eb" : "none",
+                          }} />
+                          <small>{color.value}</small>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </fieldset>
+              )}
+
+              {sizes.length > 0 && (
+                <fieldset className="detail-option" style={{ border: 0, margin: "16px 0", padding: 0 }}>
+                  <legend style={{ fontWeight: 600, marginBottom: 10 }}>
+                    Size: {sizes.find((size) => size.id === selectedSizeId)?.value || "Choose size"}
+                  </legend>
+                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                    {sizes.map((size) => (
+                      <button
+                        key={size.id}
+                        type="button"
+                        className={selectedSizeId === size.id ? "btn btn-primary" : "btn btn-outline-primary"}
+                        aria-pressed={selectedSizeId === size.id}
+                        onClick={() => {
+                          setSelectedSizeId(size.id);
+                          setQuantity(1);
+                        }}
+                      >
+                        {size.value}
+                      </button>
+                    ))}
+                  </div>
+                </fieldset>
+              )}
+
+              {!hasSwatchSelector && activeVariants.length > 1 && (
                 <label className="detail-option">
                   Choose an option
-                  <select
-                    value={variantId}
-                    onChange={(event) => {
-                      setVariantId(event.target.value);
-                      setQuantity(1);
-                    }}
-                  >
-                    {product.variants.map((item) => (
+                  <select value={variantId} onChange={(event) => {
+                    setVariantId(event.target.value);
+                    setQuantity(1);
+                  }}>
+                    {activeVariants.map((item) => (
                       <option value={item.id} key={item.id}>
-                        {item.values
-                          .map(
-                            ({ attribute, value }) =>
-                              `${attribute.name}: ${value.value}`
-                          )
-                          .join(" · ") || item.sku}
-                        {" · "}
-                        {item.stock > 0
-                          ? `${item.stock} available`
-                          : "Out of stock"}
+                        {(item.values || []).map(({ attribute, value }) =>
+                          `${attribute.name}: ${value.value}`).join(" · ") || item.sku}
+                        {` · ${Number(item.stock) > 0 ? `${item.stock} available` : "Out of stock"}`}
                       </option>
                     ))}
                   </select>
                 </label>
               )}
 
-              {variant && (
-                <>
-                  <div className="detail-price">
-                    {money(
-                      variant.discountPrice || variant.price
-                    )}
-                    {variant.discountPrice && (
-                      <del>{money(variant.price)}</del>
-                    )}
-                  </div>
+              {displayVariant && (
+                <div className="detail-price">
+                  {money(displayVariant.discountPrice || displayVariant.price)}
+                  {displayVariant.discountPrice && <del>{money(displayVariant.price)}</del>}
+                </div>
+              )}
 
-                  <p
-                    className={
-                      variant.stock > 0
-                        ? "availability available"
-                        : "availability unavailable"
-                    }
+              <p className={canBuy ? "availability available" : "availability unavailable"}>
+                {!variant && hasSwatchSelector
+                  ? "This color and size combination is unavailable"
+                  : !variant
+                    ? "Currently unavailable"
+                    : !canBuy
+                      ? "Currently out of stock"
+                      : `${variant.stock} available`}
+              </p>
+
+              {canBuy && (
+                <div className="detail-buy-row">
+                  <label>
+                    Qty
+                    <input
+                      type="number"
+                      min="1"
+                      max={Math.min(Number(variant.stock), 100)}
+                      value={quantity}
+                      onChange={(event) => {
+                        const requested = Number(event.target.value) || 1;
+                        setQuantity(Math.min(Math.max(1, requested), Number(variant.stock), 100));
+                      }}
+                    />
+                  </label>
+                  <button
+                    className="btn btn-primary btn-lg"
+                    type="button"
+                    disabled={!signedIn}
+                    onClick={() => onAdd(product, variant, quantity)}
                   >
-                    {variant.stock > 0
-                      ? `${variant.stock} available`
-                      : "Currently out of stock"}
-                  </p>
-
-                  {variant.stock > 0 && (
-                    <div className="detail-buy-row">
-                      <label>
-                        Qty
-                        <input
-                          type="number"
-                          min="1"
-                          max={Math.min(variant.stock, 100)}
-                          value={quantity}
-                          onChange={(event) =>
-                            setQuantity(
-                              Math.max(1, Number(event.target.value))
-                            )
-                          }
-                        />
-                      </label>
-
-                      <button
-                        className="btn btn-primary btn-lg"
-                        type="button"
-                        disabled={!signedIn}
-                        onClick={() =>
-                          onAdd(product, variant, quantity)
-                        }
-                      >
-                        {signedIn
-                          ? "Add to cart"
-                          : "Sign in to shop"}
-                      </button>
-                    </div>
-                  )}
-                </>
+                    {signedIn ? "Add to cart" : "Sign in to shop"}
+                  </button>
+                </div>
               )}
 
               <button
@@ -386,9 +486,9 @@ export function ProductDetails({
                     <button
                       type="button"
                       className="btn btn-outline-secondary"
-                      disabled={reviewsPage <= 1 || reviewsLoading}
+                      disabled={reviewsPage <= 1|| reviewsLoading}
                       onClick={() =>
-                        setReviewsPage((page) => page - 1)
+                        setReviewsPage((page) =>page - 1)
                       }
                     >
                       Previous
@@ -406,7 +506,7 @@ export function ProductDetails({
                         reviewsLoading
                       }
                       onClick={() =>
-                        setReviewsPage((page) => page + 1)
+                        setReviewsPage((page) =>page + 1)
                       }
                     >
                       Next

@@ -1,4 +1,5 @@
-﻿import { prisma } from "../config/database.js";
+import { verifyCategoryVariantOptions } from "./variant-category-policy.js";
+import { prisma } from "../config/database.js";
 import { getOwnerShop } from "./owner-shop.js";
 import { createProductVariants } from "./owner-product-variants.js";
 import { isStoredProductImage } from "../utils/product-images.js";
@@ -25,8 +26,17 @@ export function createOwnerProductService(
             include: {
               values: {
                 include: {
-                  attribute: { select: { name: true } },
-                  value: { select: { value: true } },
+                  attribute: {
+                    select: {
+                      name: true,
+                    },
+                  },
+                  value: {
+                    select: {
+                      id: true,
+                      value: true,
+                    },
+                  },
                 },
               },
             },
@@ -39,6 +49,7 @@ export function createOwnerProductService(
       const {
         name,
         description,
+        specifications,
         categoryId,
         brandId,
         images = [],
@@ -67,12 +78,14 @@ export function createOwnerProductService(
         throw fail(400, "INVALID_CATEGORY", "Choose an active category.");
       if (brandId && !brand)
         throw fail(400, "INVALID_BRAND", "Choose an active brand.");
+      await verifyCategoryVariantOptions(database, categoryId, variants);
       return database.$transaction(async (tx) => {
         const product = await tx.product.create({
           data: {
             shopId: shop.id,
             name,
             description,
+            ...(specifications !== undefined ? { specifications } : {}),
             categoryId,
             brandId: brandId ?? null,
 
@@ -117,10 +130,11 @@ export function createOwnerProductService(
       const shop = await lookupShop(ownerId);
       const product = await database.product.findFirst({
         where: { id: productId, shopId: shop.id },
-        select: { id: true },
+        select: { id: true, categoryId: true },
       });
       if (!product)
         throw fail(404, "PRODUCT_NOT_FOUND", "Product not found in your shop.");
+      await verifyCategoryVariantOptions(database, product.categoryId, variants);
       return database.$transaction(async (tx) => {
         const created = await createProductVariants(
           tx,
@@ -182,6 +196,13 @@ export function createOwnerProductService(
         }))
       ) {
         throw fail(400, "INVALID_CATEGORY", "Choose an active category.");
+      }
+      if (productData.categoryId) {
+        const currentVariants = await database.productVariant.findMany({
+          where: { productId: product.id },
+          select: { values: { select: { attributeId: true } } },
+        });
+        await verifyCategoryVariantOptions(database, productData.categoryId, currentVariants);
       }
       if (
         productData.brandId &&

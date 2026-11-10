@@ -1,3 +1,4 @@
+import { DemoPhoto, demoCategoryPhoto } from "../../../components/customer/DemoMedia.jsx";
 import { useMemo, useState, useEffect, useRef } from 'react';
 import { adminApi } from '../../../services/admin/index.js';
 import { resolveMediaUrl } from '../../../services/apiClient.js';
@@ -158,7 +159,7 @@ export function CategoryManagement({ items, onReload, subcategoriesOnly = false,
     }
   }
 
-  const hasMedia = (items ?? []).some((item) => item.iconUrl || item.imageUrl);
+  const hasMedia = true; // Include demo-photo previews for image-less categories.
 
   const pendingRequests = (requests ?? []).filter((request) => request.status === 'PENDING' && request.type === 'CATEGORY' && (subcategoriesOnly ? Boolean(request.proposedData?.parentId) : !request.proposedData?.parentId));
 
@@ -196,7 +197,7 @@ export function CategoryManagement({ items, onReload, subcategoriesOnly = false,
               <tbody>
                 {pageCategories.map((item) => (
                   <tr key={item.id}>
-                    {hasMedia && <td>{item.iconUrl && <img className="record-thumb" src={resolveMediaUrl(item.iconUrl)} alt="" />}{item.imageUrl && <img className="record-thumb" src={resolveMediaUrl(item.imageUrl)} alt="" />}</td>}
+                    {hasMedia && <td><DemoPhoto className="record-thumb" src={item.imageUrl || item.iconUrl} fallback={demoCategoryPhoto(item)} alt={item.name} /></td>}
                     <td><strong>{item.name}</strong></td>
                     <td>{item.parent?.name || '—'}</td>
                     <td>{item.description || '—'}</td>

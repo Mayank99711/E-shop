@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo,useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { customerApi, resolveMediaUrl } from "../../../services/customer/index.js";
+import { customerApi } from "../../../services/customer/index.js";
+import { DemoPhoto, demoProductPhoto, demoCategoryPhoto, demoBrandPhoto } from "../../../components/customer/DemoMedia.jsx";
 import {
   PageState,
   ProductGrid,
@@ -78,17 +79,11 @@ function FeaturedShops({ shops, products }) {
               to={`/?${new URLSearchParams({ shopId: shop.id })}#products-for-you`}
             >
               <div className="esh-shop-photo">
-                {shopProduct?.images?.[0] ? (
-                  <img
-                    src={resolveMediaUrl(shopProduct.images[0].url)}
-                    alt=""
-                    loading="lazy"
-                  />
-                ) : (
-                  <span aria-hidden="true">
-                    {shop.name.slice(0, 1).toUpperCase()}
-                  </span>
-                )}
+                <DemoPhoto
+                  src={shopProduct?.images?.[0]?.url}
+                  fallback={demoProductPhoto(shopProduct || products.find((p) => p.shop?.id === shop.id) || { name: shop.name })}
+                  alt={`${shop.name} shop collection`}
+                />
               </div>
               <div className="esh-shop-identity">
                 <span>{shop.name.slice(0, 1).toUpperCase()}</span>
@@ -154,7 +149,7 @@ function Filters({
             <input
               type="radio"
               name="esh-category"
-               
+
               checked={!categoryId}
               onChange={() =>
                 updateFilters({ categoryId: "", subcategoryId: "" })
@@ -454,9 +449,8 @@ export function CatalogPage({ favouriteIds, signedIn, onFavourite, onAdd }) {
     [products, priceMax, minDiscount, minRating, stockOnly],
   );
   const rootCategories = categories.filter((category) => !category.parentId);
-  const heroProduct = products.find((product) => product.images?.[0]);
+  const heroProduct = products[0];
   const spotlightProducts = products
-    .filter((product) => product.images?.[0])
     .slice(0, 3);
   const heroItem =
     spotlightProducts[heroSlide % Math.max(spotlightProducts.length, 1)] ||
@@ -504,16 +498,11 @@ export function CatalogPage({ favouriteIds, signedIn, onFavourite, onAdd }) {
               </div>
             </div>
             <div className="esh-hero-visual">
-              {heroItem?.images?.[0] ? (
-                <img
-                  src={resolveMediaUrl(heroItem.images[0].url)}
-                  alt={heroItem.name}
-                />
-              ) : (
-                <div className="esh-hero-monogram" aria-hidden="true">
-                  E<span>shop</span>
-                </div>
-              )}
+              <DemoPhoto
+                src={heroItem?.images?.[0]?.url}
+                fallback={demoProductPhoto(heroItem || products[0])}
+                alt={heroItem?.name || "Featured product collection"}
+              />
               {spotlightProducts.length > 1 && (
                 <div className="esh-hero-dots">
                   {spotlightProducts.map((product, index) => (
@@ -549,17 +538,11 @@ export function CatalogPage({ favouriteIds, signedIn, onFavourite, onAdd }) {
                     <span
                       className={`esh-category-symbol esh-tone-${index % 6}`}
                     >
-                      {category.iconUrl || category.imageUrl ? (
-                        <img
-                          src={resolveMediaUrl(
-                            category.iconUrl || category.imageUrl,
-                          )}
-                          alt=""
-                          loading="lazy"
-                        />
-                      ) : (
-                        categoryIcon(category.name)
-                      )}
+                      <DemoPhoto
+                        src={category.imageUrl || category.iconUrl}
+                        fallback={demoCategoryPhoto(category)}
+                        alt={category.name}
+                      />
                     </span>
                     <span>{category.name}</span>
                   </Link>
@@ -591,27 +574,9 @@ export function CatalogPage({ favouriteIds, signedIn, onFavourite, onAdd }) {
                 title="Explore Brands"
                 subtitle="Brands currently available in our catalog"
               />
-              <div className="esh-brand-strip">
-                {brands.slice(0, 12).map((brand) => (
-                  <Link
-                    key={brand.id}
-                    to={`/?${new URLSearchParams({ brandId: brand.id })}#products-for-you`}
-                  >
-                    <span className="esh-brand-logo-circle">
-                      {brand.logoUrl ? (
-                        <img
-                          src={resolveMediaUrl(brand.logoUrl)}
-                          alt=""
-                          loading="lazy"
-                        />
-                      ) : (
-                        "✦"
-                      )}
-                    </span>
-                    <span className="esh-brand-name">{brand.name}</span>
-                  </Link>
-                ))}
-              </div>
+
+<AutoScrollingBrands brands={brands} />
+
             </section>
           )}
         </>
@@ -787,5 +752,140 @@ export function CatalogPage({ favouriteIds, signedIn, onFavourite, onAdd }) {
         </>
       )}
     </>
+  );
+}
+
+function AutoScrollingBrands({ brands }) {
+  const scrollRef = useRef(null);
+  const pausedRef = useRef(false);
+  const draggingRef = useRef(false);
+  const pointerStartRef = useRef({ x: 0, scrollLeft: 0 });
+  const movedRef = useRef(false);
+
+  useEffect(() => {
+    const element = scrollRef.current;
+    if (!element || brands.length < 2) return;
+
+    let frameId;
+    let previousTime = 0;
+
+    const animate = (time) => {
+      if (!previousTime) previousTime = time;
+
+      const delta = Math.min(time - previousTime, 50);
+      previousTime = time;
+
+      if (!pausedRef.current && !draggingRef.current) {
+        const halfWidth = element.scrollWidth / 2;
+
+        element.scrollLeft += delta * 0.035;
+
+        if (element.scrollLeft >= halfWidth) {
+          element.scrollLeft -= halfWidth;
+        }
+      }
+
+      frameId = requestAnimationFrame(animate);
+    };
+
+    frameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(frameId);
+  }, [brands]);
+
+  function handlePointerDown(event) {
+    if (event.pointerType === "touch") return;
+
+    draggingRef.current = true;
+    pausedRef.current = true;
+    movedRef.current = false;
+
+    pointerStartRef.current = {
+      x: event.clientX,
+      scrollLeft: scrollRef.current.scrollLeft,
+    };
+  }
+
+  function handlePointerMove(event) {
+    if (!draggingRef.current) return;
+
+    const difference = event.clientX - pointerStartRef.current.x;
+
+    if (Math.abs(difference) > 5) {
+      movedRef.current = true;
+    }
+
+    const element = scrollRef.current;
+    const halfWidth = element.scrollWidth / 2;
+
+    let next = pointerStartRef.current.scrollLeft - difference;
+
+    if (halfWidth > 0) {
+      next = ((next % halfWidth) + halfWidth) % halfWidth;
+    }
+
+    element.scrollLeft = next;
+  }
+
+  function handlePointerUp() {
+    draggingRef.current = false;
+  }
+
+  function handleClickCapture(event) {
+    if (movedRef.current) {
+      event.preventDefault();
+      event.stopPropagation();
+      movedRef.current = false;
+    }
+  }
+
+  const visibleBrands = brands.slice(0, 12);
+
+  return (
+    <div
+      ref={scrollRef}
+      className="esh-brand-strip esh-brand-manual-carousel"
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => {
+        pausedRef.current = false;
+        draggingRef.current = false;
+      }}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+      onClickCapture={handleClickCapture}
+      aria-label="Explore brands carousel"
+    >
+      {[0, 1].map((copyIndex) => (
+        <div
+          key={copyIndex}
+          className="esh-brand-group"
+          aria-hidden={copyIndex === 1 ? "true" : undefined}
+        >
+          {visibleBrands.map((brand) => (
+            <Link
+              key={`${copyIndex}-${brand.id}`}
+              to={`/?${new URLSearchParams({
+                brandId: brand.id,
+              })}#products-for-you`}
+              tabIndex={copyIndex === 1 ? -1 : undefined}
+            >
+              <span className="esh-brand-logo-circle">
+                <DemoPhoto
+                  src={brand.logoUrl || brand.imageUrl}
+                  fallback={demoBrandPhoto(brand)}
+                  alt={`${brand.name} brand`}
+                />
+              </span>
+
+              <span className="esh-brand-name">
+                {brand.name}
+              </span>
+            </Link>
+          ))}
+        </div>
+      ))}
+    </div>
   );
 }
