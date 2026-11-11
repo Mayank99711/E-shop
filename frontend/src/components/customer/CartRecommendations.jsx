@@ -231,12 +231,12 @@ export function CartRecommendations({ cartItems = [] }) {
                     )}
                   </div>
 
-                  <Link
-                    className="btn btn-outline-primary w-100"
-                    to={`/products/${product.id}`}
-                  >
-                    View product
-                  </Link>
+                 <Link
+  className="btn w-100 cart-recommendation-view-btn"
+  to={`/products/${product.id}`}
+>
+  View Product
+</Link>
                 </div>
               </article>
             );

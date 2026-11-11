@@ -33,24 +33,109 @@ export function CartSummary({ subtotal, quote, quoteError, quoteLoading, address
         <p className="muted-copy">Totals will be calculated after selecting a valid address.</p>
       )}
       {quoteLoading && <small>Calculating quote...</small>}
-      <div className="address-card">
-        <strong>Delivery address</strong>
-        {selectedAddress ? (
-          <p>{selectedAddress.recipient}<br />{selectedAddress.line1}{selectedAddress.line2 ? `, ${selectedAddress.line2}` : ''}<br />{selectedAddress.city}, {selectedAddress.region} {selectedAddress.postalCode}</p>
-        ) : (
-          <p>No address selected.</p>
-        )}
-        <div className="address-actions">
-          <button type="button" className="btn btn-sm btn-outline-secondary" onClick={onManageAddresses}>Change Address</button>
-          <button type="button" className="btn btn-sm btn-primary" onClick={onManageAddresses}>Add New Address</button>
-        </div>
-      </div>
+      <div className="delivery-address-section">
+  <div className="delivery-address-header">
+    <div>
+      <h3>Delivery Address</h3>
+      <p>Select an address for your order</p>
+    </div>
+
+    <button
+  type="button"
+  className="btn btn-sm delivery-add-address-btn"
+  onClick={onManageAddresses}
+  disabled={busy || razorpayBusy}
+>
+  + Add Address
+</button>
+  </div>
+
+  {addresses.length > 0 ? (
+    <fieldset className="delivery-address-options">
+      <legend className="visually-hidden">
+        Choose delivery address
+      </legend>
+
+      {addresses.map((address) => (
+        <label
+          key={address.id}
+          className={`delivery-address-option ${
+            addressId === address.id ? "selected" : ""
+          }`}
+        >
+          <input
+            type="radio"
+            name="deliveryAddress"
+            value={address.id}
+            checked={addressId === address.id}
+            onChange={() => setAddressId(address.id)}
+            disabled={busy || razorpayBusy}
+          />
+
+          <div className="delivery-address-content">
+            <div className="delivery-address-title">
+              <strong>{address.label || "Address"}</strong>
+
+              {address.isDefault && (
+                <span className="delivery-default-badge">
+                  Default
+                </span>
+              )}
+            </div>
+
+            <strong>{address.recipient}</strong>
+
+            <p>
+              {address.line1}
+              {address.line2 ? `, ${address.line2}` : ""}
+              <br />
+              {address.city}, {address.region}{" "}
+              {address.postalCode}
+            </p>
+
+            {address.mobile && (
+              <small>Mobile: {address.mobile}</small>
+            )}
+          </div>
+        </label>
+      ))}
+    </fieldset>
+  ) : (
+    <div className="delivery-address-empty">
+      No saved addresses yet. Add an address to continue.
+    </div>
+  )}
+
+  {selectedAddress && (
+    <p className="delivery-address-confirmation">
+      ✓ Delivery address selected
+    </p>
+  )}
+</div>
       <fieldset className="payment-methods">
         <legend>Payment method</legend>
         <label><input type="radio" name="paymentMethod" value="cod" checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')} /> Cash on Delivery</label>
         <label><input type="radio" name="paymentMethod" value="razorpay" checked={paymentMethod === 'razorpay'} onChange={() => setPaymentMethod('razorpay')} /> Razorpay</label>
       </fieldset>
-      <button className="btn btn-primary w-100" type="button" disabled={busy || razorpayBusy || !addressId || !quote || quoteLoading || !!quoteError} onClick={paymentMethod === 'cod' ? onCheckout : onRazorpay}>{razorpayBusy ? 'Starting payment...' : paymentMethod === 'cod' ? 'Place COD Order' : 'Pay Securely with Razorpay'}</button>
+      <button
+  className="btn w-100 cart-place-order-btn"
+  type="button"
+  disabled={
+    busy ||
+    razorpayBusy ||
+    !addressId ||
+    !quote ||
+    quoteLoading ||
+    !!quoteError
+  }
+  onClick={paymentMethod === "cod" ? onCheckout : onRazorpay}
+>
+  {razorpayBusy
+    ? "Starting payment..."
+    : paymentMethod === "cod"
+      ? "Place COD Order"
+      : "Pay Securely with Razorpay"}
+</button>
       <small>{paymentMethod === 'cod' ? 'Cash on Delivery. Stock is reserved only after server confirmation.' : 'Razorpay Checkout opens in a secure popup. Payment is verified by the server.'}</small>
     </aside>
   );

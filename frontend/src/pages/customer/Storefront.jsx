@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, NavLink, Route, Routes, useSearchParams } from "react-router-dom";
 import { customerApi } from "../../services/customer/index.js";
-
+import { useAuth } from "../../context/AuthContext.jsx";
 const CatalogPage = lazy(() => import('../../features/customer/catalog/CatalogPage.jsx').then((module) => ({ default: module.CatalogPage })));
 const CategoriesPage = lazy(() => import('../../features/customer/categories/CategoriesPage.jsx').then((module) => ({ default: module.CategoriesPage })));
 const ShopsPage = lazy(() => import('../../features/customer/shops/ShopsPage.jsx').then((module) => ({ default: module.ShopsPage })));
@@ -26,6 +26,14 @@ function NavIcon({ name }) {
 }
 
 export default function Storefront({ user, openSignIn, mobileMenuOpen, onNavigate }) {
+  const session = useAuth();
+
+  const isBrowseOnly = [
+    "SUPER_ADMIN",
+    "SHOP_OWNER",
+    "SHOP_EMPLOYEE",
+  ].includes(session.user?.role);
+
   const [favouriteIds, setFavouriteIds] = useState(new Set());
   const [cartCount, setCartCount] = useState(0);
   const [quickCategories, setQuickCategories] = useState([]);
@@ -70,7 +78,15 @@ export default function Storefront({ user, openSignIn, mobileMenuOpen, onNavigat
   }, [searchParams, setSearchParams, openSignIn]);
 
   async function toggleFavourite(product) {
-    if (!user) { openSignIn(); return; }
+  if (isBrowseOnly) {
+    setNotice("Wishlist is available to customer accounts only.");
+    return false;
+  }
+
+  if (!user) {
+    openSignIn();
+    return false;
+  }
     setNotice("");
     try {
       if (favouriteIds.has(product.id)) {
@@ -87,23 +103,65 @@ export default function Storefront({ user, openSignIn, mobileMenuOpen, onNavigat
   }
 
   async function addToCart(product, variant, quantity = 1) {
-    if (!user) { openSignIn(); return; }
-    setNotice("");
-    try {
-      await customerApi.addCartItem({ variantId: variant.id, quantity });
-      setCartCount((value) => value + quantity);
-      setNotice(`${product.name} added to your cart.`);
-    } catch (error) { setNotice(error.message); }
+  if (isBrowseOnly) {
+    setNotice("You are viewing E-Shop in browse-only mode. Shopping is available to customers.");
+    return;
   }
 
+  if (!user) {
+    openSignIn();
+    return;
+  }
+
+  setNotice("");
+
+  try {
+    await customerApi.addCartItem({
+      variantId: variant.id,
+      quantity,
+    });
+
+    setCartCount((value) => value + quantity);
+    setNotice(`${product.name} added to your cart.`);
+  } catch (error) {
+    setNotice(error.message);
+  }
+}
+  function PreviewOnlyMessage() {
+  return (
+    <section className="sign-in-prompt">
+      <span className="eyebrow">STOREFRONT PREVIEW</span>
+      <h1>Shopping is disabled in Preview Mode</h1>
+      <p>
+        You can explore products and view details.
+        Cart, wishlist and checkout are available only to customers.
+      </p>
+      <Link className="btn btn-primary" to="/">
+        Continue browsing
+      </Link>
+    </section>
+  );
+}
   function navigationLinks() {
     return <>
       <NavLink to="/" end onClick={onNavigate}><NavIcon name="discover" />Discover</NavLink>
       <Link to="/categories" onClick={onNavigate}><NavIcon name="categories" />Categories</Link>
       <Link to="/shops" onClick={onNavigate}><NavIcon name="shops" />Shops</Link>
       <Link to="/#esh-brands" onClick={onNavigate}>✧ Brands</Link>
-      <NavLink to="/wishlist" onClick={onNavigate}><NavIcon name="favourites" />Wishlist{user && <span className="nav-count">{favouriteIds.size}</span>}</NavLink>
-      <NavLink to="/cart" onClick={onNavigate}><NavIcon name="cart" />Cart <span className="cart-count">{cartCount}</span></NavLink>
+      {!isBrowseOnly && (
+  <>
+    <NavLink to="/wishlist" onClick={onNavigate}>
+      <NavIcon name="favourites" />
+      Wishlist
+      {user && <span className="nav-count">{favouriteIds.size}</span>}
+    </NavLink>
+
+    <NavLink to="/cart" onClick={onNavigate}>
+      <NavIcon name="cart" />
+      Cart <span className="cart-count">{cartCount}</span>
+    </NavLink>
+  </>
+)}
       {user && <NavLink to="/my-orders" onClick={onNavigate}><NavIcon name="orders" />Orders</NavLink>}
     </>;
   }
@@ -133,11 +191,45 @@ export default function Storefront({ user, openSignIn, mobileMenuOpen, onNavigat
       <Route path="/categories" element={<CategoriesPage />} />
       <Route path="/shops" element={<ShopsPage />} />
       <Route path="/products" element={<CatalogPage favouriteIds={favouriteIds} signedIn={Boolean(user)} onFavourite={toggleFavourite} onAdd={addToCart} />} />
-      <Route path="/products/:productId" element={<ProductDetails favouriteIds={favouriteIds} signedIn={Boolean(user)} onFavourite={toggleFavourite} onAdd={addToCart} />} />
+      <Route
+  path="/products/:productId"
+  element={
+    <ProductDetails
+      favouriteIds={favouriteIds}
+      signedIn={Boolean(user)}
+      browseOnly={isBrowseOnly}
+      onFavourite={toggleFavourite}
+      onAdd={addToCart}
+    />
+  }
+/>
       <Route path="/favourites" element={<FavouritesPage onFavourite={toggleFavourite} onAdd={addToCart} favouriteIds={favouriteIds} signedIn={Boolean(user)} />} />
-      <Route path="/wishlist" element={<FavouritesPage onFavourite={toggleFavourite} onAdd={addToCart} favouriteIds={favouriteIds} signedIn={Boolean(user)} />} />
-      <Route path="/cart" element={<CartPage signedIn={Boolean(user)} onCartChange={setCartCount} onNotice={setNotice} />} />
-      <Route path="/checkout" element={<CartPage signedIn={Boolean(user)} onCartChange={setCartCount} onNotice={setNotice} />} />
+      <Route
+  path="/cart"
+  element={
+    isBrowseOnly
+      ? <PreviewOnlyMessage />
+      : <CartPage signedIn={Boolean(user)} onCartChange={setCartCount} onNotice={setNotice} />
+  }
+/>
+
+<Route
+  path="/checkout"
+  element={
+    isBrowseOnly
+      ? <PreviewOnlyMessage />
+      : <CartPage signedIn={Boolean(user)} onCartChange={setCartCount} onNotice={setNotice} />
+  }
+/>
+
+<Route
+  path="/wishlist"
+  element={
+    isBrowseOnly
+      ? <PreviewOnlyMessage />
+      : <FavouritesPage onFavourite={toggleFavourite} onAdd={addToCart} favouriteIds={favouriteIds} signedIn={Boolean(user)} />
+  }
+/>
       <Route path="/addresses" element={<AddressesPage signedIn={Boolean(user)} />} />
       <Route path="/orders" element={<OrdersPage signedIn={Boolean(user)} />} />
       <Route path="/my-orders" element={<OrdersPage signedIn={Boolean(user)} />} />
@@ -158,8 +250,12 @@ export default function Storefront({ user, openSignIn, mobileMenuOpen, onNavigat
       </nav>
       <nav className="market-footer-links" aria-label="Customer links">
         <strong>Your E-Shop</strong>
-        <Link to="/wishlist">Wishlist</Link>
-        <Link to="/cart">Cart</Link>
+        {!isBrowseOnly && (
+  <>
+    <Link to="/wishlist">Wishlist</Link>
+    <Link to="/cart">Cart</Link>
+  </>
+)}
         {user && <><Link to="/my-orders">Orders</Link><Link to="/profile">Account</Link><Link to="/addresses">Addresses</Link></>}
       </nav>
       <div className="market-footer-bottom"><span>E-Shop marketplace</span><span>Customer experience</span></div>

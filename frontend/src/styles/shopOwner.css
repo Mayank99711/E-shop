@@ -1453,3 +1453,312 @@ html[data-bs-theme="dark"] .compact-list li {
 html[data-bs-theme="dark"] .product-table .product-selling-price {
   color: #f1f5f9;
 }
+
+/* ============================================
+   SHOP OWNER - EMPLOYEE PAYROLL LAYOUT FIX
+   ============================================ */
+
+/* Expanded employee details: full-width stacked layout */
+.employee-details-panel:has(.employee-attendance-payroll) {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Employee information card at the top */
+.employee-details-panel:has(.employee-attendance-payroll)
+  > section:first-child {
+  width: 100%;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #e1e8f3;
+  border-radius: 14px;
+  background: #f8faff;
+  box-sizing: border-box;
+}
+
+.employee-details-panel:has(.employee-attendance-payroll)
+  > section:first-child
+  h3 {
+  margin: 0 0 18px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #172b4d;
+}
+
+/* Employee fields arranged in balanced columns */
+.employee-details-panel:has(.employee-attendance-payroll)
+  .employee-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px 24px;
+  width: 100%;
+  margin: 0;
+}
+
+/* Payroll and attendance content gets the full available width */
+.employee-details-panel > .employee-attendance-payroll {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Prevent form cards overflowing their container */
+.employee-attendance-payroll .payroll-pro-card {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-inline: 0;
+  box-sizing: border-box;
+}
+
+/* Table must allow the detail row to expand correctly */
+.employee-details-row > td {
+  padding: 18px !important;
+  max-width: 0;
+}
+
+/* Prevent long content from expanding the payroll container */
+.employee-details-panel,
+.employee-attendance-payroll,
+.payroll-pro-card {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+  .employee-details-panel:has(.employee-attendance-payroll)
+    .employee-detail-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .employee-details-panel:has(.employee-attendance-payroll)
+    > section:first-child {
+    padding: 16px;
+  }
+
+  .employee-details-panel:has(.employee-attendance-payroll)
+    .employee-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .employee-details-row > td {
+    padding: 12px !important;
+  }
+}
+.variant-image-upload-control {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 120px;
+}
+
+.variant-upload-preview {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  background: #f8fafc;
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+}
+
+.variant-image-upload-control label {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.variant-image-upload-control label:has(input:disabled) {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+/* Add these styles to the stylesheet already used by ProductsPage. */
+.create-variant-photo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 15px;
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+  background: #f8faff;
+}
+.create-variant-photo-heading {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.create-variant-photo-heading strong {
+  color: #172b4d;
+  font-size: 14px;
+}
+.create-variant-photo-heading span {
+  color: #64748b;
+  font-size: 12px;
+}
+.create-variant-photo-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+}
+.create-variant-photo-preview img {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  object-fit: contain;
+  border-radius: 7px;
+}
+.create-variant-photo-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.create-variant-photo-details strong {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+.create-variant-photo-details small {
+  color: #64748b;
+}
+@media (max-width: 600px) {
+  .create-variant-photo-preview {
+    flex-wrap: wrap;
+  }
+}
+/* Add these styles to the stylesheet already used by ProductsPage. */
+.create-variant-photo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+  padding: 15px;
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+  background: #f8faff;
+}
+.create-variant-photo-heading {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.create-variant-photo-heading strong {
+  color: #172b4d;
+  font-size: 14px;
+}
+.create-variant-photo-heading span {
+  color: #64748b;
+  font-size: 12px;
+}
+.create-variant-photo-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+}
+.create-variant-photo-preview img {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  object-fit: contain;
+  border-radius: 7px;
+}
+.create-variant-photo-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.create-variant-photo-details strong {
+  overflow-wrap: anywhere;
+  font-size: 13px;
+}
+.create-variant-photo-details small {
+  color: #64748b;
+}
+@media (max-width: 600px) {
+  .create-variant-photo-preview {
+    flex-wrap: wrap;
+  }
+}
+
+/* Manage Product: variant images and identity */
+.manage-variant-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.manage-variant-identity strong {
+  font-size: 14px;
+  color: #172b4d;
+}
+.manage-variant-identity small {
+  color: #64748b;
+  overflow-wrap: anywhere;
+}
+.manage-variant-images {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  min-width: 135px;
+}
+.manage-variant-image-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+.manage-variant-image-item {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border: 1px solid #dbe3ef;
+  border-radius: 10px;
+  background: #fff;
+}
+.manage-variant-image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+.manage-variant-image-delete {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  display: grid;
+  place-items: center;
+  width: 23px;
+  height: 23px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #dc2626;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+}
+.manage-variant-image-delete:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.manage-variant-no-photo {
+  font-size: 12px;
+}
+.manage-variant-upload-button {
+  cursor: pointer;
+}

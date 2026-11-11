@@ -504,130 +504,254 @@ export function EmployeeAttendancePayroll({
         </section>
       )}
 
-      {/* PAYROLL PERIOD MANAGEMENT */}
-      {(mode === "payroll" || mode === "all") && (
-        <section className="mb-4">
-          <h4>Payroll Periods</h4>
 
-          <form
-            onSubmit={createPeriod}
-            className="d-flex gap-2 flex-wrap mb-3"
-          >
-            <input
-              className="form-control"
-              type="date"
-              required
-              value={periodStart}
-              disabled={busy}
-              onChange={(event) =>
-                setPeriodStart(event.target.value)
-              }
-            />
+{/* PAYROLL PERIOD MANAGEMENT */}
+{(mode === "payroll" || mode === "all") && (
+  <section className="payroll-pro-card">
+    <div className="payroll-pro-heading">
+      <div className="payroll-pro-heading-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none"
+          stroke="currentColor" strokeWidth="1.8"
+          strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="5" width="18" height="16" rx="2" />
+          <path d="M7 3v4M17 3v4M3 10h18" />
+        </svg>
+      </div>
+      <div>
+        <h4>Create Payroll Period</h4>
+        <p>Define a salary period and the amount due for this employee.</p>
+      </div>
+    </div>
 
-            <input
-              className="form-control"
-              type="date"
-              required
-              value={periodEnd}
-              disabled={busy}
-              onChange={(event) =>
-                setPeriodEnd(event.target.value)
-              }
-            />
+    <form onSubmit={createPeriod} className="payroll-pro-form">
+      <div className="payroll-pro-fields">
+        <label className="payroll-pro-field">
+          <span>Period Start Date <b>*</b></span>
+          <input
+            className="form-control"
+            type="date"
+            required
+            value={periodStart}
+            max={periodEnd || undefined}
+            disabled={busy}
+            onChange={(event) => setPeriodStart(event.target.value)}
+          />
+        </label>
 
-            <input
-              className="form-control"
-              placeholder="Amount due"
-              required
-              value={amountDue}
-              disabled={busy}
-              onChange={(event) =>
-                setAmountDue(event.target.value)
-              }
-            />
+        <label className="payroll-pro-field">
+          <span>Period End Date <b>*</b></span>
+          <input
+            className="form-control"
+            type="date"
+            required
+            value={periodEnd}
+            min={periodStart || undefined}
+            disabled={busy}
+            onChange={(event) => setPeriodEnd(event.target.value)}
+          />
+        </label>
 
-            <button
-              className="btn btn-sm btn-primary"
-              disabled={busy}
-            >
-              {busy ? "Saving..." : "Create Period"}
-            </button>
-          </form>
+        <label className="payroll-pro-field">
+          <span>Salary Amount Due (INR) <b>*</b></span>
+          <input
+            className="form-control"
+            type="number"
+            min="0.01"
+            step="0.01"
+            required
+            placeholder="Enter salary amount"
+            value={amountDue}
+            disabled={busy}
+            onChange={(event) => setAmountDue(event.target.value)}
+          />
+        </label>
+      </div>
 
-          {periods.length === 0 ? (
-            <p className="muted-copy">
-              No payroll periods.
-            </p>
-          ) : (
-            <ul className="salary-history">
+      <div className="payroll-pro-form-footer">
+        <p>Verify the dates and salary amount before creating a period.</p>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          disabled={
+            busy ||
+            !periodStart ||
+            !periodEnd ||
+            periodEnd < periodStart ||
+            !(Number(amountDue) > 0)
+          }
+        >
+          {busy ? "Creating..." : "+ Create Payroll Period"}
+        </button>
+      </div>
+    </form>
+
+    <div className="payroll-pro-history">
+      <div className="payroll-pro-history-heading">
+        <h5>Payroll Period History</h5>
+        <span>{periods.length} period(s)</span>
+      </div>
+
+      {periods.length === 0 ? (
+        <div className="payroll-pro-empty">
+          <strong>No payroll periods created</strong>
+          <p>Create the first payroll period using the form above.</p>
+        </div>
+      ) : (
+        <div className="table-responsive">
+          <table className="table payroll-pro-table">
+            <thead>
+              <tr>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Amount Due</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
               {periods.map((period) => (
-                <li key={period.id}>
-                  {period.periodStart?.slice(0, 10)}
-                  {" to "}
-                  {period.periodEnd?.slice(0, 10)}
-                  {" - due "}
-                  {period.amountDue}
-                  {" - "}
-                  {period.status}
-                </li>
+                <tr key={period.id}>
+                  <td>{period.periodStart?.slice(0, 10) || "—"}</td>
+                  <td>{period.periodEnd?.slice(0, 10) || "—"}</td>
+                  <td>
+                    <strong>
+                      ₹{Number(period.amountDue || 0).toLocaleString("en-IN", {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </strong>
+                  </td>
+                  <td>
+                    <span className="payroll-pro-status">
+                      {period.status?.replaceAll("_", " ") || "Unknown"}
+                    </span>
+                  </td>
+                </tr>
               ))}
-            </ul>
-          )}
-        </section>
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  </section>
+)}
+
+
+
+{/* SALARY PAYMENT */}
+{(mode === "payroll" || mode === "all") && (
+  <section className="payroll-pro-card">
+    <div className="payroll-pro-heading">
+      <div className="payroll-pro-heading-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none"
+          stroke="currentColor" strokeWidth="1.8"
+          strokeLinecap="round" strokeLinejoin="round">
+          <rect x="2" y="5" width="20" height="14" rx="2" />
+          <path d="M2 10h20M6 15h4" />
+        </svg>
+      </div>
+      <div>
+        <h4>Record Salary Payment</h4>
+        <p>Record a payment against an existing payroll period.</p>
+      </div>
+    </div>
+
+    <form onSubmit={recordPayment} className="payroll-pro-form">
+      <div className="payroll-pro-fields payroll-pro-payment-fields">
+        <label className="payroll-pro-field">
+          <span>Select Payroll Period <b>*</b></span>
+          <select
+            className="form-select"
+            required
+            value={paymentPeriodId}
+            disabled={busy || periods.length === 0}
+            onChange={(event) => {
+              setPaymentPeriodId(event.target.value);
+              paymentKeyRef.current = null;
+            }}
+          >
+            <option value="">Choose payroll period</option>
+            {periods.map((period) => (
+              <option key={period.id} value={period.id}>
+                {period.periodStart?.slice(0, 10)}
+                {" to "}
+                {period.periodEnd?.slice(0, 10)}
+                {" | Due ₹"}
+                {Number(period.amountDue || 0).toLocaleString("en-IN")}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="payroll-pro-field">
+          <span>Payment Amount (INR) <b>*</b></span>
+          <input
+            className="form-control"
+            type="number"
+            min="0.01"
+            step="0.01"
+            placeholder="Enter payment amount"
+            required
+            value={paymentAmount}
+            disabled={busy || periods.length === 0}
+            onChange={(event) => {
+              setPaymentAmount(event.target.value);
+              paymentKeyRef.current = null;
+            }}
+          />
+        </label>
+      </div>
+
+      {paymentPeriodId && (
+        <div className="payroll-pro-selected-period">
+          {(() => {
+            const selectedPeriod = periods.find(
+              (period) => period.id === paymentPeriodId
+            );
+
+            if (!selectedPeriod) return null;
+
+            return (
+              <>
+                <span>Selected Period Amount Due</span>
+                <strong>
+                  ₹{Number(selectedPeriod.amountDue || 0).toLocaleString(
+                    "en-IN",
+                    {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    }
+                  )}
+                </strong>
+              </>
+            );
+          })()}
+        </div>
       )}
 
-      {/* SALARY PAYMENT */}
-      {(mode === "payroll" || mode === "all") && (
-        <section>
-          <h4>Record Salary Payment</h4>
-
-          <form
-            onSubmit={recordPayment}
-            className="d-flex gap-2 flex-wrap mb-3"
-          >
-            <select
-              className="form-control"
-              required
-              value={paymentPeriodId}
-              disabled={busy}
-              onChange={(event) => {
-                setPaymentPeriodId(event.target.value);
-                paymentKeyRef.current = null;
-              }}
-            >
-              <option value="">Select period</option>
-
-              {periods.map((period) => (
-                <option key={period.id} value={period.id}>
-                  {period.periodStart?.slice(0, 10)}
-                  {" (due "}
-                  {period.amountDue}
-                  {")"}
-                </option>
-              ))}
-            </select>
-
-            <input
-              className="form-control"
-              placeholder="Amount"
-              required
-              value={paymentAmount}
-              disabled={busy}
-              onChange={(event) => {
-                setPaymentAmount(event.target.value);
-                paymentKeyRef.current = null;
-              }}
-            />
-
-            <button
-              className="btn btn-sm btn-primary"
-              disabled={busy || !paymentPeriodId}
-            >
-              {busy ? "Saving..." : "Record Payment"}
-            </button>
-          </form>
-        </section>
+      {periods.length === 0 && (
+        <p className="payroll-pro-info">
+          Create a payroll period before recording a salary payment.
+        </p>
       )}
+
+      <div className="payroll-pro-form-footer">
+        <p>Payments will be recorded against the selected payroll period.</p>
+        <button
+          type="submit"
+          className="btn btn-primary"
+          disabled={
+            busy ||
+            !paymentPeriodId ||
+            !(Number(paymentAmount) > 0)
+          }
+        >
+          {busy ? "Recording..." : "Record Salary Payment"}
+        </button>
+      </div>
+    </form>
+  </section>
+)}
+
 
     </div>
   );

@@ -1,6 +1,4 @@
 export const adminNavigation = [
-  { to: "/admin/coupons", label: "Coupons" },
-
   { to: "/admin/dashboard", label: "Dashboard" },
   {
     label: "Shops",
@@ -10,6 +8,7 @@ export const adminNavigation = [
       { to: "/admin/employees", label: "Manage Employees" },
       { to: "/admin/commission", label: "Commission" },
       { to: "/admin/orders", label: "Orders" },
+      { to: "/admin/coupons", label: "Coupons" },
       { to: "/admin/reports", label: "Reports" },
     ],
   },

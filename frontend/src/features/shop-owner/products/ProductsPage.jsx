@@ -6,7 +6,7 @@ import Modal from '../../../components/common/Modal.jsx';
 import { allowedVariantAttributes, variantPolicyForCategory } from './variantAttributePolicy.js';
 import { ListPagination } from '../../../components/shopOwner/ListPagination.jsx';
 import { maxProductImages, maxImagesPerUpload, maxProductImageBytes, productImageTypes } from '../config/productConfig.js';
-
+import VariantPhotoPicker from "./VariantPhotoPicker.jsx";
 // One technical fact per line: e.g. "Output wattage: 22.5W".
 // Specifications describe the product; purchasable options remain variants.
 function parseSpecifications(text) {
@@ -34,16 +34,34 @@ export function ProductsSection({ products, options, busy, submit, reload, error
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [specificationText, setSpecificationText] = useState("");
-  const [categoryId, setCategoryId] = useState("");
-  const [brandId, setBrandId] = useState("");
+  const [parentCategoryId, setParentCategoryId] = useState("");
+const [categoryId, setCategoryId] = useState("");
+const [brandId, setBrandId] = useState("");
   const [imageUrls, setImageUrls] = useState("");
   const [selectedImages, setSelectedImages] = useState([]);
   const [imagePreviews, setImagePreviews] = useState([]);
   const [imageSelectionError, setImageSelectionError] = useState("");
+  // Show a product error for 3 seconds, then hide it in this page.
+  // The error prop is owned by the parent, so we do not mutate it here.
+  const [visibleError, setVisibleError] = useState("");
+
+  useEffect(() => {
+    setVisibleError(error || "");
+    if (!error) return undefined;
+
+    const timeoutId = window.setTimeout(() => {
+      setVisibleError("");
+    }, 3000);
+
+    return () => window.clearTimeout(timeoutId);
+  }, [error]);
+
   const [uploadingImages, setUploadingImages] = useState(false);
   const [uploadingProductId, setUploadingProductId] = useState("");
+  const [uploadingVariantId, setUploadingVariantId] = useState("");
   const [imageColorByProduct, setImageColorByProduct] = useState({});
   const [createdProductPendingImageUploadId, setCreatedProductPendingImageUploadId] = useState("");
+  const [createdProductSavedVariants, setCreatedProductSavedVariants] = useState([]);
   const [editImageFiles, setEditImageFiles] = useState([]);
   const [editImagePreviews, setEditImagePreviews] = useState([]);
   const [editingProductDetailsSavedId, setEditingProductDetailsSavedId] = useState("");
@@ -75,13 +93,14 @@ const createEmptyVariant = () => ({
   stock: "0",
   attributeId: "",
   valueId: "",
+  attributeValues: {},
   listingStatus: "ACTIVE"
 });
 
 const [productVariants, setProductVariants] = useState([
   createEmptyVariant()
 ]);
-
+const [variantImageFiles, setVariantImageFiles] = useState({});
 function addProductVariant() {
   setProductVariants((previous) => [
     ...previous,
@@ -90,11 +109,18 @@ function addProductVariant() {
 }
 
 function removeProductVariant(id) {
+  if (productVariants.length <= 1) return;
+
   setProductVariants((previous) =>
-    previous.length > 1
-      ? previous.filter((variant) => variant.id !== id)
-      : previous
+    previous.filter((variant) => variant.id !== id)
   );
+
+  // Remove the photo attached to the deleted draft variant.
+  setVariantImageFiles((previous) => {
+    const next = { ...previous };
+    delete next[id];
+    return next;
+  });
 }
 
 function updateProductVariant(id, field, value) {
@@ -110,12 +136,53 @@ function updateProductVariant(id, field, value) {
     )
   );
 }
+
+function updateVariantAttribute(variantId, attributeId, valueId) {
+  setProductVariants((previous) => previous.map((variant) => {
+    if (variant.id !== variantId) return variant;
+    return {
+      ...variant,
+      attributeValues: { ...(variant.attributeValues || {}), [attributeId]: valueId },
+    };
+  }));
+}
+
+function updateVariantPhoto(variantId, file) {
+  if (file && !productImageTypes.includes(file.type)) {
+    setImageSelectionError(
+      "Variant photo must be JPEG, PNG, or WebP."
+    );
+    return;
+  }
+
+  if (file && file.size > maxProductImageBytes) {
+    setImageSelectionError(
+      "Variant photo must be 5 MB or smaller."
+    );
+    return;
+  }
+
+  setImageSelectionError("");
+
+  setVariantImageFiles((previous) => {
+    const next = { ...previous };
+
+    if (file) {
+      next[variantId] = file;
+    } else {
+      delete next[variantId];
+    }
+
+    return next;
+  });
+}
+
   const [gstRate, setGstRate] = useState("");
   const [taxInclusive, setTaxInclusive] = useState(false);
   const [attributeId, setAttributeId] = useState("");
   const [valueId, setValueId] = useState("");
   const [variantProduct, setVariantProduct] = useState("");
-  const [variantAttributeId, setVariantAttributeId] = useState("");
+  const [newVariantAttributes, setNewVariantAttributes] = useState({});
   const [editingProduct, setEditingProduct] = useState("");
   const [query, setQuery] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
@@ -125,12 +192,32 @@ function updateProductVariant(id, field, value) {
   const [productStep, setProductStep] = useState(1);
   const [createProductOpen, setCreateProductOpen] = useState(false);
   const pageSize = 10;
+  const mainCategories = options.categories.filter(
+  (category) => !category.parentId
+);
 
+const subcategories = options.categories.filter(
+  (category) => category.parentId === parentCategoryId
+);
+
+function resetCategoryVariants() {
+  setAttributeId("");
+  setValueId("");
+
+  setProductVariants((items) =>
+    items.map((variant) => ({
+      ...variant,
+      attributeId: "",
+      valueId: "",
+      attributeValues: {},
+    }))
+  );
+}
   const categoryVariantAttributes = allowedVariantAttributes(categoryId, options.categories, options.attributes);
   const categoryVariantPolicy = variantPolicyForCategory(categoryId, options.categories);
   const selectedAttribute = options.attributes.find(({ id }) => id === attributeId);
   const selectedValues = selectedAttribute?.values || [];
-  const selectedVariantAttribute = options.attributes.find(({ id }) => id === variantAttributeId);
+
   useEffect(() => {
     const previews = selectedImages.map((file) => ({ file, url: URL.createObjectURL(file) }));
     setImagePreviews(previews);
@@ -229,6 +316,48 @@ if (colorValueId) {
         error.message || "Unknown server error"
       }`
     );
+  }
+}
+
+async function uploadVariantImage(event, productId, variantId) {
+  const input = event.currentTarget;
+  const files = Array.from(input.files || []);
+
+  if (!files.length) return;
+
+  const product = products.find((item) => item.id === productId);
+
+  const validationError = imageUploadError(
+    files,
+    product?.images?.length || 0
+  );
+
+  if (validationError) {
+    await submit(() => {
+      throw new Error(validationError);
+    }, "");
+
+    input.value = "";
+    return;
+  }
+
+  setUploadingVariantId(variantId);
+
+  try {
+    await submit(async () => {
+      const body = new FormData();
+
+      files.forEach((file) => {
+        body.append("images", file);
+      });
+
+      body.append("variantId", variantId);
+
+      return shopOwnerApi.uploadProductImages(productId, body);
+    }, "Variant image uploaded successfully.");
+  } finally {
+    setUploadingVariantId("");
+    input.value = "";
   }
 }
 
@@ -332,16 +461,15 @@ if (colorValueId) {
         throw new Error(`Variant ${index + 1}: Invalid stock.`);
       }
 
-      if (variant.attributeId && categoryVariantPolicy.options && !categoryVariantAttributes.some(({ id }) => id === variant.attributeId)) {
-        throw new Error(`Variant ${index + 1}: This attribute is not applicable to the selected category.`);
+      const selectedValues = Object.entries(variant.attributeValues || {})
+        .filter(([, value]) => Boolean(value))
+        .map(([attributeId, valueId]) => ({ attributeId, valueId }));
+      if (categoryVariantPolicy.options && selectedValues.some(({ attributeId }) =>
+        !categoryVariantAttributes.some(({ id }) => id === attributeId))) {
+        throw new Error(`Variant ${index + 1}: Attribute is not allowed for this category.`);
       }
-
-      if (variant.attributeId && !variant.valueId) {
-        throw new Error(`Variant ${index + 1}: Select an attribute value.`);
-      }
-
-      const combination = variant.attributeId && variant.valueId
-        ? `${variant.attributeId}:${variant.valueId}`
+      const combination = selectedValues.length
+        ? selectedValues.map(({ attributeId, valueId }) => `${attributeId}:${valueId}`).sort().join("|")
         : "default";
 
       if (combinations.has(combination)) {
@@ -360,12 +488,7 @@ if (colorValueId) {
         price: variant.price,
         discountPrice: variant.discountPrice || null,
         stock: quantity,
-        values: variant.attributeId && variant.valueId
-          ? [{
-              attributeId: variant.attributeId,
-              valueId: variant.valueId
-            }]
-          : []
+        values: selectedValues
       };
     });
 
@@ -414,31 +537,47 @@ if (colorValueId) {
       product = response.product;
       productId = product.id;
 
-      if (filesToUpload.length) {
+      if (filesToUpload.length || Object.values(variantImageFiles).some(Boolean)) {
         setCreatedProductPendingImageUploadId(productId);
+        setCreatedProductSavedVariants(product.variants || []);
       }
-    } else if (!filesToUpload.length) {
-      throw new Error(
-        "Product already created. Select images to retry uploading."
-      );
+    } else if (!filesToUpload.length && !Object.values(variantImageFiles).some(Boolean)) {
+      throw new Error("Product already created. Select photos to retry uploading.");
     }
 
-    if (filesToUpload.length) {
+    if (filesToUpload.length || Object.values(variantImageFiles).some(Boolean)) {
       setUploadingImages(true);
-
       try {
-        await sendProductImages(productId, filesToUpload);
-        setCreatedProductPendingImageUploadId("");
+        if (filesToUpload.length) {
+          await sendProductImages(productId, filesToUpload);
+          setCreatedProductPendingImageUploadId("");
+        }
+        // Link each photo to the real saved SKU ID, not the temporary form ID.
+        const savedVariants = product?.variants || createdProductSavedVariants;
+        for (const draft of productVariants) {
+          const file = variantImageFiles[draft.id];
+          if (!file) continue;
+          const saved = savedVariants.find((item) =>
+            String(item.sku).toUpperCase() === draft.sku.trim().toUpperCase());
+          if (!saved) throw new Error(`Cannot match saved SKU ${draft.sku} for photo upload.`);
+          const body = new FormData();
+          body.append("images", file);
+          body.append("variantId", saved.id);
+          await shopOwnerApi.uploadProductImages(productId, body);
+        }
       } finally {
         setUploadingImages(false);
       }
     }
 
+    setCreatedProductPendingImageUploadId("");
+    setCreatedProductSavedVariants([]);
     setCreateProductOpen(false);
 
     setName("");
     setDescription("");
     setSpecificationText("");
+    setParentCategoryId("");
     setCategoryId("");
     setBrandId("");
     setMasterSku("");
@@ -447,6 +586,7 @@ if (colorValueId) {
     setCommissionPercent("");
 
     setProductVariants([createEmptyVariant()]);
+    setVariantImageFiles({});
 
     setSku("");
     setPrice("");
@@ -524,10 +664,9 @@ if (colorValueId) {
   async function addVariant(event) {
     event.preventDefault();
     const form = new FormData(event.currentTarget);
-    const selectedValueId = form.get("valueId");
-    const values = variantAttributeId && selectedValueId
-      ? [{ attributeId: variantAttributeId, valueId: selectedValueId }]
-      : [];
+    const values = Object.entries(newVariantAttributes)
+      .filter(([, valueId]) => Boolean(valueId))
+      .map(([attributeId, valueId]) => ({ attributeId, valueId }));
     await submit(() => shopOwnerApi.addProductVariants(variantProduct, {
         variants: [{
           sku: form.get("sku"),
@@ -537,7 +676,7 @@ if (colorValueId) {
           values
         }]
     }), "Variant added.");
-    setVariantProduct(""); setVariantAttributeId("");
+    setVariantProduct(""); setNewVariantAttributes({});
   }
 
   async function updateProduct(event, productId) {
@@ -622,7 +761,7 @@ if (colorValueId) {
   return (
     <>
       <Modal open={createProductOpen} title="Create product" className="product-wizard-modal" onClose={() => { if (!createdProductPendingImageUploadId) setCreateProductOpen(false); }}>
-        {error && <p className="alert alert-danger" role="alert">{error}</p>}
+        {visibleError && <p className="alert alert-danger" role="alert">{visibleError}</p>}
         {createdProductPendingImageUploadId && <p className="alert alert-warning" role="status">Product details were saved, but the image upload did not finish. Your details and selected files are retained; retry the image upload before leaving this form.</p>}
         <section className="workspace-card">
         {options.categories.length === 0
@@ -729,26 +868,64 @@ if (colorValueId) {
 
   <div className="form-row">
     <label>
-      Category *
-      <select
-        className="form-select"
-        required
-        value={categoryId}
-        onChange={(e) => {
-          setCategoryId(e.target.value);
-          setAttributeId("");
-          setValueId("");
-          setProductVariants((items) => items.map((variant) => ({ ...variant, attributeId: "", valueId: "" })));
-        }}
-      >
-        <option value="">Select category</option>
-        {options.categories.map((item) => (
-          <option key={item.id} value={item.id}>
-            {item.name}
-          </option>
-        ))}
-      </select>
-    </label>
+  Category *
+  <select
+    className="form-select"
+    required
+    value={parentCategoryId}
+    onChange={(event) => {
+      const selectedId = event.target.value;
+
+      setParentCategoryId(selectedId);
+
+      const hasSubcategories = options.categories.some(
+        (category) => category.parentId === selectedId
+      );
+
+      setCategoryId(hasSubcategories ? "" : selectedId);
+
+      resetCategoryVariants();
+    }}
+  >
+    <option value="">Select category</option>
+
+    {mainCategories.map((category) => (
+      <option key={category.id} value={category.id}>
+        {category.name}
+      </option>
+    ))}
+  </select>
+</label>
+
+<label>
+  Subcategory
+  <select
+    className="form-select"
+    required={subcategories.length > 0}
+    disabled={!parentCategoryId || subcategories.length === 0}
+    value={
+      subcategories.length > 0 ? categoryId : ""
+    }
+    onChange={(event) => {
+      setCategoryId(event.target.value);
+      resetCategoryVariants();
+    }}
+  >
+    <option value="">
+      {!parentCategoryId
+        ? "Select category first"
+        : subcategories.length === 0
+          ? "No subcategories available"
+          : "Select subcategory"}
+    </option>
+
+    {subcategories.map((subcategory) => (
+      <option key={subcategory.id} value={subcategory.id}>
+        {subcategory.name}
+      </option>
+    ))}
+  </select>
+</label>
 
     <label>
       Brand
@@ -831,10 +1008,6 @@ if (colorValueId) {
   {categoryId && categoryVariantPolicy.options && categoryVariantAttributes.length === 0 && <p className="muted-copy" role="status">No matching variant attributes have been configured in Admin master data. You can create a standard variant, or ask Admin to configure the category's options.</p>}
 
   {productVariants.map((variant, index) => {
-    const selectedAttribute = options.attributes.find(
-      (item) => item.id === variant.attributeId
-    );
-
     return (
       <div
         key={variant.id}
@@ -886,54 +1059,23 @@ if (colorValueId) {
         </div>
 
         <div className="form-row">
-          <label>
-            Attribute
-            <select
-              className="form-select"
-              value={variant.attributeId}
-              onChange={(e) =>
-                updateProductVariant(
-                  variant.id,
-                  "attributeId",
-                  e.target.value
-                )
-              }
-            >
-              <option value="">No attribute</option>
-
-              {categoryVariantAttributes.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label>
-            Attribute Value
-            <select
-              className="form-select"
-              value={variant.valueId}
-              disabled={!variant.attributeId}
-              required={Boolean(variant.attributeId)}
-              onChange={(e) =>
-                updateProductVariant(
-                  variant.id,
-                  "valueId",
-                  e.target.value
-                )
-              }
-            >
-              <option value="">Select value</option>
-
-              {(selectedAttribute?.values || []).map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.value}
-                </option>
-              ))}
-            </select>
-          </label>
+          {categoryVariantAttributes.map((attribute) => (
+            <label key={attribute.id}>
+              {attribute.name} (optional)
+              <select
+                className="form-select"
+                value={variant.attributeValues?.[attribute.id] || ""}
+                onChange={(event) => updateVariantAttribute(variant.id, attribute.id, event.target.value)}
+              >
+                <option value="">Not applicable</option>
+                {(attribute.values || []).map((value) => (
+                  <option key={value.id} value={value.id}>{value.value}</option>
+                ))}
+              </select>
+            </label>
+          ))}
         </div>
+
 
         <div className="form-row">
           <label>
@@ -1023,6 +1165,13 @@ if (colorValueId) {
             />
           </label>
         </div>
+
+        {/* Variant-only image: does not replace the main product photo. */}
+        <VariantPhotoPicker
+          file={variantImageFiles[variant.id] || null}
+          disabled={busy || uploadingImages}
+          onChange={(file) => updateVariantPhoto(variant.id, file)}
+        />
       </div>
     );
   })}
@@ -1085,28 +1234,83 @@ if (colorValueId) {
                     ))}
                   </div>}
                 </div>
-                <dl className="product-review-list">
-                  <dt>Name</dt><dd>{name || "—"}</dd>
-                  <dt>Category</dt><dd>{options.categories.find(({ id }) => id === categoryId)?.name || "—"}</dd>
-                  <dt>Brand</dt><dd>{options.brands.find(({ id }) => id === brandId)?.name || "No brand"}</dd>
-                  <dt>Variants</dt>
-<dd>{productVariants.length}</dd>
+               <div className="product-review-confirmation">
+  <div className="product-review-confirmation-header">
+    <div className="product-review-confirmation-icon">
+      ✓
+    </div>
 
-<dt>SKUs</dt>
-<dd>
-  {productVariants.map((variant) => variant.sku || "Not entered").join(", ")}
-</dd>
+    <div>
+      <h3>Review Product Details</h3>
+      <p>
+        Please verify the information below before creating
+        your product.
+      </p>
+    </div>
+  </div>
 
-<dt>Total Stock</dt>
-<dd>
-  {productVariants.reduce(
-    (sum, variant) => sum + (Number(variant.stock) || 0),
-    0
-  )}
-</dd>
-                  <dt>Images</dt><dd>{creationImageUrls.length + selectedImages.length} selected</dd>
-                </dl>
-                <p className="muted-copy">The product is created first. Selected files are then uploaded securely against the new product ID.</p>
+  <div className="product-review-confirmation-grid">
+    <div>
+      <span>Product Name</span>
+      <strong>{name || "Not entered"}</strong>
+    </div>
+
+    <div>
+      <span>Category</span>
+      <strong>
+        {options.categories.find(({ id }) => id === categoryId)
+          ?.name || "Not selected"}
+      </strong>
+    </div>
+
+    <div>
+      <span>Brand</span>
+      <strong>
+        {options.brands.find(({ id }) => id === brandId)
+          ?.name || "No brand"}
+      </strong>
+    </div>
+
+    <div>
+      <span>Total Variants</span>
+      <strong>{productVariants.length}</strong>
+    </div>
+
+    <div>
+      <span>Variant SKUs</span>
+      <strong>
+        {productVariants
+          .map((variant) => variant.sku || "Not entered")
+          .join(", ")}
+      </strong>
+    </div>
+
+    <div>
+      <span>Total Stock</span>
+      <strong>
+        {productVariants.reduce(
+          (sum, variant) => sum + (Number(variant.stock) || 0),
+          0
+        )}
+      </strong>
+    </div>
+
+    <div>
+      <span>Product Images</span>
+      <strong>
+        {creationImageUrls.length + selectedImages.length} selected
+      </strong>
+    </div>
+  </div>
+
+  <div className="product-review-confirmation-note">
+    <span aria-hidden="true">ⓘ</span>
+    <p>
+      The product will be created first. Selected images will
+      then be uploaded securely against the new product ID.
+    </p>
+  </div>
+</div>
               </fieldset>
 
               <div className="modal-actions">
@@ -1258,7 +1462,7 @@ if (colorValueId) {
   </div>
 )}
                           <div className="product-image-manager">
-                            {product.images.map((image) => (
+                            {product.images.filter((image) => !image.variantId && !image.colorValueId).map((image) => (
                               <div className="product-image-item" key={image.id}>
                                 <div style={{ position: "relative", display: "inline-block" }}>
                                   <img
@@ -1304,15 +1508,106 @@ if (colorValueId) {
                             <small className="muted-copy">{product.images.length} / {maxProductImages} images</small>
                           </div></section>
                           <section className="product-detail-section"><h4>Variants and inventory</h4>
-                            {variants.length ? <div className="product-variant-table-wrap"><table className="product-variant-table"><thead><tr><th scope="col">SKU / options</th><th scope="col">Price and inventory</th></tr></thead><tbody>
-                              {variants.map((variant) => <tr key={variant.id}><td><strong>{variant.sku}</strong><small>{variant.values.map(({ attribute, value }) => attribute.name + ": " + value.value).join(" ? ") || "Standard"}</small></td><td><form className="product-variant-edit-form" onSubmit={(event) => updateVariant(event, variant.id)}><label>Regular price<input aria-label={"Regular price for " + variant.sku} name="price" type="text" inputMode="decimal" pattern="[0-9]+([.][0-9]{1,2})?" required defaultValue={variant.price} /></label><label>Discount price<input aria-label={"Discount price for " + variant.sku} name="discountPrice" type="text" inputMode="decimal" pattern="[0-9]+([.][0-9]{1,2})?" defaultValue={variant.discountPrice || ""} /></label><label>Stock<input aria-label={"Stock for " + variant.sku} name="stock" type="number" min="0" max="1000000" required defaultValue={variant.stock} /></label><button className="btn btn-sm btn-outline-primary" disabled={busy}>Save</button></form></td></tr>)}
+                            {variants.length ? <div className="product-variant-table-wrap"><table className="product-variant-table"><thead>
+                            <tr>
+                              <th scope="col">SKU / options</th>
+                              <th scope="col">Price and inventory</th>
+                              <th scope="col">Variant Image</th>
+                            </tr>
+                          </thead><tbody>
+                              {variants.map((variant) => {
+                                const variantImages = (product.images || []).filter(
+                                  (image) => image.variantId === variant.id
+                                );
+                                const variantOptions = (variant.values || [])
+                                  .map(({ attribute, value }) => `${attribute?.name || "Option"}: ${value?.value || ""}`)
+                                  .join(" / ") || "Standard";
+
+                                return (
+                                  <tr key={variant.id}>
+                                    <td>
+                                      <div className="manage-variant-identity">
+                                        <strong>{variant.variantName || variantOptions}</strong>
+                                        <small>SKU: {variant.sku}</small>
+                                        {variant.variantName && <small>{variantOptions}</small>}
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <form
+                                        className="product-variant-edit-form"
+                                        key={`${variant.id}-${variant.price}-${variant.discountPrice}-${variant.stock}`}
+                                        onSubmit={(event) => updateVariant(event, variant.id)}
+                                      >
+                                        <label>Regular price
+                                          <input aria-label={`Regular price for ${variant.sku}`} name="price" type="text" inputMode="decimal" pattern="[0-9]+([.][0-9]{1,2})?" required defaultValue={variant.price} />
+                                        </label>
+                                        <label>Discount price
+                                          <input aria-label={`Discount price for ${variant.sku}`} name="discountPrice" type="text" inputMode="decimal" pattern="[0-9]+([.][0-9]{1,2})?" defaultValue={variant.discountPrice || ""} />
+                                        </label>
+                                        <label>Stock
+                                          <input aria-label={`Stock for ${variant.sku}`} name="stock" type="number" min="0" max="1000000" required defaultValue={variant.stock} />
+                                        </label>
+                                        <button className="btn btn-sm btn-outline-primary" disabled={busy}>Save</button>
+                                      </form>
+                                    </td>
+                                    <td>
+                                      <div className="manage-variant-images">
+                                        {variantImages.length ? (
+                                          <div className="manage-variant-image-list">
+                                            {variantImages.map((image) => (
+                                              <div className="manage-variant-image-item" key={image.id}>
+                                                <img
+                                                  src={resolveMediaUrl(image.url)}
+                                                  alt={`${product.name} ${variantOptions}`}
+                                                  loading="lazy"
+                                                />
+                                                <button
+                                                  className="manage-variant-image-delete"
+                                                  type="button"
+                                                  title="Remove variant photo"
+                                                  aria-label={`Remove photo for ${variant.sku}`}
+                                                  disabled={busy || uploadingVariantId === variant.id}
+                                                  onClick={() => deleteProductImage(product.id, image.id)}
+                                                >
+                                                  ×
+                                                </button>
+                                              </div>
+                                            ))}
+                                          </div>
+                                        ) : (
+                                          <span className="muted-copy manage-variant-no-photo">No variant photo uploaded</span>
+                                        )}
+                                        <label className="btn btn-sm btn-outline-primary manage-variant-upload-button">
+                                          {uploadingVariantId === variant.id ? "Uploading..." : "Upload Photo"}
+                                          <input
+                                            type="file"
+                                            accept="image/jpeg,image/png,image/webp"
+                                            multiple
+                                            hidden
+                                            disabled={busy || uploadingVariantId === variant.id || (product.images || []).length >= maxProductImages}
+                                            onChange={(event) => uploadVariantImage(event, product.id, variant.id)}
+                                          />
+                                        </label>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                );
+                              })}
                             </tbody></table></div> : <p className="muted-copy">No variants are available for this product.</p>}
                           </section>
                           {variantProduct === product.id && <form className="workspace-form variant-form" onSubmit={addVariant}>
                             <strong>Add variant to {product.name}</strong><div className="form-row">
                               <label>SKU<input className="form-control" name="sku" required maxLength="80" /></label><label>Price<input className="form-control" name="price" required inputMode="decimal" pattern="[0-9]+([.][0-9]{1,2})?" /></label><label>Discount price<input className="form-control" name="discountPrice" inputMode="decimal" pattern="[0-9]+([.][0-9]{1,2})?" /></label><label>Stock<input className="form-control" name="stock" type="number" min="0" max="1000000" required defaultValue="0" /></label>
                             </div><div className="form-row">
-                              <label>Attribute<select className="form-select" value={variantAttributeId} onChange={(event) => setVariantAttributeId(event.target.value)}><option value="">No options</option>{allowedVariantAttributes(product.categoryId, options.categories, options.attributes).map((item) => <option value={item.id} key={item.id}>{item.name}</option>)}</select></label><label>Value<select className="form-select" name="valueId" defaultValue=""><option value="">Select value if applicable</option>{(selectedVariantAttribute?.values || []).map((item) => <option value={item.id} key={item.id}>{item.value}</option>)}</select></label>
+                              {allowedVariantAttributes(product.categoryId, options.categories, options.attributes).map((attribute) => (
+                                <label key={attribute.id}>{attribute.name}
+                                  <select className="form-select" value={newVariantAttributes[attribute.id] || ""}
+                                    onChange={(event) => setNewVariantAttributes((previous) => ({ ...previous, [attribute.id]: event.target.value }))}>
+                                    <option value="">Not applicable</option>
+                                    {(attribute.values || []).map((value) => <option key={value.id} value={value.id}>{value.value}</option>)}
+                                  </select>
+                                </label>
+                              ))}
                             </div><button className="btn btn-sm btn-primary" disabled={busy}>Save variant</button>
                           </form>}
                         </div>
@@ -1328,7 +1623,7 @@ if (colorValueId) {
           const detailsLocked = editingProductDetailsSavedId === product.id;
           const selectionError = imageUploadError(editImageFiles, product.images.length);
           return <form className="workspace-form" key={product.id} onSubmit={(event) => updateProduct(event, product.id)}>
-            {error && <p className="alert alert-danger" role="alert">{error}</p>}
+            {visibleError && <p className="alert alert-danger" role="alert">{visibleError}</p>}
             {detailsLocked && <p className="alert alert-warning" role="status">Product details were saved, but the image upload did not finish. Retry the upload; the product will not be saved a second time.</p>}
             <label>Name<input className="form-control" name="name" required minLength="2" maxLength="160" defaultValue={product.name} disabled={detailsLocked} /></label>
             <label>Description<textarea className="form-control" name="description" rows="3" required maxLength="5000" defaultValue={product.description} disabled={detailsLocked} /></label>
@@ -1346,7 +1641,7 @@ if (colorValueId) {
             <section className="product-detail-section">
               <h4>Product images</h4>
               <div className="product-image-manager">
-                {product.images.map((image) => <div className="product-image-item" key={image.id}><img src={resolveMediaUrl(image.url)} alt={product.name + " product"} loading="lazy" /></div>)}
+                {product.images.filter((image) => !image.variantId && !image.colorValueId).map((image) => <div className="product-image-item" key={image.id}><img src={resolveMediaUrl(image.url)} alt={product.name + " product"} loading="lazy" /></div>)}
                 <label className="product-image-upload">Add images (JPEG, PNG, WebP; up to 5 MB each)
                   <input className="form-control" type="file" accept="image/jpeg,image/png,image/webp" multiple disabled={busy || uploadingImages || product.images.length >= maxProductImages} onChange={(event) => setEditImageFiles(Array.from(event.currentTarget.files || []))} />
                 </label>

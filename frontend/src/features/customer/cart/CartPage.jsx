@@ -11,6 +11,11 @@ import { CartSummary } from "../../../components/customer/CartSummary.jsx";
 import { CartCouponOffers } from "../../../components/customer/CartCouponOffers.jsx";
 import { CartRecommendations } from "../../../components/customer/CartRecommendations.jsx";
 import Modal from "../../../components/common/Modal.jsx";
+import { useAuth } from "../../../context/AuthContext.jsx";
+import { money } from "../../../utils/format.js";
+
+const CONFIRMATION_KEY = "eshop_last_order_confirmation";
+const CONFIRMATION_TTL_MS = 30 * 60 * 1000;
 
 export function CartPage({ signedIn, onCartChange, onNotice }) {
   const [cart, setCart] = useState(null);
@@ -26,6 +31,46 @@ export function CartPage({ signedIn, onCartChange, onNotice }) {
   const [addressBusy, setAddressBusy] = useState(false);
   const [addressError, setAddressError] = useState("");
   const [checkoutKey, setCheckoutKey] = useState(null);
+  const { user } = useAuth();
+  const [orderConfirmation, setOrderConfirmation] = useState(null);
+
+  // Restore only a recent confirmation belonging to the signed-in customer.
+  useEffect(() => {
+    if (!signedIn || !user?.id) {
+      setOrderConfirmation(null);
+      return;
+    }
+
+    try {
+      const saved = JSON.parse(sessionStorage.getItem(CONFIRMATION_KEY) || "null");
+      const isValid =
+        saved?.userId === String(user.id) &&
+        saved?.confirmation?.orderNumber &&
+        Number.isFinite(saved?.savedAt) &&
+        Date.now() >= saved.savedAt &&
+        Date.now() - saved.savedAt <= CONFIRMATION_TTL_MS;
+
+      if (isValid) {
+        setOrderConfirmation(saved.confirmation);
+      } else {
+        sessionStorage.removeItem(CONFIRMATION_KEY);
+        setOrderConfirmation(null);
+      }
+    } catch {
+      // Storage may be unavailable in private browsing or blocked environments.
+      setOrderConfirmation(null);
+    }
+  }, [signedIn, user?.id]);
+
+  function clearOrderConfirmation() {
+    setOrderConfirmation(null);
+    try {
+      sessionStorage.removeItem(CONFIRMATION_KEY);
+    } catch {
+      // No persistence is available; React state has still been cleared.
+    }
+  }
+
   const [couponInput, setCouponInput] = useState("");
   const [couponCode, setCouponCode] = useState("");
   const [quote, setQuote] = useState(null);
@@ -139,6 +184,48 @@ export function CartPage({ signedIn, onCartChange, onNotice }) {
       setAddressBusy(false);
     }
   }
+  function showOrderConfirmation(order, paymentMethod) {
+    const selectedAddress = addresses.find((address) => address.id === addressId);
+    const orderedItems = (cart?.items || []).map((item) => {
+      const unitPrice = Number(item.variant.discountPrice || item.variant.price);
+      return {
+        id: item.id,
+        name: item.product.name,
+        sku: item.variant.sku,
+        quantity: item.quantity,
+        lineTotal: unitPrice * item.quantity,
+      };
+    });
+    const fallbackSubtotal = orderedItems.reduce((sum, item) => sum + item.lineTotal, 0);
+
+    // Never infer the payable amount from product prices alone: tax, shipping,
+    // and discounts may apply. A verified Razorpay replay can have an empty cart.
+    const confirmation = {
+      orderNumber: order.orderNumber || order.id,
+      customerName: user?.name || "Customer",
+      paymentMethod,
+      paymentStatus: paymentMethod === "COD" ? "Pay on Delivery" : "Payment Successful",
+      subtotal: quote?.subtotal != null ? Number(quote.subtotal) : (orderedItems.length ? fallbackSubtotal : null),
+      gst: quote?.taxTotal == null ? null : Number(quote.taxTotal),
+      deliveryCharges: quote?.deliveryTotal == null ? null : Number(quote.deliveryTotal),
+      discount: Number(quote?.discountTotal || 0),
+      total: quote?.grandTotal == null ? null : Number(quote.grandTotal),
+      items: orderedItems,
+      address: selectedAddress ? { ...selectedAddress } : null,
+    };
+
+    setOrderConfirmation(confirmation);
+    if (user?.id) {
+      try {
+        sessionStorage.setItem(
+          CONFIRMATION_KEY,
+          JSON.stringify({ userId: String(user.id), savedAt: Date.now(), confirmation })
+        );
+      } catch {
+        // Order is still displayed even when browser storage is unavailable.
+      }
+    }
+  }
 
   async function checkout() {
     if (!addressId) { onNotice("Select a shipping address."); return; }
@@ -146,9 +233,16 @@ export function CartPage({ signedIn, onCartChange, onNotice }) {
     setCheckoutKey(key);
     setBusy(true);
     try {
-      const result = await customerApi.checkout({ addressId, idempotencyKey: key, ...(couponCode ? { couponCode } : {}) });
-      onNotice(`Order created: ${result.order.orderNumber || result.order.id}`);
-      setCheckoutKey(null);
+      const result = await customerApi.checkout({
+  addressId,
+  idempotencyKey: key,
+  ...(couponCode ? { couponCode } : {}),
+});
+
+showOrderConfirmation(result.order, "COD");
+onNotice("");
+
+setCheckoutKey(null);
       setCouponCode(""); setCouponInput("");
       const { cart: nextCart } = await customerApi.cart();
       setCart(nextCart);
@@ -179,7 +273,7 @@ export function CartPage({ signedIn, onCartChange, onNotice }) {
   async function refreshCartAfterVerifiedPayment(orderNumber) {
     setCheckoutKey(null);
     setCouponCode(""); setCouponInput("");
-    onNotice(`Payment verified successfully. Order: ${orderNumber}`);
+    onNotice("");
     try {
       const { cart: nextCart } = await customerApi.cart();
       setCart(nextCart);
@@ -203,9 +297,10 @@ export function CartPage({ signedIn, onCartChange, onNotice }) {
       const orderNumber = result.order.orderNumber || result.order.id;
       const localPaymentStatus = result.order.payments?.[0]?.status || "PENDING";
       if (result.replayed && localPaymentStatus === "PAID") {
-        await refreshCartAfterVerifiedPayment(orderNumber);
-        return;
-      }
+  showOrderConfirmation(result.order, "RAZORPAY");
+  await refreshCartAfterVerifiedPayment(orderNumber);
+  return;
+}
       const checkoutNotice = localPaymentStatus === "PENDING"
         ? `Order created: ${orderNumber}. Payment pending; complete Razorpay Checkout to verify it.`
         : localPaymentStatus === "FAILED"
@@ -229,8 +324,12 @@ export function CartPage({ signedIn, onCartChange, onNotice }) {
               razorpaySignature: response.razorpay_signature
             });
             if (verified.payment.status === "PAID") {
-              await refreshCartAfterVerifiedPayment(verified.order.orderNumber || verified.order.id);
-            } else if (verified.payment.status === "FAILED") {
+  showOrderConfirmation(verified.order, "RAZORPAY");
+
+  await refreshCartAfterVerifiedPayment(
+    verified.order.orderNumber || verified.order.id
+  );
+} else if (verified.payment.status === "FAILED") {
               onNotice(`Order created: ${orderNumber}. Payment failed; the order remains unconfirmed.`);
             } else {
               onNotice(`Order created: ${orderNumber}. Payment ${verified.payment.status.toLowerCase()}; order confirmation is pending.`);
@@ -257,16 +356,196 @@ export function CartPage({ signedIn, onCartChange, onNotice }) {
   }
 
   if (!signedIn) return <SignInPrompt title="Your shopping cart" />;
+  if (orderConfirmation) {
+  const confirmation = orderConfirmation;
+
+  return (
+    <section className="account-page">
+      <div className="order-success-page">
+        <div className="order-success-icon" aria-hidden="true">
+          ✓
+        </div>
+
+        <h1>Thank You for Your Order!</h1>
+
+        <p className="order-success-subtitle">
+          Thank you, {confirmation.customerName}! Your order has
+          been confirmed.
+        </p>
+
+        <div className="order-success-details">
+          <div>
+            <span>Order Number</span>
+            <strong>{confirmation.orderNumber}</strong>
+          </div>
+
+          <div>
+            <span>Payment Method</span>
+            <strong>
+              {confirmation.paymentMethod === "COD"
+                ? "Cash on Delivery"
+                : "Razorpay"}
+            </strong>
+          </div>
+
+          <div>
+            <span>Payment Status</span>
+            <strong>{confirmation.paymentStatus}</strong>
+          </div>
+
+          <div>
+            <span>Order Total</span>
+            <strong>{confirmation.total == null ? "See My Orders" : money(confirmation.total)}</strong>
+          </div>
+        </div>
+        <div className="order-success-section">
+  <h2>Payment Summary</h2>
+
+  <div className="order-success-price-breakdown">
+    <div>
+      <span>Subtotal</span>
+      <strong>{confirmation.subtotal == null ? "See My Orders" : money(confirmation.subtotal)}</strong>
+    </div>
+
+    {confirmation.gst !== null && (
+      <div>
+        <span>GST (as quoted)</span>
+        <strong>{money(confirmation.gst)}</strong>
+      </div>
+    )}
+
+    {confirmation.discount > 0 && (
+      <div className="order-success-discount">
+        <span>Coupon Discount</span>
+        <strong>-{money(confirmation.discount)}</strong>
+      </div>
+    )}
+
+    {confirmation.deliveryCharges !== null && (
+      <div>
+        <span>Delivery Charges</span>
+        <strong>
+          {confirmation.deliveryCharges === 0
+            ? "FREE"
+            : money(confirmation.deliveryCharges)}
+        </strong>
+      </div>
+    )}
+
+    <div className="order-success-grand-total">
+      <span>Total Payable</span>
+      <strong>{confirmation.total == null ? "See My Orders" : money(confirmation.total)}</strong>
+    </div>
+  </div>
+</div>
+        <div className="order-success-section">
+          <h2>Ordered Products</h2>
+
+          {confirmation.items.length === 0 && (
+            <p>Product details are available in My Orders.</p>
+          )}
+          {confirmation.items.map((item) => (
+            <div className="order-success-item" key={item.id}>
+              <div>
+                <strong>{item.name}</strong>
+                <small>
+                  SKU: {item.sku} · Quantity: {item.quantity}
+                </small>
+              </div>
+
+              <strong>{money(item.lineTotal)}</strong>
+            </div>
+          ))}
+        </div>
+
+        {confirmation.address && (
+          <div className="order-success-section">
+            <h2>Delivery Address</h2>
+
+            <p className="order-success-address">
+              <strong>{confirmation.address.recipient}</strong>
+              <span>{confirmation.address.line1}</span>
+
+              {confirmation.address.line2 && (
+                <span>{confirmation.address.line2}</span>
+              )}
+
+              <span>
+                {confirmation.address.city},{" "}
+                {confirmation.address.region}{" "}
+                {confirmation.address.postalCode}
+              </span>
+
+              {confirmation.address.mobile && (
+                <span>
+                  Mobile: {confirmation.address.mobile}
+                </span>
+              )}
+            </p>
+          </div>
+        )}
+
+        <div className="order-success-actions">
+          <Link
+            className="btn order-success-primary-btn"
+            to="/my-orders"
+            onClick={clearOrderConfirmation}
+          >
+            View My Orders
+          </Link>
+
+          <Link
+            className="btn order-success-secondary-btn"
+            to="/"
+            onClick={clearOrderConfirmation}
+          >
+            Continue Shopping
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
   const subtotal = cart?.items.reduce((sum, item) => {
     const unitPrice = Number(item.variant.discountPrice || item.variant.price);
     return sum + unitPrice * item.quantity;
   }, 0) || 0;
-  return <section className="account-page">
+  return <section className="account-page customer-cart-page">
     <PageHeading eyebrow="READY WHEN YOU ARE" title="Your cart" description="Review quantities and current availability before checkout." />
     {error && <div className="store-alert" role="alert">{error}</div>}
     <PageState loading={loading}>
       {!cart?.items.length
-        ? <div className="store-empty"><span>Your cart is empty</span><p>Discover something special in the marketplace.</p><Link className="btn btn-primary" to="/">Explore products</Link></div>
+        ?
+<div className="store-empty customer-cart-empty">
+  <div className="customer-cart-empty-icon" aria-hidden="true">
+    <svg
+      width="34"
+      height="34"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M6 7h12l1.5 13h-15L6 7Z" />
+      <path d="M9 9V6a3 3 0 0 1 6 0v3" />
+    </svg>
+  </div>
+
+  <h2>Your cart is empty</h2>
+
+  <p>
+    Looks like you haven't added anything yet.
+    Explore our collection and find something you love.
+  </p>
+
+  <Link className="btn btn-primary customer-cart-explore-btn" to="/">
+    Explore Products
+    <span aria-hidden="true">→</span>
+  </Link>
+</div>
+
         :
          <>
     <div className="cart-layout">

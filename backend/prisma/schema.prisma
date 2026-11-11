@@ -218,12 +218,12 @@ model VariantAttributeValue {
 }
 
 model Product {
-  id          String  @id @default(uuid()) @db.Uuid
-  shopId      String  @db.Uuid
-  categoryId  String  @db.Uuid
-  brandId     String? @db.Uuid
-  name        String
-  description String
+  id             String  @id @default(uuid()) @db.Uuid
+  shopId         String  @db.Uuid
+  categoryId     String  @db.Uuid
+  brandId        String? @db.Uuid
+  name           String
+  description    String
   specifications Json?
 
   masterSku         String?  @db.VarChar(80)
@@ -255,15 +255,18 @@ model ProductImage {
   id           String   @id @default(uuid()) @db.Uuid
   productId    String   @db.Uuid
   colorValueId String?  @db.Uuid
+  variantId    String?  @db.Uuid
   url          String
   position     Int      @default(0)
   createdAt    DateTime @default(now())
 
   product    Product                @relation(fields: [productId], references: [id], onDelete: Cascade)
   colorValue VariantAttributeValue? @relation("ProductImageColor", fields: [colorValueId], references: [id], onDelete: SetNull)
+  variant    ProductVariant?        @relation("ProductImageVariant", fields: [variantId], references: [id], onDelete: SetNull)
 
   @@index([productId, position])
   @@index([productId, colorValueId])
+  @@index([productId, variantId])
 }
 
 model ProductVariant {
@@ -287,6 +290,7 @@ model ProductVariant {
   product               Product                @relation(fields: [productId], references: [id], onDelete: Restrict)
   shop                  Shop                   @relation(fields: [shopId], references: [id], onDelete: Restrict)
   values                ProductVariantValue[]
+  images                ProductImage[]         @relation("ProductImageVariant")
   cartItems             CartItem[]
   orderItems            OrderItem[]
   purchaseOrderItems    PurchaseOrderItem[]

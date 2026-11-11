@@ -1,6 +1,4 @@
 export const shopOwnerNavigation = [
-  { to: "/shop/coupons", label: "Coupons", icon: "payments" },
-
   // 1. Dashboard
   {
     to: "/shop/dashboard",
@@ -123,8 +121,10 @@ export const shopOwnerNavigation = [
     label: "Inventory",
     icon: "inventory",
   },
+  //10.Coupon
+  { to: "/shop/coupons", label: "Coupons", icon: "payments" },
 
-  // 10. Customer Store
+  // 11. Customer Store
   {
     to: "/shop/customer-store",
     label: "Customer Store",

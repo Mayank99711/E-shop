@@ -137,33 +137,55 @@ export function createOwnerOrdersService(
 
       // Assignment and delivery transitions belong to Delivery Management.
       const assigned = await database.deliveryAssignment.findUnique({
-        where: { shopOrderId: order.id }, select: { id: true },
+        where: { shopOrderId: order.id },
+        select: { id: true },
       });
-      if (assigned) throw fail(409, "DELIVERY_ALREADY_ASSIGNED",
-        "This order is assigned for delivery. Manage its assignment in Delivery Management.");
+      if (assigned)
+        throw fail(
+          409,
+          "DELIVERY_ALREADY_ASSIGNED",
+          "This order is assigned for delivery. Manage its assignment in Delivery Management.",
+        );
 
       const currentIndex = progression.indexOf(order.status);
       const targetIndex = progression.indexOf(status);
 
       // No preparation updates to delivery stages; those have their own APIs.
-      if (targetIndex > progression.indexOf("PACKED") || currentIndex > progression.indexOf("PACKED")) {
-        throw fail(403, "DELIVERY_WORKFLOW_REQUIRED", "Use Delivery Management or Returns for delivery/return changes.");
+      if (
+        targetIndex > progression.indexOf("PACKED") ||
+        currentIndex > progression.indexOf("PACKED")
+      ) {
+        throw fail(
+          403,
+          "DELIVERY_WORKFLOW_REQUIRED",
+          "Use Delivery Management or Returns for delivery/return changes.",
+        );
       }
-      const isNextStage = targetIndex === currentIndex + 1;
-      const isPreviousStage = targetIndex === currentIndex - 1;
 
-      // Only allow one-step rollback before dispatch.
-      // Dispatched/delivered orders require a separate exception workflow.
-      const rollbackAllowed =
-        isPreviousStage &&
-        currentIndex > 0 &&
-        currentIndex <= progression.indexOf("PACKED");
+      // Allow direct updates within Shop Owner preparation stages only.
+      // Delivery and return statuses remain protected by the checks above.
 
-      if (!isNextStage && !rollbackAllowed) {
+      const lastPreparationIndex = progression.indexOf("PACKED");
+
+      const currentIsPreparationStage =
+        currentIndex >= 0 && currentIndex <= lastPreparationIndex;
+
+      const targetIsPreparationStage =
+        targetIndex >= 0 && targetIndex <= lastPreparationIndex;
+
+      if (!currentIsPreparationStage || !targetIsPreparationStage) {
+        throw fail(
+          403,
+          "DELIVERY_WORKFLOW_REQUIRED",
+          "Use Delivery Management or Returns Management for this status.",
+        );
+      }
+
+      if (currentIndex === targetIndex) {
         throw fail(
           409,
-          "INVALID_ORDER_TRANSITION",
-          "You can move to the next stage or roll back one stage before dispatch.",
+          "ORDER_STATUS_UNCHANGED",
+          "The order is already in the selected status.",
         );
       }
 

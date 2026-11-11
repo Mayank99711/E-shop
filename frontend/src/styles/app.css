@@ -1172,13 +1172,6 @@ html[data-bs-theme="dark"] .workspace-form label {
   }
 }
 
-.shop-create-modal {
-  width: min(900px, calc(100vw - 32px));
-}
-.form-section label:has(textarea) {
-  grid-column: 1 / -1;
-}
-
 .shop-form-columns .form-section h3 {
   grid-column: 1 / -1;
   margin: 0 0 4px;
@@ -1305,7 +1298,9 @@ html[data-bs-theme="dark"] .workspace-form label {
 }
 
 .product-wizard-modal .workspace-form {
-  padding-bottom: 90px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+  min-height: 0;
 }
 
 .product-wizard-modal .product-form-section {
@@ -1315,7 +1310,512 @@ html[data-bs-theme="dark"] .workspace-form label {
 .product-wizard-modal .modal-actions {
   position: relative;
   z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
   background: #fff;
-  padding: 16px 0;
+  border-top: 1px solid #e5eaf3;
+  padding: 16px 0 0;
+  margin: 16px 0 0;
+}
+/* ===========================================
+   SHOP OWNER - CREATE PRODUCT REVIEW SECTION
+   =========================================== */
+
+.product-review-confirmation {
+  padding: 20px;
+  border: 1px solid #dbe5f5;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.product-review-confirmation-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 18px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e5eaf3;
+}
+
+.product-review-confirmation-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: #eaf1ff;
+  color: #3569dc;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.product-review-confirmation-header h3 {
+  margin: 0 0 5px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #17233c;
+}
+
+.product-review-confirmation-header p {
+  margin: 0;
+  font-size: 13px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.product-review-confirmation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+}
+
+.product-review-confirmation-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.product-review-confirmation-grid span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.product-review-confirmation-grid strong {
+  font-size: 14px;
+  font-weight: 650;
+  color: #17233c;
+  overflow-wrap: anywhere;
+}
+
+.product-review-confirmation-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 22px;
+  padding: 13px 15px;
+  border-radius: 10px;
+  background: #eef4ff;
+  color: #2455b5;
+}
+
+.product-review-confirmation-note > span {
+  font-size: 19px;
+  line-height: 1.2;
+}
+
+.product-review-confirmation-note p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Review footer spacing */
+
+.product-wizard-modal .modal-actions {
   margin-top: 20px;
+  margin-bottom: 0;
+  padding-top: 16px;
+  padding-bottom: 0;
+  border-top: 1px solid #e5eaf3;
+}
+
+/* Mobile responsiveness */
+
+@media (max-width: 600px) {
+  .product-review-confirmation {
+    padding: 15px;
+  }
+
+  .product-review-confirmation-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .product-review-confirmation-header {
+    align-items: flex-start;
+  }
+
+  .product-review-confirmation-header h3 {
+    font-size: 16px;
+  }
+}
+/* Create Product modal - compact bottom spacing */
+.app-modal.product-wizard-modal .app-modal-body {
+  padding-bottom: 16px;
+}
+
+.app-modal.product-wizard-modal .workspace-card {
+  margin-bottom: 0;
+}
+/* Create Product - Compact Review Footer */
+
+.product-wizard-modal .product-form-section:last-of-type {
+  margin-bottom: 0;
+}
+
+.product-wizard-modal .workspace-form {
+  row-gap: 0;
+}
+
+.product-wizard-modal .product-review-confirmation {
+  margin-bottom: 0;
+}
+
+.product-wizard-modal .modal-actions {
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
+/* Keep the form compact without changing other modals */
+.app-modal.product-wizard-modal .app-modal-body {
+  padding-bottom: 12px;
+}
+/* Shop Owner Returns - single-action modal (blue portal theme) */
+.app-modal.owner-return-action-modal {
+  width: min(620px, calc(100vw - 32px));
+  max-height: calc(100dvh - 32px);
+}
+.owner-return-action-content {
+  display: grid;
+  gap: 18px;
+}
+.owner-return-action-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  border: 1px solid #dbe5f5;
+  border-radius: 12px;
+  background: #f7faff;
+  padding: 16px;
+}
+.owner-return-action-summary > div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+.owner-return-action-label {
+  font-size: 12px;
+  color: #64748b;
+}
+.owner-return-action-summary strong {
+  overflow-wrap: anywhere;
+}
+.owner-return-action-reason {
+  border-bottom: 1px solid #e5eaf3;
+  padding-bottom: 14px;
+}
+.owner-return-action-reason p {
+  margin: 6px 0 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.owner-return-action-form {
+  display: grid;
+  gap: 12px;
+}
+.owner-return-action-form h3 {
+  margin: 0;
+  font-size: 17px;
+  color: #1b2b47;
+}
+.owner-return-action-form label {
+  font-size: 13px;
+  font-weight: 650;
+}
+.owner-return-action-form .dp-muted {
+  margin: 0;
+}
+.owner-return-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+.owner-return-action-footer {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #e5eaf3;
+  padding-top: 14px;
+}
+@media (max-width: 520px) {
+  .owner-return-action-summary {
+    grid-template-columns: 1fr;
+  }
+  .owner-return-action-buttons .btn {
+    flex: 1 1 100%;
+  }
+}
+/* Keep Manage Order button on one line */
+
+.manage-order-btn {
+  white-space: nowrap;
+  min-width: 125px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================
+   SHOP OWNER - PROFESSIONAL PAYROLL PANEL
+   ========================================= */
+
+.payroll-pro-card {
+  min-width: 0;
+  margin: 0 0 20px;
+  padding: 24px;
+  border: 1px solid #dfe7f3;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(22, 43, 80, 0.045);
+}
+
+.payroll-pro-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #e9eef6;
+}
+
+.payroll-pro-heading-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  color: #3569dc;
+  border-radius: 12px;
+  background: #eaf1ff;
+}
+
+.payroll-pro-heading h4 {
+  margin: 0 0 5px;
+  color: #172b4d;
+  font-size: 19px;
+  font-weight: 750;
+}
+
+.payroll-pro-heading p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.payroll-pro-form {
+  display: grid;
+  gap: 20px;
+}
+
+.payroll-pro-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.payroll-pro-field {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.payroll-pro-field b {
+  color: #dc2626;
+}
+
+.payroll-pro-field .form-control,
+.payroll-pro-field .form-select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  border: 1px solid #d8e1ee;
+  border-radius: 9px;
+  background: #ffffff;
+  font-size: 14px;
+}
+
+.payroll-pro-field .form-control:focus,
+.payroll-pro-field .form-select:focus {
+  border-color: #3569dc;
+  box-shadow: 0 0 0 3px rgba(53, 105, 220, 0.12);
+}
+
+.payroll-pro-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-top: 16px;
+  border-top: 1px solid #e9eef6;
+}
+
+.payroll-pro-form-footer p {
+  flex: 1;
+  margin: 0;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.payroll-pro-form-footer .btn {
+  min-height: 42px;
+  padding-inline: 18px;
+  white-space: nowrap;
+}
+
+.payroll-pro-history {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid #e9eef6;
+}
+
+.payroll-pro-history-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.payroll-pro-history-heading h5 {
+  margin: 0;
+  color: #172b4d;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.payroll-pro-history-heading > span {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: #3569dc;
+  background: #eaf1ff;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.payroll-pro-table {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.payroll-pro-table th {
+  padding: 12px;
+  background: #f5f8fd;
+  color: #5a6b85;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.payroll-pro-table td {
+  padding: 14px 12px;
+  color: #334155;
+  font-size: 13px;
+  vertical-align: middle;
+}
+
+.payroll-pro-status {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #edf3ff;
+  color: #315ba9;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.payroll-pro-empty {
+  padding: 28px 16px;
+  border: 1px dashed #d7e1f0;
+  border-radius: 12px;
+  background: #f9fbff;
+  text-align: center;
+}
+
+.payroll-pro-empty strong {
+  color: #334155;
+  font-size: 14px;
+}
+
+.payroll-pro-empty p {
+  margin: 7px 0 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.payroll-pro-selected-period {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 18px;
+  border-radius: 10px;
+  background: #f0f5ff;
+  color: #425575;
+  font-size: 13px;
+}
+
+.payroll-pro-selected-period strong {
+  color: #1d4ed8;
+  font-size: 18px;
+}
+
+.payroll-pro-info {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 9px;
+  background: #edf3ff;
+  color: #315ba9;
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .payroll-pro-card {
+    padding: 18px;
+  }
+
+  .payroll-pro-fields {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .payroll-pro-form-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .payroll-pro-form-footer .btn {
+    width: 100%;
+  }
+}
+/* Payroll forms should never overflow narrow containers */
+
+.employee-attendance-payroll .payroll-pro-fields {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.employee-attendance-payroll .payroll-pro-field {
+  min-width: 0;
+}
+
+.employee-attendance-payroll .payroll-pro-field input,
+.employee-attendance-payroll .payroll-pro-field select {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .employee-attendance-payroll .payroll-pro-fields {
+    grid-template-columns: 1fr;
+  }
 }

@@ -3,7 +3,12 @@ import {
   EMPLOYEE_PERMISSIONS,
   getRolePermissions,
 } from "../config/employee-permissions.js";
-import { listOwnerCoupons, createOwnerCoupon, updateOwnerCoupon, listOwnerCouponUsage } from "../services/coupons.js";
+import {
+  listOwnerCoupons,
+  createOwnerCoupon,
+  updateOwnerCoupon,
+  listOwnerCouponUsage,
+} from "../services/coupons.js";
 import { getOwnerShop } from "../services/owner-shop.js";
 import { randomBytes } from "node:crypto";
 import { fileURLToPath } from "node:url";
@@ -23,7 +28,14 @@ import {
 } from "../utils/product-images.js";
 import { shopBusinessProfileSchema } from "../validators/shop-profile.js";
 import { ownerShopController } from "../controllers/owner-shop.js";
-import {listWholesalersForOwner,editWholesaler,changeWholesalerStatus,editPurchaseOrderDate,editBillNotes,editPaymentNotes} from "../services/owner-wholesaler-editing.js";
+import {
+  listWholesalersForOwner,
+  editWholesaler,
+  changeWholesalerStatus,
+  editPurchaseOrderDate,
+  editBillNotes,
+  editPaymentNotes,
+} from "../services/owner-wholesaler-editing.js";
 import { ownerWholesalerService } from "../services/owner-wholesalers.js";
 import { ownerPurchasingService } from "../services/owner-purchasing.js";
 import { ownerAttendancePayrollService } from "../services/owner-attendance-payroll.js";
@@ -53,31 +65,100 @@ function parseUuid(value, label) {
     throw createError(400, "VALIDATION_ERROR", `Invalid ${label} identifier.`);
   return parsed.data;
 }
-const couponInput = z.object({
-  code: z.string().trim().regex(/^[A-Za-z0-9_-]{3,30}$/).transform(value => value.toUpperCase()),
-  discountType: z.enum(['PERCENTAGE', 'FIXED']), discountValue: z.number().positive().max(10000000),
-  minimumOrder: z.number().min(0).default(0), maxDiscount: z.number().positive().nullable().optional(),
-  usageLimit: z.number().int().positive().nullable().optional(), perCustomerLimit: z.number().int().positive().nullable().optional(),
-  startsAt: z.string().datetime(), expiresAt: z.string().datetime(), isActive: z.boolean().default(true)
-}).refine(c => c.discountType !== 'PERCENTAGE' || c.discountValue <= 100, {message:'Percentage cannot exceed 100%'}).refine(c => new Date(c.expiresAt)>new Date(c.startsAt), {message:'Expiry must be after start'});
+const couponInput = z
+  .object({
+    code: z
+      .string()
+      .trim()
+      .regex(/^[A-Za-z0-9_-]{3,30}$/)
+      .transform((value) => value.toUpperCase()),
+    discountType: z.enum(["PERCENTAGE", "FIXED"]),
+    discountValue: z.number().positive().max(10000000),
+    minimumOrder: z.number().min(0).default(0),
+    maxDiscount: z.number().positive().nullable().optional(),
+    usageLimit: z.number().int().positive().nullable().optional(),
+    perCustomerLimit: z.number().int().positive().nullable().optional(),
+    startsAt: z.string().datetime(),
+    expiresAt: z.string().datetime(),
+    isActive: z.boolean().default(true),
+  })
+  .refine((c) => c.discountType !== "PERCENTAGE" || c.discountValue <= 100, {
+    message: "Percentage cannot exceed 100%",
+  })
+  .refine((c) => new Date(c.expiresAt) > new Date(c.startsAt), {
+    message: "Expiry must be after start",
+  });
 const router = Router();
 router.use(requireAuth, requireRole("SHOP_OWNER"));
-router.get('/coupons', async(req,res,next)=>{try {res.json({items:await listOwnerCoupons(req.authUser.id)});}catch(e){next(e);}});
-router.get('/coupons/:id/usage', async(req,res,next)=>{
+router.get("/coupons", async (req, res, next) => {
+  try {
+    res.json({ items: await listOwnerCoupons(req.authUser.id) });
+  } catch (e) {
+    next(e);
+  }
+});
+router.get("/coupons/:id/usage", async (req, res, next) => {
   try {
     const id = z.string().uuid().parse(req.params.id);
-    res.json({ items: await listOwnerCouponUsage(req.authUser.id,id) });
-  } catch(e) { next(e); }
+    res.json({ items: await listOwnerCouponUsage(req.authUser.id, id) });
+  } catch (e) {
+    next(e);
+  }
 });
-router.post('/coupons', async(req,res,next)=>{try{const parsed=couponInput.safeParse(req.body);if(!parsed.success)return res.status(400).json({message:'Invalid coupon data',details:parsed.error.issues});res.status(201).json({coupon:await createOwnerCoupon(req.authUser.id,req.authUser.id,parsed.data)});}catch(e){next(e);}});
-router.patch('/coupons/:id', async(req,res,next)=>{try{const parsed=couponInput.innerType().partial().omit({code:true}).safeParse(req.body);if(!parsed.success)return res.status(400).json({message:'Invalid coupon update',details:parsed.error.issues});res.json({coupon:await updateOwnerCoupon(req.authUser.id,req.authUser.id,req.params.id,parsed.data)});}catch(e){next(e);}});
+router.post("/coupons", async (req, res, next) => {
+  try {
+    const parsed = couponInput.safeParse(req.body);
+    if (!parsed.success)
+      return res
+        .status(400)
+        .json({ message: "Invalid coupon data", details: parsed.error.issues });
+    res.status(201).json({
+      coupon: await createOwnerCoupon(
+        req.authUser.id,
+        req.authUser.id,
+        parsed.data,
+      ),
+    });
+  } catch (e) {
+    next(e);
+  }
+});
+router.patch("/coupons/:id", async (req, res, next) => {
+  try {
+    const parsed = couponInput
+      .innerType()
+      .partial()
+      .omit({ code: true })
+      .safeParse(req.body);
+    if (!parsed.success)
+      return res.status(400).json({
+        message: "Invalid coupon update",
+        details: parsed.error.issues,
+      });
+    res.json({
+      coupon: await updateOwnerCoupon(
+        req.authUser.id,
+        req.authUser.id,
+        req.params.id,
+        parsed.data,
+      ),
+    });
+  } catch (e) {
+    next(e);
+  }
+});
 
 const productUploadDirectory = fileURLToPath(
   new URL("../../uploads/products/", import.meta.url),
 );
 const receiveProductImageFiles = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: MAX_PRODUCT_IMAGE_BYTES, files: 6, fields: 0 },
+  limits: {
+    fileSize: MAX_PRODUCT_IMAGE_BYTES,
+    files: 6,
+    fields: 2,
+    parts: 8,
+  },
 }).array("images", 6);
 const receiveMasterDataImage = multer({
   storage: multer.memoryStorage(),
@@ -131,25 +212,69 @@ function createError(status, code, message) {
 function parseProductImageUpload(request, _response, next) {
   receiveProductImageFiles(request, _response, (error) => {
     if (!error) {
-      next();
-      return;
+      return next();
     }
+
     if (error instanceof multer.MulterError) {
-      const tooLarge = error.code === "LIMIT_FILE_SIZE";
-      next(
+      console.error("[PRODUCT IMAGE UPLOAD MULTER ERROR]", {
+        code: error.code,
+        field: error.field,
+        message: error.message,
+      });
+
+      if (error.code === "LIMIT_FILE_SIZE") {
+        return next(
+          createError(
+            413,
+            "IMAGE_TOO_LARGE",
+            "Each image must be 5 MB or smaller.",
+          ),
+        );
+      }
+
+      if (error.code === "LIMIT_FILE_COUNT") {
+        return next(
+          createError(
+            400,
+            "UPLOAD_LIMIT_EXCEEDED",
+            "Upload no more than six images at a time.",
+          ),
+        );
+      }
+
+      if (error.code === "LIMIT_UNEXPECTED_FILE") {
+        return next(
+          createError(
+            400,
+            "INVALID_IMAGE_FIELD",
+            "Upload product images using the images field.",
+          ),
+        );
+      }
+
+      if (error.code === "LIMIT_FIELD_COUNT") {
+        return next(
+          createError(
+            400,
+            "UPLOAD_FIELD_LIMIT",
+            "Image upload contains more form fields than allowed.",
+          ),
+        );
+      }
+
+      return next(
         createError(
-          tooLarge ? 413 : 400,
-          tooLarge ? "IMAGE_TOO_LARGE" : "UPLOAD_LIMIT_EXCEEDED",
-          tooLarge
-            ? "Each image must be 5 MB or smaller."
-            : "Use the images field and upload no more than six files at a time.",
+          400,
+          "INVALID_IMAGE_UPLOAD",
+          "Invalid image upload request.",
         ),
       );
-      return;
     }
-    next(error);
+
+    return next(error);
   });
 }
+
 function parseMasterDataImageUpload(req, res, next) {
   receiveMasterDataImage(req, res, (error) => {
     if (!error) {
@@ -278,11 +403,12 @@ const variantSchema = z
   });
 
 // Structured informational specifications (never used as stock/price variants).
-const productSpecificationsSchema = z.record(
-  z.string().trim().min(1).max(60),
-  z.string().trim().min(1).max(240)
-).refine((value) => Object.keys(value).length <= 30,
-  'Provide no more than 30 technical specifications.');
+const productSpecificationsSchema = z
+  .record(z.string().trim().min(1).max(60), z.string().trim().min(1).max(240))
+  .refine(
+    (value) => Object.keys(value).length <= 30,
+    "Provide no more than 30 technical specifications.",
+  );
 
 const productCreateSchema = z.object({
   masterSku: z.string().trim().max(80).nullable().optional(),
@@ -604,32 +730,70 @@ router.get("/employee-roles", async (req, res, next) => {
   try {
     const shop = await getOwnerShop(req.authUser.id);
     const roles = await prisma.shopEmployeeRole.findMany({
-      where: { shopId: shop.id }, orderBy: { name: "asc" },
+      where: { shopId: shop.id },
+      orderBy: { name: "asc" },
       select: { code: true, name: true, defaultPermissions: true },
     });
     res.json({ items: roles });
-  } catch (error) { next(error); }
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.post("/employee-roles", parseBody(z.object({
-  name: z.string().trim().min(2).max(80),
-  permissions: z.array(z.enum(Object.values(EMPLOYEE_PERMISSIONS))).max(Object.keys(EMPLOYEE_PERMISSIONS).length).default([]),
-}).strict()), async (req, res, next) => {
-  try {
-    const shop = await getOwnerShop(req.authUser.id);
-    const name = req.validatedBody.name;
-    const existingCustom = await prisma.shopEmployeeRole.findMany({ where: { shopId: shop.id }, select: { name: true } });
-    const builtin = ["Shop Manager", "Sales Staff", "Inventory Staff", "Delivery Associate"];
-    if ([...builtin, ...existingCustom.map(r => r.name)].some(r => r.toLowerCase() === name.toLowerCase())) {
-      return res.status(409).json({ error: { code: "ROLE_EXISTS", message: "This role already exists." } });
+router.post(
+  "/employee-roles",
+  parseBody(
+    z
+      .object({
+        name: z.string().trim().min(2).max(80),
+        permissions: z
+          .array(z.enum(Object.values(EMPLOYEE_PERMISSIONS)))
+          .max(Object.keys(EMPLOYEE_PERMISSIONS).length)
+          .default([]),
+      })
+      .strict(),
+  ),
+  async (req, res, next) => {
+    try {
+      const shop = await getOwnerShop(req.authUser.id);
+      const name = req.validatedBody.name;
+      const existingCustom = await prisma.shopEmployeeRole.findMany({
+        where: { shopId: shop.id },
+        select: { name: true },
+      });
+      const builtin = [
+        "Shop Manager",
+        "Sales Staff",
+        "Inventory Staff",
+        "Delivery Associate",
+      ];
+      if (
+        [...builtin, ...existingCustom.map((r) => r.name)].some(
+          (r) => r.toLowerCase() === name.toLowerCase(),
+        )
+      ) {
+        return res.status(409).json({
+          error: {
+            code: "ROLE_EXISTS",
+            message: "This role already exists.",
+          },
+        });
+      }
+      const role = await prisma.shopEmployeeRole.create({
+        data: {
+          shopId: shop.id,
+          name,
+          code: `CUSTOM_${roleRandomBytes(8).toString("hex").toUpperCase()}`,
+          defaultPermissions: [...new Set(req.validatedBody.permissions)],
+        },
+        select: { code: true, name: true, defaultPermissions: true },
+      });
+      res.status(201).json({ data: role });
+    } catch (error) {
+      next(error);
     }
-    const role = await prisma.shopEmployeeRole.create({ data: {
-      shopId: shop.id, name, code: `CUSTOM_${roleRandomBytes(8).toString("hex").toUpperCase()}`,
-      defaultPermissions: [...new Set(req.validatedBody.permissions)],
-    }, select: { code: true, name: true, defaultPermissions: true } });
-    res.status(201).json({ data: role });
-  } catch (error) { next(error); }
-});
+  },
+);
 
 router.get("/employees", ownerController.ownerEmployees_14);
 
@@ -774,8 +938,13 @@ router.get(
       }
 
       const customRole = employee.employeeRole?.startsWith("CUSTOM_")
-        ? await prisma.shopEmployeeRole.findFirst({ where: { code: employee.employeeRole, shopId: shop.id } }) : null;
-      const roleDefaults = customRole ? customRole.defaultPermissions : getRolePermissions(employee.employeeRole);
+        ? await prisma.shopEmployeeRole.findFirst({
+            where: { code: employee.employeeRole, shopId: shop.id },
+          })
+        : null;
+      const roleDefaults = customRole
+        ? customRole.defaultPermissions
+        : getRolePermissions(employee.employeeRole);
 
       const permissions = Array.isArray(employee.permissionOverrides)
         ? employee.permissionOverrides
@@ -928,6 +1097,7 @@ router.patch(
   parseBody(
     z.object({
       status: z.enum([
+        "PLACED",
         "CONFIRMED",
         "PAYMENT_PROCESSING",
         "INVENTORY_ALLOCATED",
@@ -1426,10 +1596,115 @@ router.post(
     }
   },
 );
-const ownerWholesalerEditSchema=z.object({name:z.string().trim().min(2).max(120),contactName:z.string().max(100),email:z.union([z.string().email().max(254),z.literal("")]),phone:z.string().max(20)}).strict();
-router.patch("/wholesalers/:wholesalerId/details",validateIdParam("wholesalerId"),async(req,res,next)=>{try{res.json({wholesaler:await editWholesaler(req.authUser.id,req.authUser.id,req.params.wholesalerId,ownerWholesalerEditSchema.parse(req.body))});}catch(e){next(e);}});
-router.patch("/wholesalers/:wholesalerId/status",validateIdParam("wholesalerId"),async(req,res,next)=>{try{const b=z.object({isActive:z.boolean()}).strict().parse(req.body);res.json(await changeWholesalerStatus(req.authUser.id,req.authUser.id,req.params.wholesalerId,b.isActive));}catch(e){next(e);}});
-router.patch("/purchase-orders/:purchaseOrderId/expected-date",validateIdParam("purchaseOrderId"),async(req,res,next)=>{try{const b=z.object({expectedAt:z.union([z.string().datetime(),z.null()])}).strict().parse(req.body);res.json({purchaseOrder:await editPurchaseOrderDate(req.authUser.id,req.authUser.id,req.params.purchaseOrderId,b)});}catch(e){next(e);}});
-router.patch("/wholesale-bills/:billId/notes",validateIdParam("billId"),async(req,res,next)=>{try{const b=z.object({notes:z.string().max(1000)}).strict().parse(req.body);res.json({bill:await editBillNotes(req.authUser.id,req.authUser.id,req.params.billId,b)});}catch(e){next(e);}});
-router.patch("/wholesale-payments/:paymentId/notes",validateIdParam("paymentId"),async(req,res,next)=>{try{const b=z.object({notes:z.string().max(1000)}).strict().parse(req.body);res.json({payment:await editPaymentNotes(req.authUser.id,req.authUser.id,req.params.paymentId,b)});}catch(e){next(e);}});
+const ownerWholesalerEditSchema = z
+  .object({
+    name: z.string().trim().min(2).max(120),
+    contactName: z.string().max(100),
+    email: z.union([z.string().email().max(254), z.literal("")]),
+    phone: z.string().max(20),
+  })
+  .strict();
+router.patch(
+  "/wholesalers/:wholesalerId/details",
+  validateIdParam("wholesalerId"),
+  async (req, res, next) => {
+    try {
+      res.json({
+        wholesaler: await editWholesaler(
+          req.authUser.id,
+          req.authUser.id,
+          req.params.wholesalerId,
+          ownerWholesalerEditSchema.parse(req.body),
+        ),
+      });
+    } catch (e) {
+      next(e);
+    }
+  },
+);
+router.patch(
+  "/wholesalers/:wholesalerId/status",
+  validateIdParam("wholesalerId"),
+  async (req, res, next) => {
+    try {
+      const b = z.object({ isActive: z.boolean() }).strict().parse(req.body);
+      res.json(
+        await changeWholesalerStatus(
+          req.authUser.id,
+          req.authUser.id,
+          req.params.wholesalerId,
+          b.isActive,
+        ),
+      );
+    } catch (e) {
+      next(e);
+    }
+  },
+);
+router.patch(
+  "/purchase-orders/:purchaseOrderId/expected-date",
+  validateIdParam("purchaseOrderId"),
+  async (req, res, next) => {
+    try {
+      const b = z
+        .object({ expectedAt: z.union([z.string().datetime(), z.null()]) })
+        .strict()
+        .parse(req.body);
+      res.json({
+        purchaseOrder: await editPurchaseOrderDate(
+          req.authUser.id,
+          req.authUser.id,
+          req.params.purchaseOrderId,
+          b,
+        ),
+      });
+    } catch (e) {
+      next(e);
+    }
+  },
+);
+router.patch(
+  "/wholesale-bills/:billId/notes",
+  validateIdParam("billId"),
+  async (req, res, next) => {
+    try {
+      const b = z
+        .object({ notes: z.string().max(1000) })
+        .strict()
+        .parse(req.body);
+      res.json({
+        bill: await editBillNotes(
+          req.authUser.id,
+          req.authUser.id,
+          req.params.billId,
+          b,
+        ),
+      });
+    } catch (e) {
+      next(e);
+    }
+  },
+);
+router.patch(
+  "/wholesale-payments/:paymentId/notes",
+  validateIdParam("paymentId"),
+  async (req, res, next) => {
+    try {
+      const b = z
+        .object({ notes: z.string().max(1000) })
+        .strict()
+        .parse(req.body);
+      res.json({
+        payment: await editPaymentNotes(
+          req.authUser.id,
+          req.authUser.id,
+          req.params.paymentId,
+          b,
+        ),
+      });
+    } catch (e) {
+      next(e);
+    }
+  },
+);
 export default router;

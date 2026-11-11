@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import { shopOwnerApi } from '../../../services/shopOwner/index.js';
 import { ListPagination } from '../../../components/shopOwner/ListPagination.jsx';
-import { nextOrderStatus, orderStatuses } from '../config/productConfig.js';
+import { orderStatuses } from '../config/productConfig.js';
 
 export function OrdersSection({ orders, mode = "orders", busy, submit, reload, loading = false }) {
   const [query, setQuery] = useState("");
@@ -39,8 +39,26 @@ export function OrdersSection({ orders, mode = "orders", busy, submit, reload, l
   const pageOrders = filteredOrders.slice((page - 1) * pageSize, page * pageSize);
   useEffect(() => { if (page > pageCount) setPage(pageCount); }, [page, pageCount]);
 
-  // Owner controls preparation only. Pickup and delivery belong to the assigned associate.
-  const ownerStages = ["PLACED", "CONFIRMED", "PAYMENT_PROCESSING", "INVENTORY_ALLOCATED", "PICKING", "PACKED"];
+  // Shop Owner can update preparation stages. Other statuses are visible,
+  // but must be changed through their dedicated workflows.
+  const ownerStages = [
+    "PLACED",
+    "CONFIRMED",
+    "PAYMENT_PROCESSING",
+    "INVENTORY_ALLOCATED",
+    "PICKING",
+    "PACKED",
+  ];
+  const allOrderStatuses = [
+    ...ownerStages,
+    "SHIPPED",
+    "OUT_FOR_DELIVERY",
+    "DELIVERED",
+    "DELIVERY_FAILED",
+    "CANCELLED",
+    "RETURNED",
+  ];
+  const isOwnerPreparationStatus = (status) => ownerStages.includes(status);
   const stageLabel = (value) => value?.replaceAll("_", " ") || "Unknown";
   function openDetails(order) {
     setSelectedOrder(order);
@@ -48,7 +66,7 @@ export function OrdersSection({ orders, mode = "orders", busy, submit, reload, l
     setOrderError("");
   }
   async function advance(order, status) {
-    if (savingStatus) return;
+    if (savingStatus || busy || !isOwnerPreparationStatus(status)) return;
     setSavingStatus(true);
     setOrderError("");
     try {
@@ -62,17 +80,41 @@ export function OrdersSection({ orders, mode = "orders", busy, submit, reload, l
     }
   }
   const currentOrder = (selectedOrder && orders.find((order) => order.id === selectedOrder.id)) || selectedOrder;
-  const stageIndex = currentOrder ? ownerStages.indexOf(currentOrder.status) : -1;
-  const selectedStageIndex = ownerStages.indexOf(draftStatus);
-  const nextOwnerStage = stageIndex >= 0 && stageIndex < ownerStages.length - 1 ? ownerStages[stageIndex + 1] : null;
-  const previousOwnerStage = stageIndex > 0 ? ownerStages[stageIndex - 1] : null;
-  // The owner can move one preparation stage forward or backward.
-  // Delivery and return statuses remain read-only on the Orders screen.
-  const isAdjacentPreparationChange = stageIndex >= 0 && selectedStageIndex >= 0 &&
-    Math.abs(selectedStageIndex - stageIndex) === 1;
-  const paymentUnverified = currentOrder?.order?.payments?.some((payment) => payment.provider === "RAZORPAY" && payment.status !== "PAID");
-  const selectedBlockedByPayment = Boolean(paymentUnverified) &&
-    selectedStageIndex >= ownerStages.indexOf("INVENTORY_ALLOCATED");
+
+const stageIndex = currentOrder
+  ? ownerStages.indexOf(currentOrder.status)
+  : -1;
+
+const selectedStageIndex = ownerStages.indexOf(draftStatus);
+
+const nextOwnerStage =
+  stageIndex >= 0 && stageIndex < ownerStages.length - 1
+    ? ownerStages[stageIndex + 1]
+    : null;
+
+const previousOwnerStage =
+  stageIndex > 0
+    ? ownerStages[stageIndex - 1]
+    : null;
+
+// Shop Owner can select any preparation stage.
+// Delivery and return statuses are managed separately.
+const canUpdatePreparationStatus =
+  stageIndex >= 0 &&
+  selectedStageIndex >= 0 &&
+  selectedStageIndex !== stageIndex;
+
+const paymentUnverified =
+  currentOrder?.order?.payments?.some(
+    (payment) =>
+      payment.provider === "RAZORPAY" &&
+      payment.status !== "PAID"
+  );
+
+const selectedBlockedByPayment =
+  Boolean(paymentUnverified) &&
+  selectedStageIndex >= ownerStages.indexOf("INVENTORY_ALLOCATED");
+
 
   return (
     <section className="workspace-card">
@@ -107,7 +149,15 @@ export function OrdersSection({ orders, mode = "orders", busy, submit, reload, l
                       order.order.address.country,
                     ].filter(Boolean).join(", ")}</p>
                     : <span className="muted-copy">Address unavailable</span>}</td>
-                  <td><button type="button" className="btn btn-sm btn-outline-primary" onClick={() => openDetails(order)}>Manage Order</button></td>
+                  <td>
+  <button
+    type="button"
+    className="btn btn-sm btn-outline-primary manage-order-btn"
+    onClick={() => openDetails(order)}
+  >
+    Manage Order
+  </button>
+</td>
                 </tr>;
               })}</tbody></table></div><ListPagination page={page} pageCount={pageCount} onChange={setPage} /></>}
       {currentOrder && <div className="order-workflow-backdrop" role="presentation">
@@ -136,38 +186,53 @@ export function OrdersSection({ orders, mode = "orders", busy, submit, reload, l
             {stageIndex < 0 && (
               <p className="text-muted small">This order is in the delivery, completed, cancelled or return stage. Its delivery status is read-only here. Manage delivery in Delivery Management and returns in Returns.</p>
             )}
-            {stageIndex >= 0 && (
-              <div className="row g-2 align-items-end mt-2">
+            <div className="row g-2 align-items-end mt-2">
                 <div className="col-sm">
                   <label htmlFor="owner-order-status" className="form-label fw-semibold">Update Order Status</label>
-                  <select
-                    id="owner-order-status"
-                    className="form-select"
-                    value={draftStatus}
-                    onChange={(event) => { setDraftStatus(event.target.value); setOrderError(""); }}
-                    disabled={busy || savingStatus}
-                  >
-                    {ownerStages.map((status, index) => (
-                      <option
-                        key={status}
-                        value={status}
-                        disabled={Math.abs(index - stageIndex) > 1}
-                      >
-                        {stageLabel(status)}{index === stageIndex ? " (Current)" : index === stageIndex - 1 ? " (Go Back)" : index === stageIndex + 1 ? " (Next)" : ""}
-                      </option>
-                    ))}
-                  </select>
+
+<select
+  id="owner-order-status"
+  className="form-select"
+  value={draftStatus}
+  onChange={(event) => {
+    setDraftStatus(event.target.value);
+    setOrderError("");
+  }}
+  disabled={Boolean(busy) || savingStatus}
+>
+  {allOrderStatuses.map((status) => (
+    <option key={status} value={status}>
+      {stageLabel(status)}
+      {status === currentOrder.status ? " (Current)" : ""}
+    </option>
+  ))}
+</select>
+
                 </div>
                 <div className="col-sm-auto">
-                  <button
-                    type="button"
-                    className="btn btn-primary"
-                    onClick={() => advance(currentOrder, draftStatus)}
-                    disabled={busy || savingStatus || !isAdjacentPreparationChange || selectedBlockedByPayment}
-                  >
-                    {savingStatus ? "Updating..." : "Save Status"}
-                  </button>
+
+<button
+  type="button"
+  className="btn btn-primary"
+  onClick={() => advance(currentOrder, draftStatus)}
+  disabled={
+    Boolean(busy) ||
+    savingStatus ||
+    !isOwnerPreparationStatus(draftStatus) ||
+    !canUpdatePreparationStatus ||
+    selectedBlockedByPayment
+  }
+>
+  {savingStatus ? "Updating..." : "Update Status"}
+</button>
+
                 </div>
+              </div>
+            {!isOwnerPreparationStatus(draftStatus) && (
+              <div className="alert alert-info mt-2" role="status">
+                <strong>{stageLabel(draftStatus)}</strong> is managed through the
+                dedicated Delivery, Cancellation or Returns workflow. This status
+                cannot be updated directly from Order Management.
               </div>
             )}
             {selectedBlockedByPayment && stageIndex >= 0 && <p className="alert alert-warning mt-2">Verify Razorpay payment before inventory allocation.</p>}

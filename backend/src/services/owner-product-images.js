@@ -18,7 +18,14 @@ export function createOwnerProductImageService(
   uploadDirectory,
 ) {
   return {
-    upload: async (ownerId, actorId, productId, files, colorValueId = null) => {
+    upload: async (
+      ownerId,
+      actorId,
+      productId,
+      files,
+      colorValueId = null,
+      variantId = null,
+    ) => {
       if (!files?.length)
         throw fail(
           400,
@@ -46,6 +53,40 @@ export function createOwnerProductImageService(
       ) {
         throw fail(400, "INVALID_COLOR", "Invalid color ID.");
       }
+
+      // Validate optional variant association.
+      if (
+        variantId !== null &&
+        variantId !== undefined &&
+        typeof variantId !== "string"
+      ) {
+        throw fail(400, "INVALID_VARIANT", "Invalid variant selection.");
+      }
+
+      const selectedVariantId =
+        typeof variantId === "string" && variantId.trim()
+          ? variantId.trim()
+          : null;
+
+      if (
+        selectedVariantId &&
+        !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
+          selectedVariantId,
+        )
+      ) {
+        throw fail(400, "INVALID_VARIANT", "Invalid variant ID.");
+      }
+
+      // An image belongs either to a specific variant
+      // or to a color group, not both.
+      if (selectedVariantId && selectedColorId) {
+        throw fail(
+          400,
+          "IMAGE_ASSOCIATION_CONFLICT",
+          "Select either a variant or a color, not both.",
+        );
+      }
+
       const shop = await lookupShop(ownerId);
       const product = await database.product.findFirst({
         where: { id: productId, shopId: shop.id },
@@ -113,6 +154,7 @@ export function createOwnerProductImageService(
               url,
               position: current.length + index,
               colorValueId: selectedColorId,
+              variantId: selectedVariantId,
             })),
           });
 

@@ -1,11 +1,22 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
 import Loader from "../components/common/Loader.jsx";
-
+import { isPortalBlocked, portalForRole } from "../utils/portalTabLock.js";
+import PortalTabGate from "./PortalTabGate.jsx";
 export default function ProtectedRoute({ role }) {
   const { user, loading } = useAuth();
   const location = useLocation();
+  const requestedPortal = portalForRole(
+  Array.isArray(role) ? role[0] : role
+);
 
+if (isPortalBlocked(requestedPortal)) {
+  return (
+    <PortalTabGate portal={requestedPortal}>
+      <Outlet />
+    </PortalTabGate>
+  );
+}
   if (loading) return <Loader>Restoring your secure E-Shop session...</Loader>;
   if (!user || !(Array.isArray(role) ? role : [role]).includes(user.role)) {
     const allowedRoles = Array.isArray(role) ? role : [role];

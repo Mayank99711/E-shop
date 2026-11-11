@@ -104,6 +104,19 @@ export default function OwnerWorkspace({ user }) {
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const [errorTab, setErrorTab] = useState("");
+
+  // Automatically hide error messages after 3 seconds.
+  useEffect(() => {
+    if (!error) return undefined;
+
+    const timer = window.setTimeout(() => {
+      setError("");
+      setErrorTab("");
+    }, 3000);
+
+    return () => window.clearTimeout(timer);
+  }, [error]);
+
   //syccess message auto-hide after 3second
 
   useEffect(() => {
@@ -241,7 +254,41 @@ export default function OwnerWorkspace({ user }) {
 
   return (
     <section className="owner-workspace">
-      {errorTab === activeTab && error && <div className="alert alert-danger" role="alert">{error}</div>}
+
+{errorTab === activeTab && error && (
+  <div
+    className="alert alert-danger"
+    role="alert"
+    style={{
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: "12px",
+    }}
+  >
+    <span>{error}</span>
+
+    <button
+      type="button"
+      aria-label="Dismiss error"
+      onClick={() => {
+        setError("");
+        setErrorTab("");
+      }}
+      style={{
+        background: "transparent",
+        border: "none",
+        color: "inherit",
+        cursor: "pointer",
+        fontSize: "20px",
+        lineHeight: 1,
+      }}
+    >
+      ×
+    </button>
+  </div>
+)}
+
       {notice && <div className="alert alert-success" role="status">{notice}</div>}
       {loading && <p className="workspace-state">Loading your shop data...</p>}
       {!loading && !error && !data.dashboard && ["overview", "customer-store", "shop-profile"].includes(activeTab) && <p className="workspace-state">Your shop data is not available yet. Refresh to try again.</p>}

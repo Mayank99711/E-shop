@@ -18,6 +18,7 @@ export const productSelection = {
       url: true,
       position: true,
       colorValueId: true,
+      variantId: true,
       colorValue: {
         select: {
           id: true,

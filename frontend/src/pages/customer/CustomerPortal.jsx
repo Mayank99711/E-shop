@@ -2,14 +2,46 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CustomerAuth, useCustomerAuth } from "../auth/CustomerAuth.jsx";
 import { useTheme } from "../../context/ThemeContext.jsx";
+// import { useAuth } from "../../context/AuthContext.jsx";
 import CustomerLayout from "../../layouts/CustomerLayout.jsx";
 import { useApiHealth } from "../../hooks/useApiHealth.js";
 import Storefront from "./Storefront.jsx";
-
+import { useAuth } from "../../context/AuthContext.jsx";
 export default function CustomerPortal() {
   const apiState = useApiHealth();
-  const auth = useCustomerAuth();
-  const openSignIn = useCallback(() => auth.open("login"), [auth.open]);
+const auth = useCustomerAuth();
+const session = useAuth();
+const navigate = useNavigate();
+const { activePortal } = session;
+
+const isStaffPortalActive =
+  activePortal === "shop-owner" ||
+  activePortal === "super-admin";
+
+const staffDashboardPath =
+  activePortal === "super-admin"
+    ? "/admin/dashboard"
+    : "/shop/dashboard";
+
+const portalVisitor =
+  session.user?.role === "SUPER_ADMIN" ||
+  session.user?.role === "SHOP_OWNER" ||
+  session.user?.role === "SHOP_EMPLOYEE"
+    ? session.user
+    : null;
+
+const dashboardPath =
+  portalVisitor?.role === "SUPER_ADMIN"
+    ? "/admin/dashboard"
+    : "/shop/dashboard";
+  const openSignIn = useCallback(() => {
+  if (isStaffPortalActive) {
+    navigate(staffDashboardPath);
+    return;
+  }
+
+  auth.open("login");
+}, [isStaffPortalActive, staffDashboardPath, navigate, auth.open]);
   const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -44,7 +76,7 @@ useEffect(() => {
   };
 }, []);
   const location = useLocation();
-  const navigate = useNavigate();
+
 
   useEffect(() => {
     setSearchText(new URLSearchParams(location.search).get("q") || "");
@@ -59,7 +91,11 @@ useEffect(() => {
 
   return (
     <CustomerLayout apiState={apiState}>
-      <div className="esh-announcement"><span>✧ Discover independent shops</span><span>♡ Save your favourites</span><span>◈ Explore E-Shop</span></div>
+      <div className="esh-announcement">
+  <span>Discover independent shops</span>
+  <span>Save your favourites</span>
+  <span>Explore E-Shop</span>
+</div>
       <header
   className={`portal-nav esh-smart-header ${
     headerHidden && !mobileMenuOpen ? "esh-header-hidden" : ""
@@ -73,18 +109,91 @@ useEffect(() => {
           <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" /><path d="m16 16 4.5 4.5" /></svg>
           <label className="visually-hidden" htmlFor="market-search-input">Search products and shops</label>
           <input id="market-search-input" type="search" value={searchText} onChange={(event) => setSearchText(event.target.value)} placeholder="Search products and discover shops..." />
-          <button type="submit" aria-label="Search products and shops">⌕ <span>Search</span></button>
+
+<button
+  type="submit"
+  aria-label="Search products and shops"
+>
+  <svg
+    width="17"
+    height="17"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <circle cx="11" cy="11" r="7" />
+    <path d="m16 16 5 5" />
+  </svg>
+
+  <span>Search</span>
+</button>
+
         </form>
         <div className="nav-actions">
           <span className={`api-indicator ${apiState}`} role="status"><span className="indicator-dot" />API {apiState}</span>
-          {!auth.user && <button className="btn btn-outline-primary btn-sm" onClick={openSignIn}>Sign in</button>}
+          {activePortal === "shop-owner" ? (
+  <Link
+    to="/shop/dashboard"
+    className="btn btn-outline-primary btn-sm"
+  >
+    Back to Shop Owner Dashboard
+  </Link>
+) : activePortal === "super-admin" ? (
+  <Link
+    to="/admin/dashboard"
+    className="btn btn-outline-primary btn-sm"
+  >
+    Back to Admin Dashboard
+  </Link>
+) : (
+  !session.loading &&
+  !auth.user &&
+  !portalVisitor && (
+    <button
+      className="btn btn-outline-primary btn-sm"
+      onClick={openSignIn}
+    >
+      Sign in
+    </button>
+  )
+)}
           {auth.user && <details className="market-account">
             <summary><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 20a7 7 0 0 1 14 0" /></svg><span>{auth.user.name}</span></summary>
             <div className="market-account-menu">
               <Link to="/profile">My account</Link><Link to="/my-orders">My orders</Link><Link to="/addresses">Addresses</Link>
               <button type="button" onClick={auth.logout}>Sign out</button>
             </div>
-          </details>}
+                    </details>}
+
+          {/* CHANGE 4 Ã¢â‚¬â€ Admin / Shop Owner account menu */}
+          {portalVisitor && (
+            <details className="market-account">
+              <summary>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <circle cx="12" cy="8" r="3.5" />
+                  <path d="M5 20a7 7 0 0 1 14 0" />
+                </svg>
+                <span>{portalVisitor.name || "My Account"}</span>
+              </summary>
+
+              <div className="market-account-menu">
+                <Link to={dashboardPath}>Back to Dashboard</Link>
+
+                <span className="market-account-role">
+                  {portalVisitor.role === "SUPER_ADMIN"
+                    ? "Super Admin Ã¢â‚¬â€ Browse Only"
+                    : portalVisitor.role === "SHOP_EMPLOYEE"
+                      ? "Shop Employee Ã¢â‚¬â€ Browse Only"
+                      : "Shop Owner Ã¢â‚¬â€ Browse Only"}
+                </span>
+              </div>
+            </details>
+          )}
           <button
             className="esh-theme-icon-button"
             type="button"
@@ -109,8 +218,22 @@ useEffect(() => {
         </div>
       </header>
       <CustomerAuth auth={auth} hideActions />
-      <Storefront user={auth.loading ? null : auth.user} auth={auth} openSignIn={() => auth.open("login")} mobileMenuOpen={mobileMenuOpen} onNavigate={() => setMobileMenuOpen(false)} />
-      {apiState !== "connected" && <p className="api-banner" role="status">{apiState === "checking" ? "Checking connection to E-Shop…" : "The E-Shop API is unavailable. Some marketplace actions may not load."}</p>}
+
+<Storefront
+  user={
+    isStaffPortalActive
+      ? null
+      : auth.loading
+        ? null
+        : auth.user
+  }
+  auth={auth}
+  openSignIn={openSignIn}
+  mobileMenuOpen={mobileMenuOpen}
+  onNavigate={() => setMobileMenuOpen(false)}
+/>
+
+      {apiState !== "connected" && <p className="api-banner" role="status">{apiState === "checking" ? "Checking connection to E-ShopÃ¢â‚¬Â¦" : "The E-Shop API is unavailable. Some marketplace actions may not load."}</p>}
     </CustomerLayout>
   );
 }

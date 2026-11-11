@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { resolveMediaUrl } from '../../services/customer/index.js';
 import { money } from '../../utils/format.js';
 import { DemoPhoto, demoProductPhoto } from './DemoMedia.jsx';
-
+import { useAuth } from "../../context/AuthContext.jsx";
 function getVariantColor(variant) {
   const colorEntry = (variant?.values || []).find(
     ({ attribute }) =>
@@ -68,6 +68,13 @@ export function ProductGridSkeleton() {
 
 
 export function ProductCard({ product, favourite, onFavourite }) {
+  const { user } = useAuth();
+
+  const isBrowseOnly = [
+    "SUPER_ADMIN",
+    "SHOP_OWNER",
+    "SHOP_EMPLOYEE",
+  ].includes(user?.role);
   // Show the first available active variant for the card's price.
   const activeVariants = (product.variants || []).filter(
     (item) => item.isActive !== false
@@ -137,21 +144,23 @@ export function ProductCard({ product, favourite, onFavourite }) {
           <span className="esh-new-badge">NEW</span>
         )}
 
-        <button
-          className={`favourite-button ${favourite ? "saved" : ""}`}
-          type="button"
-          aria-label={
-            favourite
-              ? "Remove from wishlist"
-              : "Add to wishlist"
-          }
-          aria-pressed={Boolean(favourite)}
-          onClick={() => onFavourite(product)}
-        >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20.5 8.8c0 4.1-8.5 10-8.5 10s-8.5-5.9-8.5-10a4.5 4.5 0 0 1 8.5-2 4.5 4.5 0 0 1 8.5 2Z" />
-          </svg>
-        </button>
+        {!isBrowseOnly && (
+  <button
+    className={`favourite-button ${favourite ? "saved" : ""}`}
+    type="button"
+    aria-label={
+      favourite
+        ? "Remove from wishlist"
+        : "Add to wishlist"
+    }
+    aria-pressed={Boolean(favourite)}
+    onClick={() => onFavourite(product)}
+  >
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M20.5 8.8c0 4.1-8.5 10-8.5 10s-8.5-5.9-8.5-10a4.5 4.5 0 0 1 8.5-2 4.5 4.5 0 0 1 8.5 2Z" />
+    </svg>
+  </button>
+)}
       </div>
 
       <div className="store-product-info">
@@ -240,7 +249,69 @@ export function PageHeading({ eyebrow, title, description }) {
 }
 
 
+
 export function SignInPrompt({ title }) {
   const navigate = useNavigate();
-  return <section className="sign-in-prompt"><span className="eyebrow">CUSTOMER ACCOUNT</span><h1>{title}</h1><p>Sign in to see information saved securely to your account.</p><button className="btn btn-primary" type="button" onClick={() => navigate("/?signin=1")}>Sign in to continue</button></section>;
+  const { activePortal } = useAuth();
+
+  const staffPortalActive =
+    activePortal === "shop-owner" ||
+    activePortal === "super-admin";
+
+  const dashboardPath =
+    activePortal === "super-admin"
+      ? "/admin/dashboard"
+      : "/shop/dashboard";
+
+  const portalName =
+    activePortal === "super-admin"
+      ? "Super Admin"
+      : "Shop Owner";
+
+  if (staffPortalActive) {
+    return (
+      <section className="sign-in-prompt" role="status">
+        <span className="eyebrow">
+          RESTRICTED CUSTOMER ACCESS
+        </span>
+
+        <h1>Customer Account Access Restricted</h1>
+
+        <p>
+          You're currently signed in to the {portalName}
+          {" "}portal. {title} is available only to
+          Customer accounts.
+        </p>
+
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => navigate(dashboardPath)}
+        >
+          Back to {portalName} Dashboard
+        </button>
+      </section>
+    );
+  }
+
+  return (
+    <section className="sign-in-prompt">
+      <span className="eyebrow">CUSTOMER ACCOUNT</span>
+
+      <h1>{title}</h1>
+
+      <p>
+        Sign in to see information saved securely
+        to your account.
+      </p>
+
+      <button
+        className="btn btn-primary"
+        type="button"
+        onClick={() => navigate("/?signin=1")}
+      >
+        Sign in to continue
+      </button>
+    </section>
+  );
 }

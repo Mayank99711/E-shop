@@ -9,7 +9,7 @@ import ProductImageAttribution from "../../../components/customer/ProductImageAt
 import { PageState } from "../../../components/customer/StorefrontComponents.jsx";
 import ProductRating from "../../../components/customer/reviews/ProductRating.jsx";
 import { money } from "../../../utils/format.js";
-
+import ProductDescription from "./ProductDescription.jsx";
 // Read the Color / Size values attached to a concrete SKU variant.
 function attributeValue(variant, name) {
   return (variant?.values || []).find(
@@ -67,6 +67,7 @@ function RatingBreakdown({ distribution = {}, total = 0 }) {
 export function ProductDetails({
   favouriteIds,
   signedIn,
+   browseOnly = false,
   onFavourite,
   onAdd,
 }) {
@@ -74,6 +75,8 @@ export function ProductDetails({
 
   const [product, setProduct] = useState(null);
   const [variantId, setVariantId] = useState("");
+  const [selectedGalleryImageId, setSelectedGalleryImageId] = useState(null);
+  const [preferVariantImage, setPreferVariantImage] = useState(false);
   const [selectedColorId, setSelectedColorId] = useState("");
   const [selectedSizeId, setSelectedSizeId] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -108,6 +111,8 @@ export function ProductDetails({
         setSelectedColorId(attributeValue(initialVariant, "color")?.id || "");
         setSelectedSizeId(attributeValue(initialVariant, "size")?.id || "");
         setQuantity(1);
+        setSelectedGalleryImageId(null);
+        setPreferVariantImage(false);
       })
       .catch((requestError) => {
         if (active) setError(requestError.message);
@@ -154,25 +159,98 @@ export function ProductDetails({
   );
   const colors = getOptions(activeVariants, "color");
   const sizes = getOptions(activeVariants, "size");
-  const hasSwatchSelector = colors.length > 0 || sizes.length > 0;
 
-  // The exact color + size must exist. Never silently switch sizes.
-  const variant = hasSwatchSelector
-    ? activeVariants.find((item) =>
-        (colors.length === 0 || attributeValue(item, "color")?.id === selectedColorId) &&
-        (sizes.length === 0 || attributeValue(item, "size")?.id === selectedSizeId)
+  // Each group corresponds to a purchasable option actually saved on a SKU.
+  const variantGroups = [];
+  for (const item of activeVariants) {
+    for (const entry of item.values || []) {
+      if (!entry.attribute?.name || !entry.value?.id) continue;
+      const name = entry.attribute.name.trim();
+      let group = variantGroups.find((group) => group.name.toLowerCase() === name.toLowerCase());
+      if (!group) {
+        group = { name, options: [] };
+        variantGroups.push(group);
+      }
+      if (!group.options.some((option) => option.id === entry.value.id)) {
+        group.options.push({ id: entry.value.id, label: entry.value.value });
+      }
+    }
+  }
+  variantGroups.sort((a, b) => {
+    const priority = (name) => name.toLowerCase() === "color" ? 0 : name.toLowerCase() === "size" ? 1 : 2;
+    return priority(a.name) - priority(b.name);
+  });
+
+  // Always use the actual selected SKU for price, inventory and cart.
+  // Some products have a standard variant alongside Color / Size variants.
+  const variant = activeVariants.find((item) => item.id === variantId) || null;
+
+  function selectVariant(item) {
+    if (!item) return;
+    setVariantId(item.id);
+    setSelectedColorId(attributeValue(item, "color")?.id || "");
+    setSelectedSizeId(attributeValue(item, "size")?.id || "");
+    setSelectedGalleryImageId(null);
+    setPreferVariantImage(true);
+    setQuantity(1);
+  }
+
+  function chooseOption(attributeName, valueId) {
+    const matches = activeVariants.filter((item) =>
+      (item.values || []).some((entry) =>
+        entry.attribute?.name?.trim().toLowerCase() === attributeName.toLowerCase() &&
+        entry.value?.id === valueId
       )
-    : activeVariants.find((item) => item.id === variantId);
+    );
+    if (!matches.length) return;
 
-  // Show one photo for the selected color, not all color variants together.
+    // Preserve the other chosen attributes when a real SKU has that combination.
+    const otherSelected = (variant?.values || []).filter((entry) =>
+      entry.attribute?.name?.trim().toLowerCase() !== attributeName.toLowerCase()
+    );
+    const exact = matches.find((item) => otherSelected.every((entry) =>
+      (item.values || []).some((candidate) =>
+        candidate.attribute?.name?.trim().toLowerCase() ===
+          entry.attribute?.name?.trim().toLowerCase() &&
+        candidate.value?.id === entry.value?.id
+      )
+    ));
+
+    // If that combination does not exist, choose an actual saved SKU and
+    // update all highlighted options, rather than inventing a combination.
+    selectVariant(exact || matches.find((item) => Number(item.stock) > 0) || matches[0]);
+  }
+
+  // Product images and variant images remain separate in the gallery.
+  // On initial page load the main product image is shown first.
+  // Selecting a variant prioritizes its own photo.
   const allImages = product?.images || [];
-  const colorImages = selectedColorId
-    ? allImages.filter((image) => image.colorValueId === selectedColorId)
+  const genericImages = allImages.filter(
+    (image) => !image.variantId && !image.colorValueId
+  );
+  const variantImages = variant?.id
+    ? allImages.filter((image) => image.variantId === variant.id)
     : [];
-  const genericImages = allImages.filter((image) => !image.colorValueId);
-  // Keep the gallery populated when only color-specific images exist or the
-  // selected variant lacks a matching upload. This does not change the variant.
-  const visibleImage = colorImages[0] || genericImages[0] || allImages[0] || null;
+  const colorImages = selectedColorId
+    ? allImages.filter(
+        (image) => image.colorValueId === selectedColorId && !image.variantId
+      )
+    : [];
+
+  const galleryImages = [...genericImages, ...variantImages, ...colorImages]
+    .filter((image, index, images) =>
+      images.findIndex((other) => other.id === image.id) === index
+    );
+
+  const selectedVariantPhoto = variantImages[0] || colorImages[0] || null;
+  const visibleImage =
+    galleryImages.find((image) => image.id === selectedGalleryImageId) ||
+    (preferVariantImage ? selectedVariantPhoto : genericImages[0]) ||
+    genericImages[0] ||
+    selectedVariantPhoto ||
+    allImages[0] ||
+    null;
+
   const canBuy = Boolean(
     variant && Number(variant.stock) > 0 &&
     product?.status === "ACTIVE" && product?.shop?.status === "ACTIVE"
@@ -200,10 +278,53 @@ export function ProductDetails({
 
                   />
                   <ProductImageAttribution imageUrl={visibleImage.url} />
+
                 </div>
               ) : (
                 <DemoPhoto fallback={demoProductPhoto(product)} alt={product.name} />
               )}
+              {galleryImages.length > 1 && (
+                <div
+                  className="product-gallery-thumbnails"
+                  aria-label="Product image gallery"
+                  style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 12 }}
+                >
+                  {galleryImages.map((image, index) => {
+                    const url = resolveMediaUrl(image.url);
+                    return (
+                      <button
+                        key={image.id}
+                        type="button"
+                        aria-label={`View product photo ${index + 1}`}
+                        aria-pressed={visibleImage?.id === image.id}
+                        onClick={() => setSelectedGalleryImageId(image.id)}
+                        style={{
+                          width: 72, height: 72, padding: 4, borderRadius: 10,
+                          border: visibleImage?.id === image.id
+                            ? "2px solid #2563eb" : "1px solid #cbd5e1",
+                          background: "white", cursor: "pointer",
+                        }}
+                      >
+                        {url && (
+                          <img
+                            src={url}
+                            alt={`${product.name} thumbnail ${index + 1}`}
+                            style={{ width: "100%", height: "100%", objectFit: "contain" }}
+                          />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+              {/* Full description below product image */}
+  <ProductDescription
+    key={product.id}
+    description={product.description}
+  />
+
+
+
             </div>
 
             <div className="detail-copy">
@@ -231,9 +352,118 @@ export function ProductDetails({
                 Sold by <strong>{product.shop.name}</strong>
               </p>
 
-              <p className="detail-description">
-                {product.description}
+              <p className="detail-description detail-short-description">
+                  {product.shortDescription?.trim() ||
+                    `${String(product.description || "").trim().slice(0, 160)}${
+                      String(product.description || "").trim().length > 160 ? "..." : ""
+                    }`}
               </p>
+              {displayVariant && (
+                <div className="detail-price">
+                  {money(displayVariant.discountPrice || displayVariant.price)}
+                  {displayVariant.discountPrice && <del>{money(displayVariant.price)}</del>}
+                </div>
+              )}
+              {activeVariants.length > 0 && (
+                <section className="professional-variant-picker" aria-label="Choose Product Variant">
+                  <div className="professional-variant-heading">
+                    <h2>Choose Product Variant</h2>
+                    <p>Select your preferred option</p>
+                  </div>
+
+                  {variantGroups.map((group) => {
+                    const selectedValue = (variant?.values || []).find((entry) =>
+                      entry.attribute?.name?.trim().toLowerCase() === group.name.toLowerCase()
+                    )?.value?.id;
+                    const isColor = group.name.toLowerCase() === "color";
+                    return (
+                      <div className="professional-variant-option-row" key={group.name}>
+                        <div className="professional-variant-option-label">
+                          {group.name}
+                        </div>
+                        <div className="professional-variant-option-list">
+                          {group.options.map((option) => {
+                            const selected = selectedValue === option.id;
+                            const swatch = SWATCH_COLORS[String(option.label).toLowerCase()];
+                            return (
+                              <button
+                                type="button"
+                                key={option.id}
+                                className={`professional-variant-option ${selected ? "is-selected" : ""}`}
+                                aria-pressed={selected}
+                                onClick={() => chooseOption(group.name, option.id)}
+                              >
+                                {isColor && (
+                                  <span
+                                    className="professional-variant-swatch"
+                                    style={{ backgroundColor: swatch || "#e2e8f0" }}
+                                    aria-hidden="true"
+                                  />
+                                )}
+                                {option.label}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+
+                  {/* Attribute-less variants still need their own selectable SKU. */}
+                  {(variantGroups.length === 0 || activeVariants.some((item) => !item.values?.length)) && (
+                    <div className="professional-variant-option-row">
+                      <div className="professional-variant-option-label">Variant</div>
+                      <div className="professional-variant-option-list">
+                        {activeVariants
+                          .filter((item) => variantGroups.length === 0 || !item.values?.length)
+                          .map((item) => (
+                            <button
+                              type="button"
+                              key={item.id}
+                              aria-pressed={item.id === variantId}
+                              className={`professional-variant-option ${item.id === variantId ? "is-selected" : ""}`}
+                              onClick={() => selectVariant(item)}
+                            >
+                              {item.variantName || item.sku}
+                            </button>
+                          ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {variant && (
+                    <div className="professional-selected-variant" aria-live="polite">
+                      {(() => {
+                        const image = allImages.find((entry) => entry.variantId === variant.id)
+                          || allImages.find((entry) => !entry.variantId && !entry.colorValueId);
+                        const imageUrl = image?.url ? resolveMediaUrl(image.url) : null;
+                        return imageUrl ? (
+                          <img src={imageUrl} alt={variant.variantName || variant.sku} />
+                        ) : (
+                          <span className="professional-variant-image-placeholder" aria-hidden="true">SKU</span>
+                        );
+                      })()}
+                      <div className="professional-selected-variant-info">
+                        <strong>
+                          {(variant.values || []).map(({ attribute, value }) =>
+                            `${attribute.name}: ${value.value}`).join(" · ") ||
+                            variant.variantName || variant.sku}
+                        </strong>
+                        <small className="professional-variant-sku">SKU: {variant.sku}</small>
+                        <span className={Number(variant.stock) > 0 ? "professional-variant-in-stock" : "professional-variant-out-stock"}>
+                          {Number(variant.stock) > 0 ? `${variant.stock} available` : "Out of stock"}
+                        </span>
+                      </div>
+                      <div className="professional-selected-variant-price">
+                        <strong>{money(variant.discountPrice || variant.price)}</strong>
+                        {variant.discountPrice && <del>{money(variant.price)}</del>}
+                      </div>
+                      <span className="professional-variant-check" aria-hidden="true">✓</span>
+                    </div>
+                  )}
+                </section>
+              )}
+
               {product.specifications && Object.keys(product.specifications).length > 0 && (
                 <section aria-label="Technical specifications" style={{ margin: '18px 0' }}>
                   <h2 style={{ fontSize: '1.15rem' }}>Technical specifications</h2>
@@ -248,139 +478,85 @@ export function ProductDetails({
                 </section>
               )}
 
-              {colors.length > 0 && (
-                <fieldset className="detail-option" style={{ border: 0, margin: "16px 0", padding: 0 }}>
-                  <legend style={{ fontWeight: 600, marginBottom: 10 }}>
-                    Color: {colors.find((color) => color.id === selectedColorId)?.value || "Choose color"}
-                  </legend>
-                  <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                    {colors.map((color) => {
-                      const selected = selectedColorId === color.id;
-                      const swatch = SWATCH_COLORS[color.value.toLowerCase()] || color.value.toLowerCase();
-                      return (
-                        <button
-                          key={color.id}
-                          type="button"
-                          aria-label={`Choose ${color.value} color`}
-                          aria-pressed={selected}
-                          title={color.value}
-                          onClick={() => {
-                            setSelectedColorId(color.id);
-                            setQuantity(1);
-                          }}
-                          style={{
-                            display: "flex", flexDirection: "column", alignItems: "center", gap: 5,
-                            background: "transparent", border: 0, cursor: "pointer", padding: 3,
-                          }}
-                        >
-                          <span style={{
-                            width: 35, height: 35, display: "block", borderRadius: "50%",
-                            background: swatch, border: selected ? "3px solid #2563eb" : "1px solid #888",
-                            outline: selected ? "2px solid #fff" : "none",
-                            boxShadow: selected ? "0 0 0 2px #2563eb" : "none",
-                          }} />
-                          <small>{color.value}</small>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </fieldset>
-              )}
-
-              {sizes.length > 0 && (
-                <fieldset className="detail-option" style={{ border: 0, margin: "16px 0", padding: 0 }}>
-                  <legend style={{ fontWeight: 600, marginBottom: 10 }}>
-                    Size: {sizes.find((size) => size.id === selectedSizeId)?.value || "Choose size"}
-                  </legend>
-                  <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-                    {sizes.map((size) => (
-                      <button
-                        key={size.id}
-                        type="button"
-                        className={selectedSizeId === size.id ? "btn btn-primary" : "btn btn-outline-primary"}
-                        aria-pressed={selectedSizeId === size.id}
-                        onClick={() => {
-                          setSelectedSizeId(size.id);
-                          setQuantity(1);
-                        }}
-                      >
-                        {size.value}
-                      </button>
-                    ))}
-                  </div>
-                </fieldset>
-              )}
-
-              {!hasSwatchSelector && activeVariants.length > 1 && (
-                <label className="detail-option">
-                  Choose an option
-                  <select value={variantId} onChange={(event) => {
-                    setVariantId(event.target.value);
-                    setQuantity(1);
-                  }}>
-                    {activeVariants.map((item) => (
-                      <option value={item.id} key={item.id}>
-                        {(item.values || []).map(({ attribute, value }) =>
-                          `${attribute.name}: ${value.value}`).join(" · ") || item.sku}
-                        {` · ${Number(item.stock) > 0 ? `${item.stock} available` : "Out of stock"}`}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              )}
-
-              {displayVariant && (
-                <div className="detail-price">
-                  {money(displayVariant.discountPrice || displayVariant.price)}
-                  {displayVariant.discountPrice && <del>{money(displayVariant.price)}</del>}
-                </div>
-              )}
-
               <p className={canBuy ? "availability available" : "availability unavailable"}>
-                {!variant && hasSwatchSelector
-                  ? "This color and size combination is unavailable"
-                  : !variant
-                    ? "Currently unavailable"
-                    : !canBuy
-                      ? "Currently out of stock"
-                      : `${variant.stock} available`}
+                {!variant
+                  ? "Currently unavailable"
+                  : !canBuy
+                    ? "Currently out of stock"
+                    : `${variant.stock} available`}
               </p>
 
               {canBuy && (
                 <div className="detail-buy-row">
-                  <label>
-                    Qty
-                    <input
-                      type="number"
-                      min="1"
-                      max={Math.min(Number(variant.stock), 100)}
-                      value={quantity}
-                      onChange={(event) => {
-                        const requested = Number(event.target.value) || 1;
-                        setQuantity(Math.min(Math.max(1, requested), Number(variant.stock), 100));
-                      }}
-                    />
-                  </label>
+                  <div className="detail-quantity-control">
+  <span className="detail-quantity-label">Qty</span>
+
+  <div className="detail-quantity-selector">
+    <button
+      type="button"
+      className="detail-quantity-button"
+      aria-label="Decrease quantity"
+      disabled={quantity <= 1}
+      onClick={() => setQuantity((current) => Math.max(1, current - 1))}
+    >
+      −
+    </button>
+
+    <span className="detail-quantity-value" aria-live="polite">
+      {quantity}
+    </span>
+
+    <button
+      type="button"
+      className="detail-quantity-button"
+      aria-label="Increase quantity"
+      disabled={quantity >= Math.min(Number(variant.stock), 100)}
+      onClick={() =>
+        setQuantity((current) =>
+          Math.min(current + 1, Number(variant.stock), 100)
+        )
+      }
+    >
+      +
+    </button>
+  </div>
+</div>
                   <button
-                    className="btn btn-primary btn-lg"
-                    type="button"
-                    disabled={!signedIn}
-                    onClick={() => onAdd(product, variant, quantity)}
-                  >
-                    {signedIn ? "Add to cart" : "Sign in to shop"}
-                  </button>
+  className={`btn btn-lg ${
+    browseOnly ? "btn-secondary" : "btn-primary"
+  }`}
+  type="button"
+  disabled={browseOnly || !signedIn}
+  onClick={() => {
+    if (browseOnly || !signedIn) return;
+    onAdd(product, variant, quantity);
+  }}
+  title={
+    browseOnly
+      ? "Purchasing is available only to customer accounts"
+      : undefined
+  }
+>
+  {browseOnly
+    ? "Shopping Disabled — Preview Mode"
+    : signedIn
+      ? "Add to cart"
+      : "Sign in to shop"}
+</button>
                 </div>
               )}
 
-              <button
-                className="btn btn-outline-primary"
-                type="button"
-                onClick={() => onFavourite(product)}
-              >
-                {favouriteIds.has(product.id)
-                  ? "♥ Saved to favourites"
-                  : "♡ Add to favourites"}
-              </button>
+              {!browseOnly && (
+  <button
+    className="btn btn-outline-primary"
+    type="button"
+    onClick={() => onFavourite(product)}
+  >
+    {favouriteIds.has(product.id)
+      ? "♥ Saved to favourites"
+      : "♡ Add to favourites"}
+  </button>
+)}
             </div>
           </section>
 
@@ -389,17 +565,13 @@ export function ProductDetails({
             className="product-reviews-section"
             aria-labelledby="product-reviews-heading"
           >
-            <div className="product-reviews-heading">
-              <span className="eyebrow">
-                CUSTOMER FEEDBACK
-              </span>
+           <div className="product-reviews-heading">
+  <h2 id="product-reviews-heading">
+    Product Ratings & Reviews
+  </h2>
 
-              <h2 id="product-reviews-heading">
-                Ratings & Reviews
-              </h2>
-
-              <p>Reviews from customers who purchased this product.</p>
-            </div>
+  <p>Customer feedback for this product</p>
+</div>
 
             {reviewsLoading && (
               <p role="status">Loading customer reviews...</p>
@@ -440,13 +612,9 @@ export function ProductDetails({
 
                 <div className="product-review-list">
                   {reviews.items.length === 0 ? (
-                    <div className="product-review-empty">
-                      <h3>No reviews yet</h3>
-                      <p>
-                        This product has not received any customer
-                        reviews.
-                      </p>
-                    </div>
+                   <div className="product-review-empty">
+  <p>No reviews yet. Be the first to review this product.</p>
+</div>
                   ) : (
                     reviews.items.map((review) => (
                       <article

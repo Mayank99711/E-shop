@@ -268,16 +268,28 @@ export const ownerController = {
   ownerCatalogOptions_2: async (_request, response, next) => {
     try {
       const [categories, brands, attributes] = await Promise.all([
+        // Categories and subcategories
         prisma.category.findMany({
           where: { isActive: true },
           orderBy: { name: "asc" },
-          select: { id: true, name: true },
+          select: {
+            id: true,
+            name: true,
+            parentId: true,
+          },
         }),
+
+        // Brands — no parentId field
         prisma.brand.findMany({
           where: { isActive: true },
           orderBy: { name: "asc" },
-          select: { id: true, name: true },
+          select: {
+            id: true,
+            name: true,
+          },
         }),
+
+        // Variant attributes
         prisma.variantAttribute.findMany({
           where: { isActive: true },
           orderBy: { name: "asc" },
@@ -287,11 +299,15 @@ export const ownerController = {
             values: {
               where: { isActive: true },
               orderBy: { value: "asc" },
-              select: { id: true, value: true },
+              select: {
+                id: true,
+                value: true,
+              },
             },
           },
         }),
       ]);
+
       response.json({ categories, brands, attributes });
     } catch (error) {
       next(error);
@@ -324,6 +340,7 @@ export const ownerController = {
         req.params.productId,
         req.files,
         req.body?.colorValueId || null,
+        req.body?.variantId || null,
       );
 
       res.status(201).json({ images });
